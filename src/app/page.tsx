@@ -1,65 +1,109 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect } from "react";
+import Lenis from "lenis";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { Experience } from "@/components/Experience";
+import { Projects } from "@/components/Projects";
+import { Skills } from "@/components/Skills";
+import { Certifications } from "@/components/Certifications";
+import { Education } from "@/components/Education";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
+import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
+import { InteractiveBrain } from "@/components/ui/InteractiveBrain";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function Home() {
+  useEffect(() => {
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    // Custom cursor logic (desktop only)
+    const cursor = document.getElementById('custom-cursor');
+    const cursorGlow = document.getElementById('custom-cursor-glow');
+
+    const updateCursorPosition = (e: MouseEvent) => {
+      if (cursor && cursorGlow) {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+        
+        // Add a slight delay to the glow for a trailing effect
+        setTimeout(() => {
+          cursorGlow.style.left = `${e.clientX}px`;
+          cursorGlow.style.top = `${e.clientY}px`;
+        }, 50);
+      }
+    };
+
+    window.addEventListener('mousemove', updateCursorPosition);
+
+    return () => {
+      lenis.destroy();
+      window.removeEventListener('mousemove', updateCursorPosition);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      {/* Custom Cursor */}
+      <div 
+        id="custom-cursor" 
+        className="hidden md:block fixed w-3 h-3 bg-[#c084fc] rounded-full pointer-events-none z-[100] -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out mix-blend-screen"
+      ></div>
+      <div 
+        id="custom-cursor-glow" 
+        className="hidden md:block fixed w-12 h-12 bg-[#a855f7]/40 rounded-full blur-xl pointer-events-none z-[99] -translate-x-1/2 -translate-y-1/2 mix-blend-screen"
+      ></div>
+
+      <AnimatedBackground />
+      <Navbar />
+      
+      <main className="flex flex-col">
+        <Hero />
+        <About />
+
+        {/* 3D Interactive Brain Section */}
+        <section className="py-24 relative overflow-hidden">
+          <div className="container mx-auto px-6 md:px-12">
+            <ScrollReveal>
+              <div className="text-center mb-16">
+                <SectionHeading title="Knowledge Graph" subtitle="Explore my skills and experience mapped as an interactive neural network." className="mb-0" />
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2} distance={50} direction="up">
+              <InteractiveBrain />
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <Experience />
+        <Projects />
+        <Skills />
+        <Certifications />
+        <Education />
+        <Contact />
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
