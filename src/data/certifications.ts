@@ -8,102 +8,145 @@ export interface Certification {
 }
 
 export const certifications: Certification[] = [
+  // ─────────────────────────────────────────────
+  // 2026
+  // ─────────────────────────────────────────────
+
   {
     id: "cert-1",
-    name: "AI Fluency Framework & Foundations",
-    issuer: "Anthropic",
-    date: "May 2026",
-    credentialId: "hu7whxu44sm7"
+    name: "Cloud AI in 90 Minutes Productivity Course: Build Your AI Work Assistant",
+    issuer: "GUVI / HCL",
+    date: "Aug 2026",
+    credentialId: "T7H671814paLK88ty7",
   },
+
   {
     id: "cert-2",
-    name: "IBM RAG and Agentic AI Professional Certificate",
-    issuer: "IBM",
-    date: "Feb 2026",
-    credentialId: "SI7FQPJWN9B8"
+    name: "Gen AI Agents: Transform Your Organization",
+    issuer: "Google Cloud",
+    date: "Aug 2026",
   },
+
   {
     id: "cert-3",
-    name: "Claude 101",
-    issuer: "Anthropic",
-    date: "Mar 2026",
-    credentialId: "j5j3epzmjq3k"
+    name: "Gen AI Apps: Transform Your Work",
+    issuer: "Google Cloud",
+    date: "Aug 2026",
   },
+
   {
     id: "cert-4",
-    name: "Introduction to Agent Skills",
-    issuer: "Anthropic",
-    date: "Mar 2026",
-    credentialId: "edemg8tzz89r"
+    name: "Gen AI: Navigate the Landscape",
+    issuer: "Google Cloud",
+    date: "Aug 2026",
   },
+
   {
     id: "cert-5",
-    name: "Machine Learning with Python",
-    issuer: "IBM",
-    date: "Dec 2025",
-    credentialId: "ED9KQUKZ7NOP"
+    name: "Gen AI: Unlock Foundational Concepts",
+    issuer: "Google Cloud",
+    date: "Aug 2026",
   },
+
   {
     id: "cert-6",
-    name: "Advanced RAG with Vector Databases",
-    issuer: "IBM",
-    date: "Dec 2025",
-    credentialId: "1F97N7T20LGZ"
+    name: "Gen AI: Beyond the Chatbot",
+    issuer: "Google Cloud",
+    date: "Aug 026",
   },
+
   {
     id: "cert-7",
-    name: "Vector Databases for RAG",
-    issuer: "IBM",
-    date: "Dec 2025",
-    credentialId: "N5TYE2J283PM"
+    name: "AWS Compute Services Overview",
+    issuer: "Amazon Web Services",
+    date: "July 2026",
   },
   {
     id: "cert-8",
-    name: "Fundamentals of Building AI Agents",
-    issuer: "Coursera",
-    date: "Dec 2025"
+    name: "AWS Command Line Interface (AWS CLI) Getting Started",
+    issuer: "Amazon Web Services",
+    date: "July 2026",
   },
+
+  // ─────────────────────────────────────────────
+  // 2025
+  // ─────────────────────────────────────────────
+
+  // ─────────────────────────────────────────────
+  // 2024
+  // ─────────────────────────────────────────────
+
   {
     id: "cert-9",
-    name: "Agentic AI with LangChain and LangGraph",
-    issuer: "IBM",
-    date: "Dec 2025"
+    name: "Java (Basic)",
+    issuer: "HackerRank",
+    date: "Oct 2024",
+    credentialId: "2ADE5B66C8CB",
   },
+
   {
     id: "cert-10",
-    name: "Neo4j Certified Professional",
-    issuer: "Neo4j",
-    date: "Jun 2025",
-    credentialId: "8496df8c"
+    name: "Python (Basic)",
+    issuer: "HackerRank",
+    date: "Oct 2024",
+    credentialId: "A2B464404B57",
   },
+
   {
     id: "cert-11",
-    name: "Kubernetes: Your First Project",
-    issuer: "LinkedIn",
-    date: "Sep 2024"
+    name: "Problem Solving (Basic)",
+    issuer: "HackerRank",
+    date: "Oct 2024",
   },
+
   {
     id: "cert-12",
-    name: "Transformer Models and BERT Model",
-    issuer: "Udacity",
-    date: "Oct 2023"
+    name: "Cloud Application Developer — On-the-Job Training",
+    issuer: "Rooman Technologies",
+    date: "Dec 17, 2024",
   },
+
   {
     id: "cert-13",
-    name: "Academic Process Mining Fundamentals",
-    issuer: "Celonis",
-    date: "Nov 2023"
+    name: "Learning Plan for Entrepreneurship Internship",
+    issuer: "IBM SkillsBuild",
+    date: "Oct 24, 2024",
+    credentialId: "PLAN-D34D312B39E3",
   },
+
   {
     id: "cert-14",
-    name: "Accenture Project Management Simulation",
-    issuer: "Forage",
-    date: "Sep 2024"
+    name: "Fundamentals of Cryptography",
+    issuer: "Infosys Springboard",
+    date: "Dec 19, 2024",
   },
+
   {
     id: "cert-15",
-    name: "J.P. Morgan Software Engineering Simulation",
-    issuer: "Forage",
-    date: "Sep 2024"
-  }
+    name: "Software Testing Tutorial",
+    issuer: "Great Learning",
+    date: "Jun 2024",
+  },
+
+  // ─────────────────────────────────────────────
+  // 2023
+  // ─────────────────────────────────────────────
+
+  {
+    id: "cert-16",
+    name: "Python Fundamentals for Beginners",
+    issuer: "Great Learning",
+    date: "May 2023",
+  },
+
+  // ─────────────────────────────────────────────
+  // Events & Participation
+  // ─────────────────────────────────────────────
+
+  {
+    id: "cert-17",
+    name: "AI Day @ Ford, Chennai — Participation",
+    issuer: "Ford",
+    date: "Feb 2026",
+  },
 ];

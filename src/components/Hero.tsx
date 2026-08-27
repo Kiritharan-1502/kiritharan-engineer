@@ -69,7 +69,7 @@ export const Hero = () => {
     }
   };
 
-  const taglineWords = "AI Engineer • Agentic AI • Knowledge Graphs • AIOps".split(" ");
+  const taglineWords = "Software Developer • IT Operations Engineer • Knowledge Graphs • Generative AI".split(" ");
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
@@ -94,7 +94,7 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-6xl md:text-8xl font-extrabold tracking-tight mb-6 drop-shadow-2xl"
         >
-          <GradientText text="Janavi J" />
+          <GradientText text="Shakthi Nandini J" />
         </motion.h1>
 
         <motion.div
@@ -128,7 +128,7 @@ export const Hero = () => {
           transition={{ duration: 0.5, delay: 1 }}
           className="max-w-2xl text-lg md:text-xl text-[#94a3b8] mb-12 leading-relaxed backdrop-blur-sm bg-[#0a0a0f]/30 p-4 rounded-2xl"
         >
-          Building intelligent, scalable systems at the intersection of AI agents, knowledge graphs, and cloud-native infrastructure.
+          Bridging full-stack engineering and Generative AI to build intelligent, autonomous, and scalable cloud systems.
         </motion.p>
 
         <motion.div

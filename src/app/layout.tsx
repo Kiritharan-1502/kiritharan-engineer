@@ -13,8 +13,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Janavi J | AI Engineer Portfolio",
-  description: "Personal portfolio of Janavi J, AI Engineer building intelligent, scalable systems at the intersection of AI agents, knowledge graphs, and cloud-native infrastructure.",
+  title: "Shakthi Nandini J | Software Developer Portfolio",
+  description: "Personal portfolio of Shakthi Nandini J, a software developer and technology professional with experience in software development, testing, and enterprise technologies.",
 };
 
 export default function RootLayout({

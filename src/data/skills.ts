@@ -6,33 +6,126 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    id: "ai-ml",
-    name: "AI & Machine Learning",
-    skills: ["Python", "Machine Learning", "Deep Learning", "NLP", "Scikit-Learn", "NumPy", "Matplotlib", "Anomaly Detection", "LLMs", "Prompt Engineering", "RAG", "Vector Databases", "Graph Embeddings"]
+    id: "programming",
+    name: "Programming & Computer Science",
+    skills: [
+      "Java",
+      "C++",
+      "Python",
+      "C",
+      "C#",
+      "TypeScript",
+      "Data Structures",
+      "DBMS",
+      "Operating Systems",
+      "Computer Networks",
+    ],
   },
+
   {
-    id: "agents",
-    name: "Agent Frameworks & Agentic AI",
-    skills: ["LangChain", "LangGraph", "CrewAI", "AutoGen", "Agentic Workflows", "Multi-Agent Systems", "ReAct Pattern", "Tool-Using Agents", "Agent Memory", "Model Context Protocol (MCP)"]
+    id: "web",
+    name: "Web Technologies",
+    skills: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+    ],
   },
+
   {
-    id: "kg",
-    name: "Knowledge Graphs & Ontology",
-    skills: ["Neo4j", "GraphDB/Ontotext", "RDF", "OWL", "SPARQL", "Ontology Engineering", "Semantic Reasoning"]
+    id: "ai",
+    name: "Generative AI & AI Tools",
+    skills: [
+      "Generative AI",
+      "Prompt Engineering",
+      "Large Language Models",
+      "AI Tools",
+      "AI-assisted Development",
+    ],
   },
+
+  {
+    id: "data",
+    name: "Data & Databases",
+    skills: [
+      "SQL",
+      "MySQL",
+      "Data Analysis",
+      "Data Mining",
+      "Process Mining",
+    ],
+  },
+
+  {
+    id: "testing",
+    name: "Testing & Quality",
+    skills: [
+      "Selenium WebDriver",
+      "Test Automation",
+      "Software Testing",
+      "Debugging",
+    ],
+  },
+
   {
     id: "cloud",
-    name: "Cloud & DevOps",
-    skills: ["Kubernetes", "Helm", "Docker", "OpenShift", "Microsoft Azure", "AWS Bedrock", "Prometheus", "TimescaleDB", "OpenSearch", "CI/CD"]
+    name: "Cloud & Emerging Technologies",
+    skills: [
+      "AWS",
+      "Cloud Computing",
+      "Generative AI",
+    ],
   },
+
   {
-    id: "programming",
-    name: "Programming & Data",
-    skills: ["Python", "JavaScript", "SQL", "SPARQL", "Data Structures", "DBMS", "Operating Systems", "Computer Networking"]
+    id: "tools",
+    name: "Tools & Development Environment",
+    skills: [
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Visual Studio",
+      "Eclipse",
+      "Linux",
+    ],
   },
+
   {
-    id: "other",
-    name: "Other Skills",
-    skills: ["Process Mining", "Product Descriptions", "Delegation", "AI Evaluation", "Sustainable AI", "Technical Writing", "Git", "VS Code", "Linux"]
-  }
+    id: "security",
+    name: "Security & Networking",
+    skills: [
+      "Cryptography",
+      "Computer Networks",
+      "Network Security Fundamentals",
+    ],
+  },
+
+  {
+    id: "it",
+    name: "IT & Service Management",
+    skills: [
+      "ServiceNow",
+      "Perceive",
+      "Okta Administration",
+      "SCCM",
+      "Active Directory",
+    ],
+  },
+
+  {
+    id: "professional",
+    name: "Professional & Creative Skills",
+    skills: [
+      "Technical Writing",
+      "Creative Writing",
+      "Communication",
+      "Problem-Solving",
+      "Analytical Thinking",
+      "Team Leadership",
+      "Prioritization",
+      "Adaptability",
+      "Continuous Learning",
+    ],
+  },
 ];

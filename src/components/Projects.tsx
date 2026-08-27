@@ -24,7 +24,9 @@ export const Projects = () => {
               delay={index * 0.1}
               className={cn(
                 "h-full",
-                project.size === "large" ? "md:col-span-2 lg:col-span-2" : "col-span-1"
+                project.size === "large"
+                  ? "md:col-span-2 lg:col-span-2"
+                  : "col-span-1"
               )}
             >
               <GlassCard
@@ -34,30 +36,58 @@ export const Projects = () => {
                   project.size === "large" && "md:flex-row gap-8"
                 )}
               >
-                <div className={cn("flex flex-col flex-1", project.size === "large" && "md:w-1/2")}>
+                {/* LEFT SIDE */}
+                <div
+                  className={cn(
+                    "flex flex-col flex-1",
+                    project.size === "large" && "md:w-1/2"
+                  )}
+                >
+                  {/* Project Title */}
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-[#c084fc] transition-colors">
                       {project.title}
                     </h3>
+
+                    {/* Mobile Links */}
                     <div className="flex gap-3 text-[#94a3b8] md:hidden">
                       {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:text-[#c084fc] transition-colors">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-[#c084fc] transition-colors"
+                          aria-label="GitHub"
+                        >
                           <FaGithub size={20} />
                         </a>
                       )}
+
                       {project.demo && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="hover:text-[#22d3ee] transition-colors">
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-[#22d3ee] transition-colors"
+                          aria-label="Live Demo"
+                        >
                           <ExternalLink size={20} />
                         </a>
                       )}
                     </div>
                   </div>
 
-                  <p className={cn("text-[#cbd5e1] mb-6 flex-grow", project.size === "large" && "text-lg")}>
+                  {/* Description */}
+                  <p
+                    className={cn(
+                      "text-[#cbd5e1] mb-6 flex-grow",
+                      project.size === "large" && "text-lg"
+                    )}
+                  >
                     {project.description}
                   </p>
 
-                  {/* Move Tech Stack here for Large Cards */}
+                  {/* Tech Stack - Large Cards */}
                   {project.size === "large" && (
                     <div className="flex flex-wrap gap-2 mt-auto mb-6">
                       {project.tech.map((tech, i) => (
@@ -72,27 +102,66 @@ export const Projects = () => {
                   )}
                 </div>
 
-                <div className={cn("flex flex-col flex-1", project.size === "large" && "md:w-1/2 justify-between")}>
-                   <div className="hidden md:flex justify-end gap-3 text-[#94a3b8] mb-4">
-                      {project.github && (
-                        <a href={project.github} target="_blank" rel="noopener noreferrer" className="hover:text-[#c084fc] transition-colors">
-                          <FaGithub size={20} />
-                        </a>
-                      )}
-                      {project.demo && (
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="hover:text-[#22d3ee] transition-colors">
-                          <ExternalLink size={20} />
-                        </a>
-                      )}
-                    </div>
+                {/* RIGHT SIDE */}
+                <div
+                  className={cn(
+                    "flex flex-col flex-1",
+                    project.size === "large" &&
+                      "md:w-1/2 justify-between"
+                  )}
+                >
+                  {/* Desktop Links */}
+                  <div className="hidden md:flex justify-end gap-3 text-[#94a3b8] mb-4">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#c084fc] transition-colors"
+                        aria-label="GitHub"
+                      >
+                        <FaGithub size={20} />
+                      </a>
+                    )}
 
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#22d3ee] transition-colors"
+                        aria-label="Live Demo"
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
+                  </div>
+
+                  {/* Key Highlights */}
                   {project.highlights && (
-                    <div className={cn("mb-6", project.size === "large" && "bg-[#0a0a0f]/40 p-5 rounded-xl border border-[#a855f7]/20")}>
-                      {project.size === "large" && <h4 className="text-sm font-bold text-[#c084fc] mb-3 uppercase tracking-wider">Key Highlights</h4>}
+                    <div
+                      className={cn(
+                        "mb-6",
+                        project.size === "large" &&
+                          "bg-[#0a0a0f]/40 p-5 rounded-xl border border-[#a855f7]/20"
+                      )}
+                    >
+                      {project.size === "large" && (
+                        <h4 className="text-sm font-bold text-[#c084fc] mb-3 uppercase tracking-wider">
+                          Key Highlights
+                        </h4>
+                      )}
+
                       <ul className="space-y-2">
                         {project.highlights.map((highlight, i) => (
-                          <li key={i} className="text-sm text-[#e2e8f0] flex items-start">
-                            <span className="text-[#22d3ee] mr-2 mt-0.5">›</span> 
+                          <li
+                            key={i}
+                            className="text-sm text-[#e2e8f0] flex items-start"
+                          >
+                            <span className="text-[#22d3ee] mr-2 mt-0.5">
+                              ›
+                            </span>
+
                             <span>{highlight}</span>
                           </li>
                         ))}
@@ -100,7 +169,53 @@ export const Projects = () => {
                     </div>
                   )}
 
-                  {/* Keep Tech Stack here for Medium/Small Cards */}
+                  {/* Published Research Paper*/}
+                  {project.publication && (
+                    <div className="mb-6 p-5 rounded-xl border border-[#22d3ee]/20 bg-[#22d3ee]/5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-[#22d3ee] text-lg">
+                          ✦
+                        </span>
+
+                        <h4 className="text-sm font-bold text-[#22d3ee] uppercase tracking-wider">
+                          Published Research Paper
+                        </h4>
+                      </div>
+
+                      <h5 className="text-sm font-semibold text-white leading-relaxed mb-2">
+                        {project.publication.title}
+                      </h5>
+
+                      <p className="text-xs text-[#cbd5e1] mb-2">
+                        {project.publication.journal}
+                      </p>
+
+                      <p className="text-xs text-[#94a3b8] mb-3">
+                        {project.publication.details}
+                      </p>
+
+                      <p className="text-xs text-[#94a3b8] leading-relaxed mb-4">
+                        <span className="text-[#cbd5e1]">
+                          Authors:
+                        </span>{" "}
+                        {project.publication.authors}
+                      </p>
+
+                      {project.publication.link && (
+                        <a
+                          href={project.publication.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-[#22d3ee] hover:text-white transition-colors"
+                        >
+                          View Publication
+                          <ExternalLink size={15} />
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Tech Stack - Medium/Small Cards */}
                   {project.size !== "large" && (
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tech.map((tech, i) => (

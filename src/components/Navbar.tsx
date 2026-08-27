@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
+  { name: "Beyond the Code", href: "#universe" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
@@ -60,7 +61,7 @@ export const Navbar = () => {
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <a href="#home" onClick={(e) => scrollTo(e, "#home")} className="text-2xl font-bold font-mono tracking-tighter">
-          <span className="text-gradient">JJ</span>
+          <span className="text-gradient">SN</span>
         </a>
 
         {/* Desktop Nav */}

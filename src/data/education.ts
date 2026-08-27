@@ -10,13 +10,14 @@ export const education: Education[] = [
   {
     id: "edu-1",
     institution: "Visvesvaraya Technological University",
-    degree: "B.E. Computer Science",
-    duration: "Dec 2021 – May 2025"
+    degree: "B.E. Information Science and Engineering",
+    duration: "Dec 2021 – May 2025",
   },
+
   {
     id: "edu-2",
-    institution: "St. Claret PU College",
-    degree: "Intermediate, PCMB",
-    duration: "May 2019 – May 2021"
-  }
+    institution: "Cluny Convent PU College",
+    degree: "Intermediate, PCME",
+    duration: "May 2019 – May 2021",
+  },
 ];

@@ -14,14 +14,14 @@ const generateGraphData = () => {
   const links: any[] = [];
 
   // Center node
-  nodes.push({ id: "Janavi J", group: 0, val: 40, color: "#f8fafc", desc: "AI Engineer @ Nokia" });
+  nodes.push({ id: "Shakthi Nandini", group: 0, val: 40, color: "#f8fafc", desc: "Exploring Generative AI & Cloud" });
 
   skillCategories.forEach((category, i) => {
     const catId = category.name;
     // Add category node
     nodes.push({ id: catId, group: i + 1, val: 20, color: "#ec4899", desc: "Domain" });
     // Link to center
-    links.push({ source: "Janavi J", target: catId });
+    links.push({ source: "Shakthi Nandini", target: catId });
 
     // Add skill nodes
     category.skills.forEach((skill) => {
@@ -35,76 +35,54 @@ const generateGraphData = () => {
   });
 
   return { nodes, links };
-};
+};  
 
 // Standard definitions for skills
 const skillDefinitions: Record<string, string> = {
-  // AI & ML
-  "Python": "A high-level, general-purpose programming language widely used in AI, data science, and backend development.",
-  "Machine Learning": "A field of AI focused on developing algorithms that allow computers to learn from and make predictions based on data.",
-  "Deep Learning": "A subset of machine learning based on artificial neural networks with multiple layers.",
-  "NLP": "Natural Language Processing: the ability of a computer program to understand human language as it is spoken and written.",
-  "Scikit-Learn": "A popular open-source machine learning library for Python featuring various classification, regression and clustering algorithms.",
-  "NumPy": "A library for the Python programming language, adding support for large, multi-dimensional arrays and matrices.",
-  "Matplotlib": "A plotting library for the Python programming language and its numerical mathematics extension NumPy.",
-  "Anomaly Detection": "The identification of rare items, events or observations which raise suspicions by differing significantly from the majority of the data.",
-  "LLMs": "Large Language Models: advanced AI models trained on vast amounts of text data to understand and generate human-like language.",
-  "Prompt Engineering": "The practice of designing and refining inputs (prompts) to guide AI models to produce optimal outputs.",
-  "RAG": "Retrieval-Augmented Generation: an AI framework that retrieves factual information from an external knowledge base to ground large language models.",
-  "Vector Databases": "Databases designed to store and query high-dimensional vectors efficiently, crucial for semantic search and RAG.",
-  "Graph Embeddings": "The process of transforming nodes, edges, and their features into vector space while preserving graph structure.",
-
-  // Agents
-  "LangChain": "A framework designed to simplify the creation of applications using large language models.",
-  "LangGraph": "An extension of LangChain for building stateful, multi-actor applications with LLMs using graph concepts.",
-  "CrewAI": "A framework for orchestrating role-playing, autonomous AI agents to work together on complex tasks.",
-  "AutoGen": "A framework that enables development of LLM applications using multiple agents that can converse with each other.",
-  "Agentic Workflows": "Automated processes where autonomous AI agents make decisions, use tools, and collaborate to achieve goals.",
-  "Multi-Agent Systems": "Computerized systems composed of multiple interacting intelligent agents.",
-  "ReAct Pattern": "Reasoning and Acting: a paradigm where LLMs generate reasoning traces and task-specific actions in an interleaved manner.",
-  "Tool-Using Agents": "AI agents equipped with the ability to call external APIs, execute code, or query databases to accomplish tasks.",
-  "Agent Memory": "Systems allowing agents to retain context over time, including episodic (past events), semantic (facts), and procedural (skills) memory.",
-  "Model Context Protocol (MCP)": "An open standard that enables AI models to securely connect to and interact with local and remote data sources.",
-
-  // KG
-  "Neo4j": "A highly scalable native graph database that leverages data relationships as first-class entities.",
-  "GraphDB/Ontotext": "An enterprise semantic graph database engine for storing, managing, and querying RDF data.",
-  "RDF": "Resource Description Framework: a standard model for data interchange on the Web, forming the basis of semantic graphs.",
-  "OWL": "Web Ontology Language: a semantic web language designed to represent rich and complex knowledge about things and their relations.",
-  "SPARQL": "An RDF query language able to retrieve and manipulate data stored in Resource Description Framework (RDF) format.",
-  "Ontology Engineering": "The field studying the methods and methodologies for building ontologies (formal representations of knowledge).",
-  "Semantic Reasoning": "The process of inferring logical consequences from a set of asserted facts or axioms in a knowledge base.",
-
-  // Cloud & DevOps
-  "Kubernetes": "An open-source system for automating deployment, scaling, and management of containerized applications.",
-  "Helm": "A package manager for Kubernetes that simplifies deployment of complex applications.",
-  "Docker": "A platform that enables developers to build, test, and deploy applications quickly using containers.",
-  "OpenShift": "An enterprise-ready Kubernetes container platform by Red Hat with full-stack automated operations.",
-  "Microsoft Azure": "A cloud computing platform operated by Microsoft providing access, management, and development of applications and services.",
-  "AWS Bedrock": "A fully managed service that offers a choice of high-performing foundation models via a single API.",
-  "Prometheus": "An open-source systems monitoring and alerting toolkit originally built at SoundCloud.",
-  "TimescaleDB": "An open-source relational database for time-series data, built as a PostgreSQL extension.",
-  "OpenSearch": "A scalable, flexible, and extensible open-source software suite for search, analytics, and observability applications.",
-  "CI/CD": "Continuous Integration and Continuous Deployment: practices enabling frequent and reliable software delivery.",
-
   // Programming
-  "JavaScript": "A high-level, often just-in-time compiled programming language that conforms to the ECMAScript specification.",
-  "SQL": "Structured Query Language: a domain-specific language used in programming and designed for managing data in relational databases.",
-  "Data Structures": "Specialized formats for organizing, processing, retrieving and storing data.",
-  "DBMS": "Database Management System: software that interacts with end users, applications, and the database itself to capture and analyze the data.",
-  "Operating Systems": "System software that manages computer hardware, software resources, and provides common services for computer programs.",
-  "Computer Networking": "The interconnection of multiple devices, generally termed as Hosts connected using multiple paths for the purpose of sending/receiving data.",
+  "C": "A foundational programming language used for understanding programming concepts, logic, and system-level development.",
+  "C++": "A general-purpose programming language used for object-oriented programming, problem solving, and application development.",
+  "Java": "A widely used programming language for building reliable and scalable applications.",
+  "C#": "A programming language used for application development, including Windows-based applications and .NET development.",
+  "Python": "A versatile programming language used for automation, scripting, data handling, and exploring modern technologies.",
+  "JavaScript": "A programming language used to create interactive and dynamic web applications.",
+  "Data Structures": "Fundamental methods for organizing and efficiently managing data in software applications.",
+  "OOP": "Object-Oriented Programming, a programming approach based on objects, classes, inheritance, and encapsulation.",
 
-  // Other
-  "Process Mining": "A family of techniques relating the fields of data science and process management to support the analysis of operational processes.",
-  "Product Descriptions": "The marketing copy used to describe a product's value proposition to potential customers.",
-  "Delegation": "The assignment of authority or responsibility to another person (or AI agent) to carry out specific activities.",
-  "AI Evaluation": "The systematic process of assessing the performance, safety, and reliability of artificial intelligence systems.",
-  "Sustainable AI": "The practice of designing, developing, and deploying AI systems in a way that minimizes environmental impact.",
-  "Technical Writing": "Writing or drafting technical communication used in technical and occupational fields.",
-  "Git": "A distributed version control system that tracks changes in any set of computer files.",
-  "VS Code": "Visual Studio Code: a source-code editor made by Microsoft with support for debugging, syntax highlighting, and version control.",
-  "Linux": "A family of open-source Unix-like operating systems based on the Linux kernel.",
+  // Web Technologies
+  "HTML": "The standard markup language used to structure content and elements on web pages.",
+  "CSS": "A styling language used to control the presentation, layout, and appearance of web pages.",
+  "React": "A JavaScript library for building reusable and interactive user interfaces.",
+  "Next.js": "A React framework for building modern web applications with features such as routing and server-side capabilities.",
+  "Tailwind CSS": "A utility-first CSS framework for creating responsive and customizable user interfaces.",
+  "Bootstrap": "A front-end framework used to build responsive and mobile-friendly web interfaces.",
+
+  // Databases
+  "MySQL": "A relational database management system used to store, organize, and retrieve structured data.",
+  "SQL": "A language used to query, manage, and work with data stored in relational databases.",
+  "Query Optimization": "The process of improving database queries so that they execute efficiently and use resources effectively.",
+
+  // Testing
+  "Selenium WebDriver": "A browser automation tool used to automate web applications and perform functional testing.",
+  "TestNG": "A testing framework for Java that supports test organization, execution, and reporting.",
+  "Manual Testing": "The process of manually checking software functionality to identify defects and verify expected behavior.",
+
+  // Cloud & Emerging Technology
+  "AWS": "A cloud computing platform providing a wide range of services for building, deploying, and managing applications.",
+  "Generative AI": "An area of artificial intelligence focused on systems that can generate text, images, code, and other content.",
+  "AI Tools": "Tools and technologies that use artificial intelligence to support productivity, automation, problem solving, and software development.",
+
+  // Enterprise & Tools
+  "ServiceNow": "An enterprise platform used to manage IT services, incidents, service requests, and business workflows.",
+  "Intune": "Microsoft's cloud-based endpoint management solution for managing devices, applications, and organizational access.",
+  "Active Directory": "A Microsoft directory service used to manage users, computers, permissions, and access within an organization.",
+  "SCCM": "Microsoft System Center Operations Manager, a monitoring platform used to monitor the health and performance of IT environments.",
+  "ITSM": "IT Service Management practices and processes used to manage and deliver effective IT services.",
+  "VS Code": "A source-code editor used for writing, editing, debugging, and managing software projects.",
+  "Git": "A distributed version control system used to track changes in source code and collaborate on software projects.",
+  "GitHub": "A platform for hosting, managing, and collaborating on software projects using Git.",
+  "Perceive": "A ticketing system used for logging, tracking, and updating IT incidents and service requests.",
+  "Okta Administration": "Identity and access administration involving user accounts, authentication, and application access.",
 };
 
 const InteractiveBrainComponent = () => {
@@ -220,7 +198,7 @@ const InteractiveBrainComponent = () => {
             <p className="text-[#c084fc] text-xs uppercase tracking-wider font-bold mb-4">{selectedNode.desc}</p>
             <p className="text-[#cbd5e1] text-sm leading-relaxed">
               {selectedNode.val === 40 
-                ? "The central hub of my expertise. Exploring the intersection of AI, Agentic systems, and Knowledge Graphs."
+                ? "Exploring Generative AI, cloud technologies, and practical solutions while continuously learning and building new skills."
                 : selectedNode.val === 20
                 ? `A core domain of my technical stack. This category encompasses my relevant skills and tools in ${selectedNode.id}.`
                 : skillDefinitions[selectedNode.id] || `A specialized skill I use within my ${skillCategories.find(c => c.skills.includes(selectedNode.id))?.name} workflow to build robust AI systems.`
