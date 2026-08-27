@@ -69,7 +69,7 @@ export const Hero = () => {
     }
   };
 
-  const taglineWords = "Software Developer • IT Operations Engineer • Problem Solving • Generative AI".split(" ");
+  const taglineWords = "Software Developer • IT Operations Engineer • Generative AI • Problem Solving".split(" ");
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
