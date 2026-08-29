@@ -11,58 +11,65 @@ export const certifications: Certification[] = [
   // ─────────────────────────────────────────────
   // 2026
   // ─────────────────────────────────────────────
-
   {
     id: "cert-1",
-    name: "Cloud AI in 90 Minutes Productivity Course: Build Your AI Work Assistant",
+    name: "Claude 101",
+    issuer: "Anthropic",
+    date: "Aug 2026",
+  },
+
+  {
+    id: "cert-2",
+    name: "Claude AI in 90 Minutes Productivity Course: Build Your AI Work Assistant",
     issuer: "GUVI / HCL",
     date: "Aug 2026",
     credentialId: "T7H671814paLK88ty7",
   },
 
   {
-    id: "cert-2",
+    id: "cert-3",
     name: "Gen AI Agents: Transform Your Organization",
     issuer: "Google Cloud",
     date: "Aug 2026",
   },
 
   {
-    id: "cert-3",
+    id: "cert-4",
     name: "Gen AI Apps: Transform Your Work",
     issuer: "Google Cloud",
     date: "Aug 2026",
   },
 
   {
-    id: "cert-4",
+    id: "cert-5",
     name: "Gen AI: Navigate the Landscape",
     issuer: "Google Cloud",
     date: "Aug 2026",
   },
 
   {
-    id: "cert-5",
+    id: "cert-6",
     name: "Gen AI: Unlock Foundational Concepts",
     issuer: "Google Cloud",
     date: "Aug 2026",
   },
 
   {
-    id: "cert-6",
+    id: "cert-7",
     name: "Gen AI: Beyond the Chatbot",
     issuer: "Google Cloud",
     date: "Aug 026",
   },
 
   {
-    id: "cert-7",
+    id: "cert-8",
     name: "AWS Compute Services Overview",
     issuer: "Amazon Web Services",
     date: "July 2026",
   },
+
   {
-    id: "cert-8",
+    id: "cert-9",
     name: "AWS Command Line Interface (AWS CLI) Getting Started",
     issuer: "Amazon Web Services",
     date: "July 2026",
@@ -77,7 +84,7 @@ export const certifications: Certification[] = [
   // ─────────────────────────────────────────────
 
   {
-    id: "cert-9",
+    id: "cert-10",
     name: "Java (Basic)",
     issuer: "HackerRank",
     date: "Oct 2024",
@@ -85,7 +92,7 @@ export const certifications: Certification[] = [
   },
 
   {
-    id: "cert-10",
+    id: "cert-11",
     name: "Python (Basic)",
     issuer: "HackerRank",
     date: "Oct 2024",
@@ -93,21 +100,21 @@ export const certifications: Certification[] = [
   },
 
   {
-    id: "cert-11",
+    id: "cert-12",
     name: "Problem Solving (Basic)",
     issuer: "HackerRank",
     date: "Oct 2024",
   },
 
   {
-    id: "cert-12",
+    id: "cert-13",
     name: "Cloud Application Developer — On-the-Job Training",
     issuer: "Rooman Technologies",
     date: "Dec 17, 2024",
   },
 
   {
-    id: "cert-13",
+    id: "cert-14",
     name: "Learning Plan for Entrepreneurship Internship",
     issuer: "IBM SkillsBuild",
     date: "Oct 24, 2024",
@@ -115,14 +122,14 @@ export const certifications: Certification[] = [
   },
 
   {
-    id: "cert-14",
+    id: "cert-15",
     name: "Fundamentals of Cryptography",
     issuer: "Infosys Springboard",
     date: "Dec 19, 2024",
   },
 
   {
-    id: "cert-15",
+    id: "cert-16",
     name: "Software Testing Tutorial",
     issuer: "Great Learning",
     date: "Jun 2024",
@@ -133,7 +140,7 @@ export const certifications: Certification[] = [
   // ─────────────────────────────────────────────
 
   {
-    id: "cert-16",
+    id: "cert-17",
     name: "Python Fundamentals for Beginners",
     issuer: "Great Learning",
     date: "May 2023",
@@ -144,7 +151,7 @@ export const certifications: Certification[] = [
   // ─────────────────────────────────────────────
 
   {
-    id: "cert-17",
+    id: "cert-18",
     name: "AI Day @ Ford, Chennai — Participation",
     issuer: "Ford",
     date: "Feb 2026",
