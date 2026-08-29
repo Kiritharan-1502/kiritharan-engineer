@@ -58,7 +58,7 @@ export const certifications: Certification[] = [
     id: "cert-7",
     name: "Gen AI: Beyond the Chatbot",
     issuer: "Google Cloud",
-    date: "Aug 026",
+    date: "Aug 2026",
   },
 
   {
