@@ -2,164 +2,583 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import { GradientText } from "./animations/GradientText";
-import { TypewriterEffect } from "./animations/TypewriterEffect";
-import { GradientButton } from "./ui/GradientButton";
-import { Canvas } from "@react-three/fiber";
-import { Float, Stars } from "@react-three/drei";
-
-// Add a 3D Abstract Neural/Tech structure for the Hero background
-const AbstractHero3D = () => {
-  return (
-    <Canvas camera={{ position: [0, 0, 10] }}>
-      <ambientLight intensity={0.2} />
-      <directionalLight position={[10, 10, 5]} intensity={1} color="#a855f7" />
-      <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#22d3ee" />
-      
-      <Stars radius={50} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
-      
-      <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-        <mesh position={[-4, 2, -2]}>
-          <torusKnotGeometry args={[1, 0.3, 128, 16]} />
-          <meshPhysicalMaterial 
-            color="#7c3aed" 
-            wireframe 
-            roughness={0.1}
-            emissive="#7c3aed"
-            emissiveIntensity={0.2}
-          />
-        </mesh>
-      </Float>
-
-      <Float speed={2} rotationIntensity={2} floatIntensity={1.5}>
-        <mesh position={[4, -1, -3]}>
-          <icosahedronGeometry args={[1.5, 0]} />
-          <meshPhysicalMaterial 
-            color="#ec4899" 
-            wireframe 
-            roughness={0.2}
-            emissive="#ec4899"
-            emissiveIntensity={0.2}
-          />
-        </mesh>
-      </Float>
-
-      <Float speed={1.2} rotationIntensity={0.5} floatIntensity={3}>
-        <mesh position={[-2, -3, -5]}>
-          <octahedronGeometry args={[2, 0]} />
-          <meshPhysicalMaterial 
-            color="#22d3ee" 
-            wireframe 
-            roughness={0.1}
-            emissive="#22d3ee"
-            emissiveIntensity={0.1}
-          />
-        </mesh>
-      </Float>
-    </Canvas>
-  );
-};
+import {
+  ArrowRight,
+  UserRound,
+  Bot,
+  Settings,
+  SearchCheck,
+  ChartNoAxesColumnIncreasing,
+  BookOpen,
+  Globe,
+} from "lucide-react";
 
 export const Hero = () => {
   const scrollTo = (href: string) => {
     const target = document.querySelector(href);
+
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const taglineWords = "Software Developer • IT Operations Engineer • Generative AI • Problem Solving".split(" ");
-
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Floating 3D Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <AbstractHero3D />
-      </div>
+    <section
+      id="home"
+      className="bg-white text-[#101d35]"
+    >
+      {/* =========================================================
+          HERO SECTION
+      ========================================================= */}
+      <div className="border-b border-[#eef1f5]">
+        <div className="mx-auto max-w-[1400px] px-8 lg:px-10">
 
-      <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 text-xl md:text-2xl font-mono text-[#c084fc]"
-        >
-          <TypewriterEffect text="Hi, I'm" speed={100} />
-        </motion.div>
+          <div
+            className="
+              grid
+              items-center
+              gap-8
+              lg:grid-cols-[1.03fr_0.97fr]
+            "
+          >
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-6xl md:text-8xl font-extrabold tracking-tight mb-6 drop-shadow-2xl"
-        >
-          <GradientText text="Shakthi Nandini J" />
-        </motion.h1>
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1, delayChildren: 0.5 },
-            },
-          }}
-          className="text-xl md:text-3xl font-medium mb-8 flex flex-wrap justify-center gap-x-2 text-[#e2e8f0] drop-shadow-lg"
-        >
-          {taglineWords.map((word, i) => (
-            <motion.span
-              key={i}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
+            {/* =====================================================
+                LEFT SIDE
+            ===================================================== */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="relative z-10 py-6"
             >
-              {word}
-            </motion.span>
-          ))}
-        </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          className="max-w-2xl text-lg md:text-xl text-[#94a3b8] mb-12 leading-relaxed backdrop-blur-sm bg-[#0a0a0f]/30 p-4 rounded-2xl"
-        >
-          Bridging full-stack engineering and Generative AI to build intelligent, autonomous, and scalable cloud systems.
-        </motion.p>
+              {/* EXPERIENCE */}
+              <div
+                className="
+                  mb-3
+                  flex
+                  items-center
+                  gap-3
+                  text-[15px]
+                  font-bold
+                  uppercase
+                  tracking-wide
+                  text-[#1266d6]
+                "
+              >
+                <span className="h-[2px] w-6 bg-[#1266d6]" />
+                <span>9+ Years of Experience</span>
+              </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="flex flex-col sm:flex-row gap-6"
-        >
-          <GradientButton onClick={() => scrollTo("#projects")} variant="solid">
-            View My Work
-          </GradientButton>
-          <GradientButton onClick={() => scrollTo("#contact")} variant="outline">
-            Get In Touch
-          </GradientButton>
-        </motion.div>
+
+              {/* MAIN HEADING */}
+              <h1
+                className="
+                  max-w-[610px]
+                  text-[42px]
+                  font-bold
+                  leading-[1.08]
+                  tracking-[-0.025em]
+                  sm:text-[44px]
+                  lg:text-[47px]
+                "
+              >
+                Engineering Intelligent
+                <br />
+                Solutions. Optimizing
+                <br />
+                Performance.
+              </h1>
+
+
+              {/* DESCRIPTION */}
+              <p
+                className="
+                  mt-4
+                  max-w-[650px]
+                  text-[15px]
+                  leading-[1.75]
+                  text-[#43516b]
+                "
+              >
+                Senior Offline Robot Programmer with expertise in paint robot
+                programming, automation, process optimization and production
+                engineering within automotive manufacturing environments.
+              </p>
+
+
+              {/* BUTTONS */}
+              <div className="mt-5 flex items-center gap-4">
+
+                <button
+                  onClick={() => scrollTo("#projects")}
+                  className="
+                    flex
+                    h-[48px]
+                    items-center
+                    gap-3
+                    rounded-md
+                    bg-[#0867dc]
+                    px-6
+                    text-[12px]
+                    font-semibold
+                    text-white
+                    shadow-sm
+                    transition
+                    hover:bg-[#0759bd]
+                  "
+                >
+                  EXPLORE MY WORK
+                  <ArrowRight size={17} />
+                </button>
+
+
+                <button
+                  onClick={() => scrollTo("#about")}
+                  className="
+                    flex
+                    h-[48px]
+                    items-center
+                    gap-3
+                    rounded-md
+                    border-2
+                    border-[#1768d5]
+                    px-6
+                    text-[12px]
+                    font-semibold
+                    text-[#1266d6]
+                    transition
+                    hover:bg-[#f2f7ff]
+                  "
+                >
+                  VIEW PROFILE
+                  <UserRound size={16} />
+                </button>
+
+              </div>
+
+
+              {/* TECHNOLOGIES */}
+              <div className="mt-6">
+
+                <p
+                  className="
+                    mb-2.5
+                    text-[12px]
+                    font-medium
+                    uppercase
+                    tracking-wide
+                    text-[#526079]
+                  "
+                >
+                  Technologies I Work With
+                </p>
+
+
+                <div className="flex items-center gap-7">
+
+                  <span
+                    className="
+                      text-[25px]
+                      font-black
+                      tracking-tight
+                      text-[#1664bd]
+                    "
+                  >
+                    DÜRR
+                  </span>
+
+
+                  <span
+                    className="
+                      text-[25px]
+                      font-black
+                      tracking-tight
+                      text-[#df1717]
+                    "
+                  >
+                    ABB
+                  </span>
+
+
+                  <span
+                    className="
+                      text-[25px]
+                      font-black
+                      tracking-tight
+                      text-[#1264b8]
+                    "
+                  >
+                    YASKAWA
+                  </span>
+
+
+                  <span
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      text-[20px]
+                      font-semibold
+                      text-[#46536b]
+                    "
+                  >
+                    <span
+                      className="
+                        rounded
+                        border-2
+                        border-[#46536b]
+                        p-1
+                      "
+                    >
+                      <Settings size={18} />
+                    </span>
+
+                    PLC
+                  </span>
+
+                </div>
+
+              </div>
+
+            </motion.div>
+
+
+            {/* =====================================================
+                RIGHT SIDE — IMAGE PLACEHOLDER
+            ===================================================== */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="
+                relative
+                flex
+                h-[455px]
+                items-center
+                justify-end
+              "
+            >
+
+              {/* FRAME */}
+              <div
+                className="
+                  absolute
+                  right-0
+                  top-1/2
+                  h-[455px]
+                  w-[94%]
+                  -translate-y-1/2
+                  border
+                  border-[#2473dc]/60
+                "
+              />
+
+
+              {/* BLUEPRINT */}
+              <div
+                className="
+                  absolute
+                  left-0
+                  top-1/2
+                  z-0
+                  hidden
+                  -translate-y-1/2
+                  opacity-20
+                  lg:block
+                "
+              >
+                <svg
+                  width="290"
+                  height="390"
+                  viewBox="0 0 330 430"
+                  fill="none"
+                >
+                  <path
+                    d="M55 390V300L105 255V185L165 135L215 170V235L270 285"
+                    stroke="#1266d6"
+                    strokeWidth="2"
+                  />
+
+                  <circle
+                    cx="105"
+                    cy="255"
+                    r="30"
+                    stroke="#1266d6"
+                    strokeWidth="2"
+                  />
+
+                  <circle
+                    cx="165"
+                    cy="135"
+                    r="30"
+                    stroke="#1266d6"
+                    strokeWidth="2"
+                  />
+
+                  <circle
+                    cx="215"
+                    cy="235"
+                    r="30"
+                    stroke="#1266d6"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </div>
+
+
+              {/* IMAGE AREA
+                  PHOTO WILL BE ADDED LAST
+              */}
+              <div
+                className="
+                  relative
+                  z-10
+                  h-[455px]
+                  w-[455px]
+                  bg-[#f5f8fc]
+                "
+              />
+
+
+              {/* DOTS */}
+              <div
+                className="
+                  absolute
+                  right-5
+                  top-4
+                  z-20
+                  grid
+                  grid-cols-6
+                  gap-[10px]
+                  opacity-60
+                "
+              >
+                {Array.from({ length: 30 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className="
+                      h-[4px]
+                      w-[4px]
+                      rounded-full
+                      bg-[#1266d6]
+                    "
+                  />
+                ))}
+              </div>
+
+            </motion.div>
+
+          </div>
+
+        </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer"
-        onClick={() => scrollTo("#about")}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <ChevronDown size={32} className="text-[#a855f7] opacity-70" />
-        </motion.div>
-      </motion.div>
+
+      {/* =========================================================
+          CORE EXPERTISE
+      ========================================================= */}
+      <section className="bg-white px-8 py-5 lg:px-10">
+
+        <div className="mx-auto max-w-[1400px]">
+
+          {/* TITLE */}
+          <div className="mb-4 text-center">
+
+            <h2
+              className="
+                text-[25px]
+                font-bold
+                uppercase
+                leading-tight
+                tracking-tight
+                text-[#101d35]
+              "
+            >
+              Core{" "}
+              <span className="border-b-[3px] border-[#1266d6]">
+                Expertise
+              </span>
+            </h2>
+
+
+            <p
+              className="
+                mt-1
+                text-[13px]
+                leading-5
+                text-[#526079]
+              "
+            >
+              I deliver end-to-end engineering solutions that drive
+              efficiency, quality and innovation.
+            </p>
+
+          </div>
+
+
+          {/* CARDS */}
+          <div
+            className="
+              grid
+              grid-cols-1
+              gap-3
+              sm:grid-cols-2
+              lg:grid-cols-3
+              xl:grid-cols-6
+            "
+          >
+
+            <ExpertiseCard
+              icon={<Bot size={38} />}
+              title={
+                <>
+                  Robot Programming
+                  <br />
+                  & Commissioning
+                </>
+              }
+              description="Expert in ABB, Yaskawa & Dürr robots for paint and industrial applications."
+            />
+
+            <ExpertiseCard
+              icon={<Settings size={38} />}
+              title="Process Optimization"
+              description="Improving cycle time, paint quality, transfer efficiency and line performance."
+            />
+
+            <ExpertiseCard
+              icon={<SearchCheck size={38} />}
+              title={
+                <>
+                  Troubleshooting &
+                  <br />
+                  Error Analysis
+                </>
+              }
+              description="Root cause analysis and defect elimination for sustainable results."
+            />
+
+            <ExpertiseCard
+              icon={<ChartNoAxesColumnIncreasing size={38} />}
+              title={
+                <>
+                  System Start-up
+                  <br />
+                  & Support
+                </>
+              }
+              description="Supporting system deployment, trials, debugging and production ramp-up."
+            />
+
+            <ExpertiseCard
+              icon={<BookOpen size={38} />}
+              title={
+                <>
+                  Technical Training
+                  <br />
+                  & Documentation
+                </>
+              }
+              description="Training teams and preparing SOPs, process sheets and technical guides."
+            />
+
+            <ExpertiseCard
+              icon={<Globe size={38} />}
+              title={
+                <>
+                  Global Support
+                  <br />
+                  & Projects
+                </>
+              }
+              description="Willingness to travel worldwide for assignments and customer support."
+            />
+
+          </div>
+
+        </div>
+
+      </section>
+
     </section>
+  );
+};
+
+
+/* ===============================================================
+   EXPERTISE CARD
+================================================================ */
+
+const ExpertiseCard = ({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: React.ReactNode;
+  description: string;
+}) => {
+  return (
+    <motion.div
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+      className="
+        flex
+        min-h-[190px]
+        flex-col
+        items-center
+        rounded-xl
+        border
+        border-[#e2e7ee]
+        bg-white
+        px-4
+        py-4
+        text-center
+        shadow-[0_2px_10px_rgba(20,40,70,0.04)]
+      "
+    >
+
+      {/* ICON */}
+      <div
+        className="
+          mb-2.5
+          flex
+          h-[44px]
+          items-center
+          justify-center
+          text-[#1266d6]
+        "
+      >
+        {icon}
+      </div>
+
+
+      {/* TITLE */}
+      <h3
+        className="
+          text-[14px]
+          font-bold
+          leading-[1.25]
+          text-[#101d35]
+        "
+      >
+        {title}
+      </h3>
+
+
+      {/* DESCRIPTION */}
+      <p
+        className="
+          mt-2.5
+          text-[12px]
+          leading-[1.5]
+          text-[#526079]
+        "
+      >
+        {description}
+      </p>
+
+    </motion.div>
   );
 };

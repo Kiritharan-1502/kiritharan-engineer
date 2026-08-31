@@ -13,8 +13,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shakthi Nandini J | Software Developer Portfolio",
-  description: "Personal portfolio of Shakthi Nandini J, a software developer and technology professional with experience in software development, testing, and enterprise technologies.",
+  title: "Kiritharan | Senior Engineer Portfolio",
+  description:
+    "Personal portfolio of Kiritharan, a Senior Engineer specializing in industrial robotics, automotive paint systems, commissioning, troubleshooting, production optimization, and technical support.",
 };
 
 export default function RootLayout({
@@ -27,7 +28,9 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased bg-[#0a0a0f] text-[#f8fafc]`}
     >
-      <body className="min-h-full flex flex-col font-sans overflow-x-hidden">{children}</body>
+      <body className="min-h-full flex flex-col font-sans overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }

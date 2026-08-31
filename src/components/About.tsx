@@ -1,130 +1,184 @@
 "use client";
 
 import React from "react";
-import { ScrollReveal } from "./animations/ScrollReveal";
-import { SectionHeading } from "./ui/SectionHeading";
-import { GlassCard } from "./ui/GlassCard";
-import { GraduationCap, MapPin, Lightbulb, PenTool } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const About = () => {
   return (
-    <section id="about" className="py-24 relative">
-      <div className="container mx-auto px-6 md:px-12">
-        <ScrollReveal>
-          <SectionHeading title="About Me" />
-        </ScrollReveal>
+    <section
+      id="about"
+      className="
+        scroll-mt-0
+        w-full
+        bg-white
+        px-6
+        py-16
+        text-[#101d35]
+        md:px-10
+        md:py-18
+        lg:px-12
+        xl:px-14
+      "
+    >
+      <div className="mx-auto w-full max-w-[1280px]">
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6 text-lg text-[#cbd5e1] leading-relaxed">
-            <ScrollReveal delay={0.1}>
-              <p>
-                I’m someone who enjoys understanding how technology works and
-                finding ways to turn ideas into something practical.
-                My journey in Information Science and Engineering has given me exposure to programming, web technologies, databases, testing, IT systems, and emerging technologies.
-              </p>
-            </ScrollReveal>
+        {/* =====================================================
+            HEADING
+        ===================================================== */}
 
-            <ScrollReveal delay={0.2}>
-              <p>
-                Through projects and hands-on experience, I’ve worked with technologies such as C#, Java, Python,
-                SQL, Selenium WebDriver, Git, GitHub, and service management platforms including ServiceNow and Perceive. 
-                I’m also developing my interest in Generative AI and exploring how it can be used to 
-                create smarter and more useful solutions.
-              </p>
-            </ScrollReveal>
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.55 }}
+        >
+          <h2
+            className="
+              text-[40px]
+              font-bold
+              leading-[1.1]
+              tracking-[-0.035em]
+              text-[#101d35]
+              md:text-[46px]
+              lg:text-[48px]
+            "
+          >
+            About Me
+          </h2>
 
-            <ScrollReveal delay={0.3}>
-              <p>
-                I believe in learning by doing. I enjoy breaking down problems, experimenting with 
-                different approaches, and continuously improving what I build. For me, growth comes 
-                from staying curious, being open to learning, and turning challenges into opportunities 
-                to understand something new.
-              </p>
-            </ScrollReveal>
+          <div
+            className="
+              mt-4
+              h-[3px]
+              w-16
+              bg-[#1768d5]
+            "
+          />
+        </motion.div>
 
-            <ScrollReveal delay={0.4}>
-              <p>
-                Beyond technology, I enjoy reading, creative writing,
-                journaling, travelling, music, and badminton.
-              </p>
-            </ScrollReveal>
-          </div>
+        {/* =====================================================
+            ABOUT CONTENT
+        ===================================================== */}
 
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <ScrollReveal delay={0.3} direction="left">
-              <GlassCard
-                hoverGlow
-                className="p-6 flex flex-col items-center text-center gap-3 h-full"
-              >
-                <div className="p-3 rounded-full bg-[#7c3aed]/20 text-[#c084fc]">
-                  <GraduationCap size={28} />
-                </div>
+        <div
+          className="
+            mt-10
+            w-full
+            max-w-[1180px]
+          "
+        >
 
-                <h3 className="font-semibold text-white">Education</h3>
+          {/* INTRODUCTION */}
 
-                <p className="text-sm text-[#94a3b8]">
-                  B.E. in Information Science & Engineering
-                  <br />
-                  CGPA: 7.59
-                </p>
-              </GlassCard>
-            </ScrollReveal>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55 }}
+            className="
+              text-[16px]
+              leading-[1.8]
+              text-[#43516b]
+              md:text-[18px]
+              md:leading-[1.8]
+            "
+          >
+            Senior Offline Robot Programmer with 9+ years of experience in
+            paint robot programming and industrial robot programming, including
+            offline programming, robotic paint application systems, site
+            commissioning, application prove-out, customer technical support,
+            and process optimization within automotive manufacturing
+            environments.
+          </motion.p>
 
-            <ScrollReveal delay={0.4} direction="left">
-              <GlassCard
-                hoverGlow
-                className="p-6 flex flex-col items-center text-center gap-3 h-full"
-              >
-                <div className="p-3 rounded-full bg-[#ec4899]/20 text-[#ec4899]">
-                  <MapPin size={28} />
-                </div>
+          {/* ROBOT SYSTEMS */}
 
-                <h3 className="font-semibold text-white">Location</h3>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.05 }}
+            className="
+              mt-6
+              text-[16px]
+              leading-[1.8]
+              text-[#52627d]
+              md:text-[18px]
+              md:leading-[1.8]
+            "
+          >
+            Experienced in ABB, Yaskawa, and Dürr robotic systems with
+            hands-on expertise in commissioning, troubleshooting, robot path
+            optimization, defect elimination, and global technical support.
+            I have also completed advanced Germany training for Dürr robot
+            systems.
+          </motion.p>
 
-                <p className="text-sm text-[#94a3b8]">
-                  Chennai, India
-                </p>
-              </GlassCard>
-            </ScrollReveal>
+          {/* PAINT PROCESS */}
 
-            <ScrollReveal delay={0.5} direction="left">
-              <GlassCard
-                hoverGlow
-                className="p-6 flex flex-col items-center text-center gap-3 h-full"
-              >
-                <div className="p-3 rounded-full bg-[#22d3ee]/20 text-[#22d3ee]">
-                  <Lightbulb size={28} />
-                </div>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="
+              mt-6
+              text-[16px]
+              leading-[1.8]
+              text-[#52627d]
+              md:text-[18px]
+              md:leading-[1.8]
+            "
+          >
+            My experience covers paint application processes including sealer,
+            primer, base coat, clear coat, dual-tone applications, process
+            validation, robot path optimization, cycle-time improvement, and
+            production line performance enhancement.
+          </motion.p>
 
-                <h3 className="font-semibold text-white">Focus</h3>
+          {/* COLLABORATION */}
 
-                <p className="text-sm text-[#94a3b8]">
-                  Generative AI
-                  <br />
-                  (Symbolic + ML)
-                </p>
-              </GlassCard>
-            </ScrollReveal>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="
+              mt-6
+              text-[16px]
+              leading-[1.8]
+              text-[#52627d]
+              md:text-[18px]
+              md:leading-[1.8]
+            "
+          >
+            I work closely with production, maintenance, quality, process
+            engineering, automation teams, and vendors to troubleshoot
+            problems, improve processes, support commissioning, and deliver
+            reliable production solutions.
+             I work closely with production, maintenance, quality, process
+            engineering, automation teams, and vendors to troubleshoot
+            problems, improve processes, support commissioning, and deliver
+            reliable production solutions.
+             I work closely with production, maintenance, quality, process
+            engineering, automation teams, and vendors to troubleshoot
+            problems, improve processes, support commissioning, and deliver
+            reliable production solutions.
+             I work closely with production, maintenance, quality, process
+            engineering, automation teams, and vendors to troubleshoot
+            problems, improve processes, support commissioning, and deliver
+            reliable production solutions.
+             I work closely with production, maintenance, quality, process
+            engineering, automation teams, and vendors to troubleshoot
+            problems, improve processes, support commissioning, and deliver
+            reliable production solutions.
+             I work closely with production, maintenance, quality, process
+            engineering, automation teams, and vendors to troubleshoot
+            problems, improve processes, support commissioning, and deliver
+            reliable production solutions.
+          
+          </motion.p>
 
-            <ScrollReveal delay={0.6} direction="left">
-              <GlassCard
-                hoverGlow
-                className="p-6 flex flex-col items-center text-center gap-3 h-full"
-              >
-                <div className="p-3 rounded-full bg-[#a855f7]/20 text-[#a855f7]">
-                  <PenTool size={28} />
-                </div>
-
-                <h3 className="font-semibold text-white">Creative Side</h3>
-
-                <p className="text-sm text-[#94a3b8]">
-                  Writing
-                  <br />
-                  Journaling
-                </p>
-              </GlassCard>
-            </ScrollReveal>
-          </div>
         </div>
       </div>
     </section>

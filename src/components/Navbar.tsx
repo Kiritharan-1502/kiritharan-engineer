@@ -1,127 +1,456 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import {
+  Home,
+  User,
+  Workflow,
+  BriefcaseBusiness,
+  GraduationCap,
+  School,
+  Wrench,
+  Mail,
+  Menu,
+  X,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
+/*
+ * =========================================================
+ * NAVIGATION LINKS
+ * =========================================================
+ */
+
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Beyond the Code", href: "#universe" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Certifications", href: "#certifications" },
-  { name: "Contact", href: "#contact" },
+  {
+    name: "Home",
+    href: "#home",
+    icon: Home,
+  },
+  {
+    name: "About",
+    href: "#about",
+    icon: User,
+  },
+  {
+    name: "Skills",
+    href: "#expertise",
+    icon: Workflow,
+  },
+  {
+    name: "Experience",
+    href: "#experience",
+    icon: BriefcaseBusiness,
+  },
+  {
+    name: "Trainings",
+    href: "#trainings",
+    icon: GraduationCap,
+  },
+  {
+    name: "Capabilities",
+    href: "#capabilities",
+    icon: Wrench,
+  },
+  {
+    name: "Education",
+    href: "#education",
+    icon: School,
+  },
+  {
+    name: "Contact",
+    href: "#contact",
+    icon: Mail,
+  },
 ];
 
 export const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  /*
+   * =========================================================
+   * ACTIVE SECTION DETECTION
+   * =========================================================
+   */
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      
-      // Update active section based on scroll position
-      const sections = navLinks.map(link => link.name.toLowerCase());
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
-          }
+      const viewportPosition = window.innerHeight * 0.28;
+
+      let currentSection = "home";
+
+      for (const link of navLinks) {
+        const id = link.href.replace("#", "");
+        const element = document.getElementById(id);
+
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+
+        if (
+          rect.top <= viewportPosition &&
+          rect.bottom >= viewportPosition
+        ) {
+          currentSection = id;
+          break;
         }
       }
+
+      /*
+       * Keep Home active near the top.
+       */
+
+      if (window.scrollY < 120) {
+        currentSection = "home";
+      }
+
+      setActiveSection(currentSection);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
-  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  /*
+   * =========================================================
+   * SMOOTH NAVIGATION
+   * =========================================================
+   */
+
+  const scrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
+
     setMobileMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+
+    const target = document.querySelector(
+      href
+    ) as HTMLElement | null;
+
+    if (!target) return;
+
+    const targetPosition =
+      target.getBoundingClientRect().top + window.scrollY;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth",
+    });
+
+    window.history.replaceState(null, "", href);
   };
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "py-4 glass shadow-lg" : "py-6 bg-transparent"
-      )}
-    >
-      <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <a href="#home" onClick={(e) => scrollTo(e, "#home")} className="text-2xl font-bold font-mono tracking-tighter">
-          <span className="text-gradient">SN</span>
-        </a>
+    <>
+      {/* =====================================================
+          DESKTOP SIDEBAR
+      ===================================================== */}
 
-        {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <a
-                href={link.href}
-                onClick={(e) => scrollTo(e, link.href)}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-white relative",
-                  activeSection === link.name.toLowerCase() ? "text-white" : "text-[#94a3b8]"
-                )}
-              >
-                {link.name}
-                {activeSection === link.name.toLowerCase() && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#c084fc] shadow-[0_0_8px_#c084fc]"
-                  />
-                )}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <aside
+        className="
+          fixed
+          left-0
+          top-0
+          z-[60]
+          hidden
+          h-screen
+          w-[126px]
+          flex-col
+          bg-[#061a33]
+          md:flex
+        "
+      >
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        {/* ===================================================
+            LOGO
+        =================================================== */}
+
+        <div
+          className="
+            flex
+            h-[118px]
+            shrink-0
+            items-center
+            justify-center
+            border-b
+            border-white/[0.05]
+          "
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Nav */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-0 w-full glass border-t border-[#a855f7]/20 flex flex-col py-4 px-6 gap-4"
+          <a
+            href="#home"
+            onClick={(e) => scrollTo(e, "#home")}
+            aria-label="Go to Home"
+            className="select-none"
           >
-            {navLinks.map((link) => (
+            <div
+              className="
+                text-[38px]
+                font-bold
+                leading-none
+                tracking-[-5px]
+              "
+            >
+              <span className="text-white">K</span>
+              <span className="text-[#1769d5]">K</span>
+            </div>
+          </a>
+        </div>
+
+        {/* ===================================================
+            DESKTOP NAVIGATION
+        =================================================== */}
+
+        <nav className="flex flex-1 flex-col">
+          {navLinks.map((link) => {
+            const Icon = link.icon;
+
+            const sectionId = link.href.replace("#", "");
+
+            const isActive =
+              activeSection === sectionId;
+
+            return (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => scrollTo(e, link.href)}
+                onClick={(e) =>
+                  scrollTo(e, link.href)
+                }
                 className={cn(
-                  "text-lg font-medium py-2 border-b border-[#a855f7]/10",
-                  activeSection === link.name.toLowerCase() ? "text-[#c084fc]" : "text-[#94a3b8]"
+                  `
+                    relative
+                    flex
+                    h-[76px]
+                    w-full
+                    shrink-0
+                    flex-col
+                    items-center
+                    justify-center
+                    gap-[7px]
+                    text-center
+                    transition-all
+                    duration-200
+                  `,
+                  isActive
+                    ? "bg-[#0b315a] text-white"
+                    : "text-white/85 hover:bg-[#0a2949]"
                 )}
               >
-                {link.name}
+
+                {/* ACTIVE BLUE BAR */}
+
+                {isActive && (
+                  <motion.div
+                    layoutId="sidebar-active"
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 35,
+                    }}
+                    className="
+                      absolute
+                      left-0
+                      top-0
+                      h-full
+                      w-[3px]
+                      bg-[#0874ed]
+                    "
+                  />
+                )}
+
+                {/* ICON */}
+
+                <Icon
+                  size={21}
+                  strokeWidth={1.7}
+                  className={cn(
+                    "transition-colors duration-200",
+                    isActive
+                      ? "text-[#4b9cff]"
+                      : "text-white/90"
+                  )}
+                />
+
+                {/* LABEL */}
+
+                <span
+                  className="
+                    text-[12px]
+                    font-medium
+                    leading-none
+                    tracking-[0.1px]
+                  "
+                >
+                  {link.name}
+                </span>
+
               </a>
-            ))}
+            );
+          })}
+        </nav>
+      </aside>
+
+      {/* =====================================================
+          MOBILE HEADER
+      ===================================================== */}
+
+      <header
+        className="
+          fixed
+          left-0
+          right-0
+          top-0
+          z-[60]
+          flex
+          h-[68px]
+          items-center
+          justify-between
+          bg-[#061a33]
+          px-5
+          shadow-sm
+          md:hidden
+        "
+      >
+
+        {/* MOBILE LOGO */}
+
+        <a
+          href="#home"
+          onClick={(e) => scrollTo(e, "#home")}
+          aria-label="Go to Home"
+          className="
+            text-[30px]
+            font-bold
+            leading-none
+            tracking-[-4px]
+          "
+        >
+          <span className="text-white">K</span>
+          <span className="text-[#1769d5]">K</span>
+        </a>
+
+        {/* MENU BUTTON */}
+
+        <button
+          type="button"
+          onClick={() =>
+            setMobileMenuOpen(!mobileMenuOpen)
+          }
+          className="
+            rounded-md
+            p-2
+            text-white
+            transition-colors
+            hover:bg-white/10
+          "
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+        >
+          {mobileMenuOpen ? (
+            <X size={24} />
+          ) : (
+            <Menu size={24} />
+          )}
+        </button>
+
+      </header>
+
+      {/* =====================================================
+          MOBILE MENU
+      ===================================================== */}
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: -12,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              y: -12,
+            }}
+            transition={{
+              duration: 0.2,
+            }}
+            className="
+              fixed
+              left-0
+              right-0
+              top-[68px]
+              z-[55]
+              border-t
+              border-white/[0.06]
+              bg-[#061a33]
+              px-5
+              py-3
+              shadow-xl
+              md:hidden
+            "
+          >
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+
+              const sectionId =
+                link.href.replace("#", "");
+
+              const isActive =
+                activeSection === sectionId;
+
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) =>
+                    scrollTo(e, link.href)
+                  }
+                  className={cn(
+                    `
+                      flex
+                      items-center
+                      gap-4
+                      border-b
+                      border-white/[0.08]
+                      py-3.5
+                      text-sm
+                      font-medium
+                      transition-colors
+                    `,
+                    isActive
+                      ? "text-[#4b9cff]"
+                      : "text-white/90"
+                  )}
+                >
+                  <Icon
+                    size={19}
+                    strokeWidth={1.7}
+                  />
+
+                  <span>{link.name}</span>
+                </a>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
