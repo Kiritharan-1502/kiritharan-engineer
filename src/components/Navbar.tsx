@@ -48,11 +48,7 @@ const navLinks = [
     href: "#trainings",
     icon: GraduationCap,
   },
-  {
-    name: "Capabilities",
-    href: "#capabilities",
-    icon: Wrench,
-  },
+
   {
     name: "Education",
     href: "#education",

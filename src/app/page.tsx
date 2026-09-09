@@ -10,7 +10,7 @@ import { Expertise } from "@/components/Expertise";
 import { Experience } from "@/components/Experience";
 import { Trainings } from "@/components/Trainings";
 import { Education } from "@/components/Education";
-import { Capabilities } from "@/components/Capabilities";
+
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
@@ -102,11 +102,7 @@ export default function Home() {
         {/* ===================================================
             EDUCATION & CERTIFICATIONS
         =================================================== */}
-<Capabilities />
 
-        {/* ===================================================
-            CONTACT
-        =================================================== */}
 
         <Education />
 
