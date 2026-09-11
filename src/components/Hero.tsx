@@ -14,12 +14,10 @@ export const Hero = () => {
       id="home"
       className={`
         relative
-        min-h-screen
         w-full
         overflow-hidden
         transition-colors
         duration-500
-
         ${
           isDark
             ? "bg-[#080814] text-white"
@@ -29,18 +27,13 @@ export const Hero = () => {
     >
       {/* =====================================================
           THEME TOGGLE
-          HOME PAGE ONLY
       ===================================================== */}
 
       <motion.button
         type="button"
         onClick={toggleTheme}
-        whileHover={{
-          scale: 1.06,
-        }}
-        whileTap={{
-          scale: 0.94,
-        }}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
         aria-label={
           isDark
             ? "Switch to light mode"
@@ -53,20 +46,21 @@ export const Hero = () => {
         }
         className={`
           fixed
-          right-6
-          top-[102px]
+          right-4
+          top-[82px]
           z-[90]
           flex
-          h-11
-          w-11
+          h-10
+          w-10
           items-center
           justify-center
           rounded-full
           border
           shadow-lg
-          transition-all
-          duration-300
-
+          sm:right-6
+          sm:top-[92px]
+          sm:h-11
+          sm:w-11
           ${
             isDark
               ? `
@@ -91,22 +85,13 @@ export const Hero = () => {
       >
         {isDark ? (
           <Sun
-            size={19}
+            size={18}
             strokeWidth={1.8}
-            className="
-              transition-transform
-              duration-300
-              group-hover:rotate-45
-            "
           />
         ) : (
           <Moon
             size={18}
             strokeWidth={1.8}
-            className="
-              transition-transform
-              duration-300
-            "
           />
         )}
       </motion.button>
@@ -115,8 +100,15 @@ export const Hero = () => {
           MAIN LAYOUT
       ===================================================== */}
 
-      <div className="flex min-h-screen w-full flex-col lg:flex-row">
-
+      <div
+        className="
+          flex
+          w-full
+          flex-col
+          lg:min-h-screen
+          lg:flex-row
+        "
+      >
         {/* =====================================================
             LEFT — CONTENT
         ===================================================== */}
@@ -126,20 +118,23 @@ export const Hero = () => {
             relative
             z-10
             flex
-            min-h-screen
             w-full
             flex-col
             justify-center
-            px-8
-            pb-20
-            pt-32
+            px-5
+            pb-12
+            pt-[112px]
+            sm:px-7
+            sm:pb-14
+            sm:pt-[120px]
             md:px-12
+            md:pb-16
+            lg:min-h-screen
             lg:w-[44%]
             lg:px-16
             lg:pb-16
             lg:pt-28
             xl:px-[4.5vw]
-
             ${
               isDark
                 ? "bg-[#080814]"
@@ -147,20 +142,20 @@ export const Hero = () => {
             }
           `}
         >
-
           {/* Background glow */}
 
           <div
             className={`
               pointer-events-none
               absolute
-              left-[-150px]
+              left-[-120px]
               top-[25%]
-              h-[450px]
-              w-[450px]
+              h-[350px]
+              w-[350px]
               rounded-full
-              blur-[150px]
-
+              blur-[130px]
+              sm:h-[450px]
+              sm:w-[450px]
               ${
                 isDark
                   ? "bg-blue-600/[0.025]"
@@ -170,7 +165,6 @@ export const Hero = () => {
           />
 
           <div className="relative">
-
             {/* =================================================
                 EYEBROW
             ================================================= */}
@@ -188,17 +182,18 @@ export const Hero = () => {
                 duration: 0.6,
                 delay: 0.15,
               }}
-              className="flex items-center gap-6"
+              className="flex items-center gap-4 sm:gap-6"
             >
-              <span className="h-[2px] w-14 bg-[#3b82f6]" />
+              <span className="h-[2px] w-10 bg-[#3b82f6] sm:w-14" />
 
               <span
                 className={`
-                  text-[10px]
+                  text-[9px]
                   font-medium
                   uppercase
-                  tracking-[0.32em]
-
+                  tracking-[0.28em]
+                  sm:text-[10px]
+                  sm:tracking-[0.32em]
                   ${
                     isDark
                       ? "text-slate-400"
@@ -229,12 +224,15 @@ export const Hero = () => {
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="
-                mt-10
+                mt-7
                 max-w-[680px]
-                text-[clamp(4rem,6vw,6.4rem)]
+                text-[clamp(3.25rem,13vw,6.4rem)]
                 font-bold
-                leading-[0.86]
+                leading-[0.88]
                 tracking-[-0.065em]
+                sm:mt-9
+                sm:text-[clamp(4rem,9vw,6.4rem)]
+                lg:mt-10
               "
             >
               <span
@@ -280,12 +278,14 @@ export const Hero = () => {
                 delay: 0.4,
               }}
               className={`
-                mt-12
+                mt-7
                 max-w-[620px]
-                text-[16px]
-                leading-[1.9]
+                text-[14px]
+                leading-[1.8]
+                sm:mt-10
+                sm:text-[16px]
+                sm:leading-[1.9]
                 md:text-[18px]
-
                 ${
                   isDark
                     ? "text-slate-400"
@@ -317,14 +317,18 @@ export const Hero = () => {
                 delay: 0.5,
               }}
               className="
-                mt-10
+                mt-8
                 flex
-                flex-wrap
-                items-center
-                gap-8
+                flex-col
+                items-stretch
+                gap-4
+                sm:flex-row
+                sm:flex-wrap
+                sm:items-center
+                sm:gap-7
+                lg:mt-10
               "
             >
-
               {/* Explore My Work */}
 
               <a
@@ -332,18 +336,22 @@ export const Hero = () => {
                 className={`
                   group
                   flex
-                  h-16
+                  h-14
+                  w-full
                   items-center
-                  gap-8
+                  justify-between
+                  gap-6
                   border
-                  px-8
-                  text-[11px]
+                  px-6
+                  text-[10px]
                   font-semibold
                   uppercase
-                  tracking-[0.2em]
-                  transition-all
-                  duration-300
-
+                  tracking-[0.18em]
+                  sm:h-16
+                  sm:w-auto
+                  sm:px-8
+                  sm:text-[11px]
+                  sm:tracking-[0.2em]
                   ${
                     isDark
                       ? `
@@ -363,9 +371,7 @@ export const Hero = () => {
                   }
                 `}
               >
-                <span>
-                  Explore My Work
-                </span>
+                <span>Explore My Work</span>
 
                 <span
                   className="
@@ -388,16 +394,17 @@ export const Hero = () => {
                 className={`
                   group
                   flex
-                  h-16
+                  h-12
                   items-center
+                  justify-center
                   gap-4
-                  text-[11px]
+                  text-[10px]
                   font-medium
                   uppercase
-                  tracking-[0.2em]
-                  transition-colors
-                  duration-300
-
+                  tracking-[0.18em]
+                  sm:h-16
+                  sm:text-[11px]
+                  sm:tracking-[0.2em]
                   ${
                     isDark
                       ? "text-slate-400 hover:text-white"
@@ -405,26 +412,21 @@ export const Hero = () => {
                   }
                 `}
               >
-                <span>
-                  Download Resume
-                </span>
+                <span>Download Resume</span>
 
                 <span
                   className="
                     flex
-                    h-9
-                    w-9
+                    h-8
+                    w-8
                     items-center
                     justify-center
                     rounded-full
                     border
                     border-[#3b82f6]/50
                     text-[#3b82f6]
-                    transition-all
-                    duration-300
-                    group-hover:border-[#3b82f6]
-                    group-hover:bg-[#3b82f6]/10
-                    group-hover:translate-y-0.5
+                    sm:h-9
+                    sm:w-9
                   "
                 >
                   ↓
@@ -450,10 +452,11 @@ export const Hero = () => {
                 delay: 0.6,
               }}
               className={`
-                mt-14
+                mt-9
                 border-t
-                pt-7
-
+                pt-5
+                sm:mt-12
+                sm:pt-7
                 ${
                   isDark
                     ? "border-white/[0.08]"
@@ -462,14 +465,13 @@ export const Hero = () => {
               `}
             >
               <div className="grid grid-cols-4">
-
                 {/* Experience */}
 
                 <div
                   className={`
                     border-r
-                    pr-4
-
+                    pr-2
+                    sm:pr-4
                     ${
                       isDark
                         ? "border-white/[0.08]"
@@ -479,11 +481,11 @@ export const Hero = () => {
                 >
                   <p
                     className={`
-                      text-3xl
+                      text-2xl
                       font-semibold
                       tracking-[-0.04em]
+                      sm:text-3xl
                       md:text-4xl
-
                       ${
                         isDark
                           ? "text-white"
@@ -496,13 +498,15 @@ export const Hero = () => {
 
                   <p
                     className={`
-                      mt-2
-                      text-[8px]
+                      mt-1
+                      text-[7px]
                       font-medium
                       uppercase
-                      leading-[1.6]
-                      tracking-[0.2em]
-
+                      leading-[1.5]
+                      tracking-[0.16em]
+                      sm:mt-2
+                      sm:text-[8px]
+                      sm:tracking-[0.2em]
                       ${
                         isDark
                           ? "text-slate-600"
@@ -521,8 +525,8 @@ export const Hero = () => {
                 <div
                   className={`
                     border-r
-                    px-4
-
+                    px-2
+                    sm:px-4
                     ${
                       isDark
                         ? "border-white/[0.08]"
@@ -532,11 +536,11 @@ export const Hero = () => {
                 >
                   <p
                     className={`
-                      text-3xl
+                      text-2xl
                       font-semibold
                       tracking-[-0.04em]
+                      sm:text-3xl
                       md:text-4xl
-
                       ${
                         isDark
                           ? "text-white"
@@ -549,13 +553,15 @@ export const Hero = () => {
 
                   <p
                     className={`
-                      mt-2
-                      text-[8px]
+                      mt-1
+                      text-[7px]
                       font-medium
                       uppercase
-                      leading-[1.6]
-                      tracking-[0.2em]
-
+                      leading-[1.5]
+                      tracking-[0.16em]
+                      sm:mt-2
+                      sm:text-[8px]
+                      sm:tracking-[0.2em]
                       ${
                         isDark
                           ? "text-slate-600"
@@ -574,8 +580,8 @@ export const Hero = () => {
                 <div
                   className={`
                     border-r
-                    px-4
-
+                    px-2
+                    sm:px-4
                     ${
                       isDark
                         ? "border-white/[0.08]"
@@ -585,11 +591,11 @@ export const Hero = () => {
                 >
                   <p
                     className={`
-                      text-3xl
+                      text-2xl
                       font-semibold
                       tracking-[-0.04em]
+                      sm:text-3xl
                       md:text-4xl
-
                       ${
                         isDark
                           ? "text-white"
@@ -602,13 +608,15 @@ export const Hero = () => {
 
                   <p
                     className={`
-                      mt-2
-                      text-[8px]
+                      mt-1
+                      text-[7px]
                       font-medium
                       uppercase
-                      leading-[1.6]
-                      tracking-[0.2em]
-
+                      leading-[1.5]
+                      tracking-[0.16em]
+                      sm:mt-2
+                      sm:text-[8px]
+                      sm:tracking-[0.2em]
                       ${
                         isDark
                           ? "text-slate-600"
@@ -624,14 +632,14 @@ export const Hero = () => {
 
                 {/* Continuous Learning */}
 
-                <div className="pl-4">
+                <div className="pl-2 sm:pl-4">
                   <p
                     className={`
-                      text-3xl
+                      text-2xl
                       font-semibold
                       tracking-[-0.04em]
+                      sm:text-3xl
                       md:text-4xl
-
                       ${
                         isDark
                           ? "text-white"
@@ -644,13 +652,15 @@ export const Hero = () => {
 
                   <p
                     className={`
-                      mt-2
-                      text-[8px]
+                      mt-1
+                      text-[7px]
                       font-medium
                       uppercase
-                      leading-[1.6]
-                      tracking-[0.2em]
-
+                      leading-[1.5]
+                      tracking-[0.16em]
+                      sm:mt-2
+                      sm:text-[8px]
+                      sm:tracking-[0.2em]
                       ${
                         isDark
                           ? "text-slate-600"
@@ -663,10 +673,8 @@ export const Hero = () => {
                     Learning
                   </p>
                 </div>
-
               </div>
             </motion.div>
-
           </div>
         </div>
 
@@ -689,10 +697,14 @@ export const Hero = () => {
           }}
           className="
             relative
-            min-h-[55vh]
+            h-[42svh]
+            min-h-[280px]
             w-full
             overflow-hidden
+            sm:h-[48svh]
+            sm:min-h-[340px]
             lg:min-h-screen
+            lg:h-auto
             lg:w-[56%]
           "
         >
@@ -713,7 +725,6 @@ export const Hero = () => {
             className={`
               absolute
               inset-0
-
               ${
                 isDark
                   ? "bg-gradient-to-r from-black/[0.08] via-transparent to-black/[0.08]"
@@ -731,7 +742,6 @@ export const Hero = () => {
             "
           />
         </motion.div>
-
       </div>
     </section>
   );

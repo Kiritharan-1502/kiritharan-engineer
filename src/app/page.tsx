@@ -45,39 +45,33 @@ export default function Home() {
     <div
       className="
         min-h-screen
+        w-full
+        max-w-full
+        overflow-x-clip
         bg-[var(--background)]
         text-[var(--foreground)]
         transition-colors
         duration-300
       "
     >
-      {/* GLOBAL NAVBAR */}
       <Navbar />
 
-      <main className="w-full">
-        {/* HOME */}
+      <main className="w-full max-w-full overflow-x-clip">
         <Hero />
 
-        {/* ABOUT */}
         <About />
 
-        {/* EXPERIENCE */}
         <Experience />
 
-        {/* TRAINING */}
         <Trainings />
 
-        {/* SKILLS */}
         <Skills />
 
-        {/* EDUCATION */}
         <Education />
 
-        {/* CONTACT */}
         <Contact />
       </main>
 
-      {/* FOOTER */}
       <Footer />
     </div>
   );
