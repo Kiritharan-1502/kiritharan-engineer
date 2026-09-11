@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  GraduationCap,
-  CalendarDays,
-  Building2,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 const education = [
   {
@@ -21,303 +18,570 @@ const education = [
   },
   {
     number: "03",
-    degree: "Masters of Business Administration",
-    institution: "Loyola College",
+    degree: "Master of Business Administration",
+    institution: "Loyola College, Chennai",
     year: "2025",
   },
 ];
 
 export const Education = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <section
       id="education"
-      className="
+      className={`
         relative
-        bg-white
+        w-full
+        overflow-hidden
         px-6
-        py-20
-        md:px-12
+        py-24
+        transition-colors
+        duration-500
+        md:px-10
         lg:px-16
-      "
+        xl:px-20
+        ${
+          isDark
+            ? "bg-[#080814] text-white"
+            : "bg-white text-[#101d35]"
+        }
+      `}
     >
-      <div className="mx-auto w-full max-w-[1280px]">
+
+      {/* Background glow */}
+
+      <div
+        className={`
+          pointer-events-none
+          absolute
+          right-[-180px]
+          top-[100px]
+          h-[500px]
+          w-[500px]
+          rounded-full
+          blur-[150px]
+          ${
+            isDark
+              ? "bg-blue-600/[0.04]"
+              : "bg-blue-500/[0.025]"
+          }
+        `}
+      />
+
+      {/* Subtle grid */}
+
+      <div
+        className={`
+          pointer-events-none
+          absolute
+          inset-0
+          ${
+            isDark
+              ? "opacity-[0.03]"
+              : "opacity-[0.018]"
+          }
+          [background-image:linear-gradient(rgba(59,130,246,0.35)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.35)_1px,transparent_1px)]
+          [background-size:80px_80px]
+        `}
+      />
+
+      <div className="relative mx-auto max-w-[1400px]">
 
         {/* =====================================================
-            HEADER
+            HEADING
         ===================================================== */}
 
-        <div className="mb-14">
-          <h2
-            className="
-              text-4xl
-              font-bold
-              tracking-tight
-              text-[#101d35]
-              md:text-5xl
-            "
-          >
-            Education 
-          </h2>
+        <motion.div
+          initial="rest"
+          whileHover="hover"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          className="
+            inline-flex
+            cursor-default
+            flex-col
+            items-start
+          "
+        >
 
-          <div
+          <motion.h2
+            variants={{
+              rest: {
+                y: 0,
+              },
+
+              hover: {
+                y: -1,
+              },
+
+              visible: {
+                y: 0,
+              },
+            }}
+            transition={{
+              duration: 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className={`
+              text-[clamp(2.8rem,4.2vw,4rem)]
+              font-bold
+              leading-[0.95]
+              tracking-[-0.05em]
+              ${
+                isDark
+                  ? "text-white"
+                  : "text-[#101d35]"
+              }
+            `}
+          >
+            Education{" "}
+            <span className="text-[#3b82f6]">
+              Journey.
+            </span>
+          </motion.h2>
+
+          <motion.div
+            variants={{
+              rest: {
+                width: "58px",
+              },
+
+              hover: {
+                width: "100%",
+              },
+
+              visible: {
+                width: "58px",
+              },
+            }}
+            transition={{
+              duration: 0.5,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="
-              mt-5
-              h-[3px]
-              w-[68px]
-              bg-[#1769d5]
+              mt-6
+              h-[4px]
+              rounded-full
+              bg-[#3b82f6]
             "
           />
-        </div>
+
+        </motion.div>
+
+        {/* =====================================================
+            DESCRIPTION
+        ===================================================== */}
+
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.6,
+            delay: 0.15,
+          }}
+          className={`
+            mt-7
+            max-w-2xl
+            text-[17px]
+            leading-[1.8]
+            md:text-[18px]
+            ${
+              isDark
+                ? "text-slate-400"
+                : "text-[#506481]"
+            }
+          `}
+        >
+          Academic qualifications that built the
+          foundation for my technical knowledge
+          and professional career.
+        </motion.p>
 
         {/* =====================================================
             EDUCATION TIMELINE
         ===================================================== */}
 
-        <div className="relative">
+        <div className="relative mt-16">
 
-          {/* Vertical Line */}
+          {/* Timeline line */}
 
           <div
             className="
               absolute
-              left-[27px]
-              top-0
-              bottom-0
+              left-[25px]
+              top-6
               hidden
+              h-[calc(100%-48px)]
               w-px
-              bg-[#dbe5f2]
+              bg-gradient-to-b
+              from-blue-500/50
+              via-blue-500/20
+              to-transparent
               md:block
             "
           />
 
-          <div className="space-y-6">
+          <div className="space-y-5">
 
-            {education.map((item) => (
-              <div
+            {education.map((item, index) => (
+              <motion.article
                 key={item.number}
-                className="
-                  group
-                  relative
-                  flex
-                  flex-col
-                  gap-6
-                  rounded-2xl
-                  border
-                  border-[#dfe7f1]
-                  bg-white
-                  p-6
-                  shadow-[0_4px_20px_rgba(16,29,53,0.04)]
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#1769d5]
-                  hover:shadow-[0_10px_30px_rgba(23,105,213,0.10)]
-                  md:flex-row
-                  md:items-center
-                  md:p-7
-                "
+                initial={{
+                  opacity: 0,
+                  x: -20,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  x: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.15,
+                }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.08,
+                }}
               >
 
-                {/* =================================================
-                    NUMBER / TIMELINE NODE
-                ================================================= */}
+                {/* EDUCATION CARD */}
 
-                <div
-                  className="
+                <motion.div
+                  whileHover={{
+                    y: -4,
+                    scale: 1.005,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 22,
+                  }}
+                  className={`
+                    group
                     relative
-                    z-10
-                    flex
-                    shrink-0
-                    items-center
-                    gap-4
-                  "
+                    overflow-hidden
+                    rounded-2xl
+                    border
+                    px-6
+                    py-7
+                    transition-all
+                    duration-300
+                    md:ml-[55px]
+                    md:px-8
+                    md:py-8
+                    ${
+                      isDark
+                        ? `
+                          border-white/[0.08]
+                          bg-white/[0.02]
+                          hover:border-blue-500/30
+                          hover:bg-white/[0.035]
+                          hover:shadow-[0_15px_45px_rgba(37,99,235,0.08)]
+                        `
+                        : `
+                          border-slate-200
+                          bg-slate-50/70
+                          hover:border-blue-500/30
+                          hover:bg-blue-50/40
+                          hover:shadow-[0_15px_45px_rgba(37,99,235,0.08)]
+                        `
+                    }
+                  `}
                 >
+
+                  {/* Top glow */}
+
                   <div
                     className="
-                      flex
-                      h-[56px]
-                      w-[56px]
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      border-[#cfe0f8]
-                      bg-[#f1f6fd]
-                      text-[15px]
-                      font-bold
-                      text-[#1769d5]
-                      transition-all
+                      pointer-events-none
+                      absolute
+                      left-0
+                      right-0
+                      top-0
+                      h-px
+                      bg-gradient-to-r
+                      from-transparent
+                      via-blue-400/60
+                      to-transparent
+                      opacity-0
+                      transition-opacity
                       duration-300
-                      group-hover:border-[#1769d5]
-                      group-hover:bg-[#1769d5]
-                      group-hover:text-white
+                      group-hover:opacity-100
                     "
-                  >
-                    {item.number}
-                  </div>
-                </div>
-
-                {/* =================================================
-                    DEGREE
-                ================================================= */}
-
-                <div className="min-w-0 flex-1">
-
-                  <h3
-                    className="
-                      text-xl
-                      font-bold
-                      leading-snug
-                      text-[#101d35]
-                      md:text-[22px]
-                    "
-                  >
-                    {item.degree}
-                  </h3>
+                  />
 
                   <div
                     className="
-                      mt-3
                       flex
                       flex-col
-                      gap-2
-                      text-sm
-                      text-[#637796]
-                      sm:flex-row
-                      sm:items-center
-                      sm:gap-5
+                      gap-7
+                      lg:flex-row
+                      lg:items-center
+                      lg:justify-between
                     "
                   >
 
-                    {/* Institution */}
+                    {/* LEFT */}
 
-                    <div className="flex items-center gap-2">
-                      <Building2
-                        size={16}
-                        strokeWidth={1.8}
-                        className="text-[#1769d5]"
-                      />
+                    <div className="flex items-start gap-5">
 
-                      <span>
-                        {item.institution}
-                      </span>
+                      {/* Number */}
+
+                      <div
+                        className="
+                          relative
+                          flex
+                          h-12
+                          w-12
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-xl
+                          border
+                          border-blue-500/25
+                          bg-blue-500/[0.07]
+                          text-sm
+                          font-semibold
+                          text-blue-500
+                          transition-all
+                          duration-300
+                          group-hover:border-blue-400/40
+                          group-hover:bg-blue-500/[0.12]
+                        "
+                      >
+                        {item.number}
+                      </div>
+
+                      {/* Details */}
+
+                      <div>
+
+                        <h3
+                          className={`
+                            text-xl
+                            font-semibold
+                            leading-tight
+                            tracking-[-0.03em]
+                            md:text-2xl
+                            ${
+                              isDark
+                                ? "text-white"
+                                : "text-[#101d35]"
+                            }
+                          `}
+                        >
+                          {item.degree}
+                        </h3>
+
+                        <p
+                          className={`
+                            mt-2
+                            text-[15px]
+                            leading-7
+                            md:text-base
+                            ${
+                              isDark
+                                ? "text-slate-400"
+                                : "text-[#64748b]"
+                            }
+                          `}
+                        >
+                          {item.institution}
+                        </p>
+
+                      </div>
+
                     </div>
 
-                    {/* Year */}
+                    {/* YEAR */}
 
-                    <div className="flex items-center gap-2">
-                      <CalendarDays
-                        size={16}
-                        strokeWidth={1.8}
-                        className="text-[#1769d5]"
-                      />
+                    <div
+                      className={`
+                        flex
+                        items-center
+                        gap-4
+                        border-t
+                        pt-5
+                        lg:border-l
+                        lg:border-t-0
+                        lg:pl-8
+                        lg:pt-0
+                        ${
+                          isDark
+                            ? "border-white/[0.07]"
+                            : "border-slate-200"
+                        }
+                      `}
+                    >
 
-                      <span>{item.year}</span>
+                      {/* Calendar */}
+
+                      <div
+                        className="
+                          flex
+                          h-10
+                          w-10
+                          items-center
+                          justify-center
+                          rounded-lg
+                          border
+                          border-blue-500/20
+                          bg-blue-500/[0.05]
+                          text-blue-500
+                        "
+                      >
+                        <svg
+                          width="17"
+                          height="17"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                        >
+                          <rect
+                            x="3"
+                            y="4"
+                            width="18"
+                            height="17"
+                            rx="2"
+                          />
+
+                          <line
+                            x1="16"
+                            y1="2"
+                            x2="16"
+                            y2="6"
+                          />
+
+                          <line
+                            x1="8"
+                            y1="2"
+                            x2="8"
+                            y2="6"
+                          />
+
+                          <line
+                            x1="3"
+                            y1="10"
+                            x2="21"
+                            y2="10"
+                          />
+                        </svg>
+                      </div>
+
+                      {/* Completed */}
+
+                      <div>
+
+                        <p
+                          className={`
+                            text-[10px]
+                            font-medium
+                            uppercase
+                            tracking-[0.2em]
+                            ${
+                              isDark
+                                ? "text-slate-500"
+                                : "text-slate-400"
+                            }
+                          `}
+                        >
+                          Completed
+                        </p>
+
+                        <p className="mt-1 text-base font-medium text-blue-500">
+                          {item.year}
+                        </p>
+
+                      </div>
+
                     </div>
 
                   </div>
-                </div>
 
-                {/* =================================================
-                    GRADUATION ICON
-                ================================================= */}
+                  {/* Bottom blue accent */}
 
-                <div
-                  className="
-                    hidden
-                    h-[54px]
-                    w-[54px]
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-xl
-                    bg-[#f1f6fd]
-                    text-[#1769d5]
-                    md:flex
-                  "
-                >
-                  <GraduationCap
-                    size={25}
-                    strokeWidth={1.7}
+                  <div
+                    className="
+                      mt-7
+                      h-px
+                      w-16
+                      bg-blue-500/40
+                      transition-all
+                      duration-300
+                      group-hover:w-24
+                      group-hover:bg-blue-400
+                    "
                   />
-                </div>
 
-              </div>
+                </motion.div>
+
+              </motion.article>
             ))}
 
           </div>
         </div>
 
-        {/* =====================================================
-            EDUCATION SUMMARY
-        ===================================================== */}
+        {/* FOOTER NOTE */}
 
-        <div
-          className="
-            mt-10
-            flex
-            flex-col
-            gap-5
-            rounded-2xl
-            border
-            border-[#dfe7f1]
-            bg-[#f7faff]
-            p-6
-            md:flex-row
-            md:items-center
-            md:px-8
-            md:py-7
-          "
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          whileInView={{
+            opacity: 1,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.6,
+            delay: 0.2,
+          }}
+          className={`
+            mt-12
+            border-t
+            pt-7
+            ${
+              isDark
+                ? "border-white/[0.07]"
+                : "border-slate-200"
+            }
+          `}
         >
 
-          <div
-            className="
-              flex
-              h-[52px]
-              w-[52px]
-              shrink-0
-              items-center
-              justify-center
-              rounded-xl
-              bg-[#1769d5]
-              text-white
-            "
+          <p
+            className={`
+              text-xs
+              uppercase
+              tracking-[0.2em]
+              ${
+                isDark
+                  ? "text-slate-600"
+                  : "text-slate-400"
+              }
+            `}
           >
-            <GraduationCap
-              size={25}
-              strokeWidth={1.8}
-            />
-          </div>
+            Academic Foundation · Technical Growth · Continuous Learning
+          </p>
 
-          <div>
-
-            <h3
-              className="
-                text-lg
-                font-bold
-                text-[#101d35]
-              "
-            >
-              Academic Journey
-            </h3>
-
-            <p
-              className="
-                mt-1.5
-                text-sm
-                leading-6
-                text-[#637796]
-                md:text-base
-              "
-            >
-              A progression from technical education to
-              engineering and management studies, building
-              a strong foundation for my professional growth.
-            </p>
-
-          </div>
-
-        </div>
+        </motion.div>
 
       </div>
     </section>

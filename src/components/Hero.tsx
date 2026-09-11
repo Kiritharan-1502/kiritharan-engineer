@@ -1,168 +1,738 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
+
 export const Hero = () => {
-  const scrollTo = (sectionId: string) => {
-    const target = document.getElementById(sectionId);
+  const { theme, toggleTheme } = useTheme();
 
-    if (!target) return;
-
-    const targetPosition =
-      target.getBoundingClientRect().top + window.scrollY;
-
-    window.scrollTo({
-      top: targetPosition,
-      behavior: "smooth",
-    });
-  };
+  const isDark = theme === "dark";
 
   return (
     <section
       id="home"
-      className="min-h-screen bg-white flex items-center"
+      className={`
+        relative
+        min-h-screen
+        w-full
+        overflow-hidden
+        transition-colors
+        duration-500
+
+        ${
+          isDark
+            ? "bg-[#080814] text-white"
+            : "bg-white text-[#101d35]"
+        }
+      `}
     >
-      <div className="w-full px-8 md:px-12 lg:px-10 py-16">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-12 xl:gap-16 items-center">
+      {/* =====================================================
+          THEME TOGGLE
+          HOME PAGE ONLY
+      ===================================================== */}
 
-          {/* LEFT CONTENT */}
-          <div className="max-w-3xl">
+      <motion.button
+        type="button"
+        onClick={toggleTheme}
+        whileHover={{
+          scale: 1.06,
+        }}
+        whileTap={{
+          scale: 0.94,
+        }}
+        aria-label={
+          isDark
+            ? "Switch to light mode"
+            : "Switch to dark mode"
+        }
+        title={
+          isDark
+            ? "Switch to light mode"
+            : "Switch to dark mode"
+        }
+        className={`
+          fixed
+          right-6
+          top-[102px]
+          z-[90]
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          rounded-full
+          border
+          shadow-lg
+          transition-all
+          duration-300
 
-            {/* EXPERIENCE LABEL */}
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-6 h-[2px] bg-blue-600"></span>
+          ${
+            isDark
+              ? `
+                border-white/15
+                bg-white/[0.06]
+                text-white
+                hover:border-blue-400/50
+                hover:bg-blue-500/[0.10]
+                hover:text-blue-300
+              `
+              : `
+                border-slate-200
+                bg-white
+                text-[#101d35]
+                shadow-slate-200/60
+                hover:border-blue-300
+                hover:bg-blue-50
+                hover:text-blue-600
+              `
+          }
+        `}
+      >
+        {isDark ? (
+          <Sun
+            size={19}
+            strokeWidth={1.8}
+            className="
+              transition-transform
+              duration-300
+              group-hover:rotate-45
+            "
+          />
+        ) : (
+          <Moon
+            size={18}
+            strokeWidth={1.8}
+            className="
+              transition-transform
+              duration-300
+            "
+          />
+        )}
+      </motion.button>
 
-              <p className="text-sm font-semibold tracking-wide text-blue-600">
-                9+ YEARS OF EXPERIENCE
-              </p>
-            </div>
+      {/* =====================================================
+          MAIN LAYOUT
+      ===================================================== */}
 
-            {/* MAIN HEADING */}
-            <h1 className="text-5xl md:text-6xl xl:text-[64px] font-bold leading-[1.08] tracking-tight text-[#101d35]">
-              Engineering Intelligent
-              <br />
-              Solutions. Optimizing
-              <br />
-              Performance.
-            </h1>
+      <div className="flex min-h-screen w-full flex-col lg:flex-row">
 
-            {/* DESCRIPTION */}
-            <p className="mt-7 max-w-2xl text-base md:text-lg leading-7 text-[#53627d]">
-              Senior Offline Robot Programmer with expertise in paint robot
-              programming, automation, process optimization and production
-              engineering within automotive manufacturing environments.
-            </p>
+        {/* =====================================================
+            LEFT — CONTENT
+        ===================================================== */}
 
-            {/* BUTTONS */}
-            <div className="mt-8 flex flex-wrap gap-4">
+        <div
+          className={`
+            relative
+            z-10
+            flex
+            min-h-screen
+            w-full
+            flex-col
+            justify-center
+            px-8
+            pb-20
+            pt-32
+            md:px-12
+            lg:w-[44%]
+            lg:px-16
+            lg:pb-16
+            lg:pt-28
+            xl:px-[4.5vw]
 
-              <button
-                type="button"
-                onClick={() => scrollTo("experience")}
-                className="group flex items-center gap-5 bg-[#101d35] px-6 py-4 text-sm font-semibold tracking-wide text-white transition-all hover:bg-blue-600"
+            ${
+              isDark
+                ? "bg-[#080814]"
+                : "bg-white"
+            }
+          `}
+        >
+
+          {/* Background glow */}
+
+          <div
+            className={`
+              pointer-events-none
+              absolute
+              left-[-150px]
+              top-[25%]
+              h-[450px]
+              w-[450px]
+              rounded-full
+              blur-[150px]
+
+              ${
+                isDark
+                  ? "bg-blue-600/[0.025]"
+                  : "bg-blue-500/[0.035]"
+              }
+            `}
+          />
+
+          <div className="relative">
+
+            {/* =================================================
+                EYEBROW
+            ================================================= */}
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.6,
+                delay: 0.15,
+              }}
+              className="flex items-center gap-6"
+            >
+              <span className="h-[2px] w-14 bg-[#3b82f6]" />
+
+              <span
+                className={`
+                  text-[10px]
+                  font-medium
+                  uppercase
+                  tracking-[0.32em]
+
+                  ${
+                    isDark
+                      ? "text-slate-400"
+                      : "text-[#52627d]"
+                  }
+                `}
               >
-                EXPLORE MY WORK
+                Senior Engineer
+              </span>
+            </motion.div>
 
-                <span className="text-lg transition-transform group-hover:translate-x-1">
+            {/* =================================================
+                MAIN HEADING
+            ================================================= */}
+
+            <motion.h1
+              initial={{
+                opacity: 0,
+                y: 30,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.8,
+                delay: 0.25,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="
+                mt-10
+                max-w-[680px]
+                text-[clamp(4rem,6vw,6.4rem)]
+                font-bold
+                leading-[0.86]
+                tracking-[-0.065em]
+              "
+            >
+              <span
+                className={
+                  isDark
+                    ? "block text-white"
+                    : "block text-[#101d35]"
+                }
+              >
+                Engineering
+              </span>
+
+              <span className="block text-[#3b82f6]">
+                Intelligent
+              </span>
+
+              <span
+                className={
+                  isDark
+                    ? "block text-white"
+                    : "block text-[#101d35]"
+                }
+              >
+                Solutions.
+              </span>
+            </motion.h1>
+
+            {/* =================================================
+                DESCRIPTION
+            ================================================= */}
+
+            <motion.p
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.4,
+              }}
+              className={`
+                mt-12
+                max-w-[620px]
+                text-[16px]
+                leading-[1.9]
+                md:text-[18px]
+
+                ${
+                  isDark
+                    ? "text-slate-400"
+                    : "text-[#52627d]"
+                }
+              `}
+            >
+              Senior Offline Robot Programmer with 9+
+              years of experience in automotive
+              manufacturing, robotic paint automation
+              and production engineering.
+            </motion.p>
+
+            {/* =================================================
+                ACTIONS
+            ================================================= */}
+
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.5,
+              }}
+              className="
+                mt-10
+                flex
+                flex-wrap
+                items-center
+                gap-8
+              "
+            >
+
+              {/* Explore My Work */}
+
+              <a
+                href="#experience"
+                className={`
+                  group
+                  flex
+                  h-16
+                  items-center
+                  gap-8
+                  border
+                  px-8
+                  text-[11px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.2em]
+                  transition-all
+                  duration-300
+
+                  ${
+                    isDark
+                      ? `
+                        border-white/20
+                        text-white
+                        hover:border-[#3b82f6]
+                        hover:bg-blue-500/[0.06]
+                        hover:text-blue-300
+                      `
+                      : `
+                        border-[#101d35]/20
+                        text-[#101d35]
+                        hover:border-[#3b82f6]
+                        hover:bg-blue-500/[0.05]
+                        hover:text-blue-600
+                      `
+                  }
+                `}
+              >
+                <span>
+                  Explore My Work
+                </span>
+
+                <span
+                  className="
+                    text-xl
+                    text-blue-500
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                >
                   →
                 </span>
-              </button>
+              </a>
 
-              <button
-                type="button"
-                onClick={() => scrollTo("about")}
-                className="flex items-center gap-4 border border-[#101d35] px-7 py-4 text-sm font-semibold tracking-wide text-[#101d35] transition-all hover:bg-[#101d35] hover:text-white"
+              {/* Download Resume */}
+
+              <a
+                href="/logos/Kiritharan.K%20CV.pdf"
+                download="Kiritharan_Resume.pdf"
+                className={`
+                  group
+                  flex
+                  h-16
+                  items-center
+                  gap-4
+                  text-[11px]
+                  font-medium
+                  uppercase
+                  tracking-[0.2em]
+                  transition-colors
+                  duration-300
+
+                  ${
+                    isDark
+                      ? "text-slate-400 hover:text-white"
+                      : "text-[#52627d] hover:text-[#101d35]"
+                  }
+                `}
               >
-                VIEW PROFILE
-
-                <span>♙</span>
-              </button>
-
-            </div>
-
-            {/* TECHNOLOGIES */}
-            <div className="mt-9">
-
-              <p className="mb-4 text-xs font-medium tracking-[0.18em] text-[#8b96aa]">
-                TECHNOLOGIES I WORK WITH
-              </p>
-
-              <div className="flex flex-wrap items-center gap-8">
-
-                <span className="text-2xl font-black tracking-tight text-[#1769d1]">
-                  DÜRR
+                <span>
+                  Download Resume
                 </span>
 
-                <span className="text-2xl font-black tracking-tight text-[#e32620]">
-                  ABB
+                <span
+                  className="
+                    flex
+                    h-9
+                    w-9
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-[#3b82f6]/50
+                    text-[#3b82f6]
+                    transition-all
+                    duration-300
+                    group-hover:border-[#3b82f6]
+                    group-hover:bg-[#3b82f6]/10
+                    group-hover:translate-y-0.5
+                  "
+                >
+                  ↓
                 </span>
+              </a>
+            </motion.div>
 
-                <span className="text-2xl font-black tracking-tight text-[#1769d1]">
-                  YASKAWA
-                </span>
+            {/* =================================================
+                STATS
+            ================================================= */}
 
-                <span className="flex items-center gap-2 text-xl font-semibold text-[#53627d]">
-                  <span className="flex h-8 w-8 items-center justify-center border-2 border-[#53627d] rounded-md text-sm">
-                    ⚙
-                  </span>
-                  PLC
-                </span>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.6,
+              }}
+              className={`
+                mt-14
+                border-t
+                pt-7
+
+                ${
+                  isDark
+                    ? "border-white/[0.08]"
+                    : "border-slate-200"
+                }
+              `}
+            >
+              <div className="grid grid-cols-4">
+
+                {/* Experience */}
+
+                <div
+                  className={`
+                    border-r
+                    pr-4
+
+                    ${
+                      isDark
+                        ? "border-white/[0.08]"
+                        : "border-slate-200"
+                    }
+                  `}
+                >
+                  <p
+                    className={`
+                      text-3xl
+                      font-semibold
+                      tracking-[-0.04em]
+                      md:text-4xl
+
+                      ${
+                        isDark
+                          ? "text-white"
+                          : "text-[#101d35]"
+                      }
+                    `}
+                  >
+                    9+
+                  </p>
+
+                  <p
+                    className={`
+                      mt-2
+                      text-[8px]
+                      font-medium
+                      uppercase
+                      leading-[1.6]
+                      tracking-[0.2em]
+
+                      ${
+                        isDark
+                          ? "text-slate-600"
+                          : "text-slate-400"
+                      }
+                    `}
+                  >
+                    Years
+                    <br />
+                    Experience
+                  </p>
+                </div>
+
+                {/* Robot Platforms */}
+
+                <div
+                  className={`
+                    border-r
+                    px-4
+
+                    ${
+                      isDark
+                        ? "border-white/[0.08]"
+                        : "border-slate-200"
+                    }
+                  `}
+                >
+                  <p
+                    className={`
+                      text-3xl
+                      font-semibold
+                      tracking-[-0.04em]
+                      md:text-4xl
+
+                      ${
+                        isDark
+                          ? "text-white"
+                          : "text-[#101d35]"
+                      }
+                    `}
+                  >
+                    3
+                  </p>
+
+                  <p
+                    className={`
+                      mt-2
+                      text-[8px]
+                      font-medium
+                      uppercase
+                      leading-[1.6]
+                      tracking-[0.2em]
+
+                      ${
+                        isDark
+                          ? "text-slate-600"
+                          : "text-slate-400"
+                      }
+                    `}
+                  >
+                    Robot
+                    <br />
+                    Platforms
+                  </p>
+                </div>
+
+                {/* Key Skills */}
+
+                <div
+                  className={`
+                    border-r
+                    px-4
+
+                    ${
+                      isDark
+                        ? "border-white/[0.08]"
+                        : "border-slate-200"
+                    }
+                  `}
+                >
+                  <p
+                    className={`
+                      text-3xl
+                      font-semibold
+                      tracking-[-0.04em]
+                      md:text-4xl
+
+                      ${
+                        isDark
+                          ? "text-white"
+                          : "text-[#101d35]"
+                      }
+                    `}
+                  >
+                    10+
+                  </p>
+
+                  <p
+                    className={`
+                      mt-2
+                      text-[8px]
+                      font-medium
+                      uppercase
+                      leading-[1.6]
+                      tracking-[0.2em]
+
+                      ${
+                        isDark
+                          ? "text-slate-600"
+                          : "text-slate-400"
+                      }
+                    `}
+                  >
+                    Key
+                    <br />
+                    Skills
+                  </p>
+                </div>
+
+                {/* Continuous Learning */}
+
+                <div className="pl-4">
+                  <p
+                    className={`
+                      text-3xl
+                      font-semibold
+                      tracking-[-0.04em]
+                      md:text-4xl
+
+                      ${
+                        isDark
+                          ? "text-white"
+                          : "text-[#101d35]"
+                      }
+                    `}
+                  >
+                    ∞
+                  </p>
+
+                  <p
+                    className={`
+                      mt-2
+                      text-[8px]
+                      font-medium
+                      uppercase
+                      leading-[1.6]
+                      tracking-[0.2em]
+
+                      ${
+                        isDark
+                          ? "text-slate-600"
+                          : "text-slate-400"
+                      }
+                    `}
+                  >
+                    Continuous
+                    <br />
+                    Learning
+                  </p>
+                </div>
 
               </div>
+            </motion.div>
 
-            </div>
           </div>
-
-          {/* RIGHT VISUAL */}
-          <div className="hidden lg:flex justify-center">
-
-            <div className="relative w-full max-w-[580px] h-[470px] bg-[#f5f7fa] overflow-hidden">
-
-              {/* BLUE BORDER */}
-              <div className="absolute left-0 top-0 h-full w-[110px] border-l border-t border-b border-blue-300"></div>
-
-              {/* ENGINEERING LINE GRAPHIC */}
-              <div className="absolute left-3 top-28 h-56 w-24">
-
-                <div className="absolute left-8 top-0 h-16 w-px bg-blue-200"></div>
-
-                <div className="absolute left-8 top-16 h-px w-12 rotate-[140deg] bg-blue-200 origin-left"></div>
-
-                <div className="absolute left-8 top-16 h-14 w-px bg-blue-200"></div>
-
-                <div className="absolute left-8 top-30 h-px w-12 rotate-[-140deg] bg-blue-200 origin-left"></div>
-
-                <div className="absolute left-8 top-44 h-16 w-px bg-blue-200"></div>
-
-                <div className="absolute left-0 top-14 h-14 w-14 rounded-full border border-blue-200"></div>
-
-                <div className="absolute left-0 top-28 h-14 w-14 rounded-full border border-blue-200"></div>
-
-              </div>
-
-              {/* DOT GRID */}
-              <div className="absolute right-7 top-5 grid grid-cols-6 gap-3">
-                {Array.from({ length: 36 }).map((_, index) => (
-                  <span
-                    key={index}
-                    className="h-1 w-1 rounded-full bg-blue-400"
-                  />
-                ))}
-              </div>
-
-              {/* PHOTO PLACEHOLDER */}
-              <div className="absolute inset-y-0 right-0 w-[82%] flex items-center justify-center">
-                <span className="text-xs font-medium tracking-[0.2em] text-[#a0a8b7]">
-                  PHOTO
-                </span>
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
+
+        {/* =====================================================
+            RIGHT — ROBOT IMAGE
+        ===================================================== */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 1.03,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 1.2,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            relative
+            min-h-[55vh]
+            w-full
+            overflow-hidden
+            lg:min-h-screen
+            lg:w-[56%]
+          "
+        >
+          <img
+            src="/logos/robotics-hero.jpg"
+            alt="Industrial robotic system"
+            className="
+              absolute
+              inset-0
+              h-full
+              w-full
+              object-cover
+              object-center
+            "
+          />
+
+          <div
+            className={`
+              absolute
+              inset-0
+
+              ${
+                isDark
+                  ? "bg-gradient-to-r from-black/[0.08] via-transparent to-black/[0.08]"
+                  : "bg-gradient-to-r from-white/[0.06] via-transparent to-white/[0.04]"
+              }
+            `}
+          />
+
+          <div
+            className="
+              absolute
+              inset-0
+              bg-[#3b82f6]/[0.025]
+              mix-blend-multiply
+            "
+          />
+        </motion.div>
+
       </div>
     </section>
   );
 };
-
-export default Hero;

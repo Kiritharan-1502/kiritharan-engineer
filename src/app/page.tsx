@@ -6,23 +6,18 @@ import Lenis from "lenis";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
-import { Expertise } from "@/components/Expertise";
 import { Experience } from "@/components/Experience";
 import { Trainings } from "@/components/Trainings";
+import { Skills } from "@/components/Skills";
 import { Education } from "@/components/Education";
-
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
   useEffect(() => {
-    // =========================================================
-    // LENIS — SMOOTH SCROLLING
-    // =========================================================
-
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) =>
+      easing: (t: number) =>
         Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -47,80 +42,43 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-[#101d35]">
-
-      {/* =====================================================
-          NAVBAR
-      ===================================================== */}
-
+    <div
+      className="
+        min-h-screen
+        bg-[var(--background)]
+        text-[var(--foreground)]
+        transition-colors
+        duration-300
+      "
+    >
+      {/* GLOBAL NAVBAR */}
       <Navbar />
 
-      {/* =====================================================
-          MAIN CONTENT
-          Desktop sidebar width = 126px
-      ===================================================== */}
-
-      <main
-        className="
-          ml-0
-          min-h-screen
-          bg-white
-          md:ml-[126px]
-        "
-      >
-
-        {/* ===================================================
-            HOME
-        =================================================== */}
-
+      <main className="w-full">
+        {/* HOME */}
         <Hero />
 
-        {/* ===================================================
-            ABOUT
-        =================================================== */}
-
+        {/* ABOUT */}
         <About />
 
-        {/* ===================================================
-            AREAS OF EXPERTISE
-        =================================================== */}
-
-        <Expertise />
-
-        {/* ===================================================
-            PROFESSIONAL EXPERIENCE
-        =================================================== */}
-
+        {/* EXPERIENCE */}
         <Experience />
 
-        {/* ===================================================
-            PROFESSIONAL TRAININGS
-        =================================================== */}
-
+        {/* TRAINING */}
         <Trainings />
 
-        {/* ===================================================
-            EDUCATION & CERTIFICATIONS
-        =================================================== */}
+        {/* SKILLS */}
+        <Skills />
 
-
+        {/* EDUCATION */}
         <Education />
 
-        {/* ===================================================
-            TECHNICAL CAPABILITIES
-        =================================================== */}
-
-        
+        {/* CONTACT */}
         <Contact />
-
       </main>
 
-      {/* =====================================================
-          FOOTER
-      ===================================================== */}
-
+      {/* FOOTER */}
       <Footer />
-
     </div>
   );
 }

@@ -1,444 +1,488 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  Bot,
-  SlidersHorizontal,
-  Factory,
-  MapPin,
-  GraduationCap,
-  CheckCircle2,
-} from "lucide-react";
+import { trainings } from "@/data/trainings";
+import { useTheme } from "@/components/ThemeProvider";
 
-const trainings = [
-  {
-    number: "01",
-    title: "ABB Robot Training",
-    location: "Bangalore, India",
-    icon: Bot,
-    description:
-      "Professional training focused on ABB industrial robot programming, operation, and application fundamentals for automotive manufacturing environments.",
-    focus: [
-      "ABB Robotics",
-      "Robot Programming",
-      "Robot Operation",
-      "Industrial Automation",
-    ],
-    accent: "#1769d5",
-    soft: "#eef5ff",
-    border: "#cfe0f8",
-  },
-  {
-    number: "02",
-    title: "Yaskawa Robot Training",
-    location: "Chennai, India",
-    icon: SlidersHorizontal,
-    description:
-      "Hands-on training in Yaskawa industrial robot systems with practical exposure to robot programming, operation, troubleshooting, and paint application systems.",
-    focus: [
-      "Yaskawa Robotics",
-      "Robot Programming",
-      "Troubleshooting",
-      "Paint Applications",
-    ],
-    accent: "#7652e8",
-    soft: "#f4f0ff",
-    border: "#ddd3fa",
-  },
-  {
-    number: "03",
-    title: "Dürr Robot Systems Training",
-    location: "Germany",
-    icon: Factory,
-    description:
-      "Advanced training on Dürr robot systems covering robotic paint applications, programming, process optimization, and system operation.",
-    focus: [
-      "Dürr Robotics",
-      "Paint Robot Systems",
-      "Robot Programming",
-      "Process Optimization",
-    ],
-    accent: "#19aaa7",
-    soft: "#eefaf9",
-    border: "#ccebea",
-  },
-];
+const renderBoldText = (
+  text: string,
+  isLight: boolean,
+) => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+
+  return parts.map((part, index) => {
+    if (
+      part.startsWith("**") &&
+      part.endsWith("**")
+    ) {
+      const boldText = part.slice(2, -2);
+
+      return (
+        <strong
+          key={index}
+          className={
+            isLight
+              ? "font-semibold text-[#101d35]"
+              : "font-semibold text-slate-100"
+          }
+        >
+          {boldText}
+        </strong>
+      );
+    }
+
+    return (
+      <span key={index}>
+        {part}
+      </span>
+    );
+  });
+};
 
 export const Trainings = () => {
+  const { theme } = useTheme();
+
+  const isDark = theme === "dark";
+  const isLight = theme === "light";
+
   return (
     <section
-      id="trainings"
-      className="
-        scroll-mt-0
-        bg-white
+      id="training"
+      className={`
+        relative
+        w-full
+        overflow-hidden
         px-6
-        py-12
+        py-28
+        transition-colors
+        duration-500
         md:px-10
-        md:py-14
         lg:px-16
-      "
+        ${
+          isDark
+            ? "bg-[#080814] text-white"
+            : "bg-white text-[#101d35]"
+        }
+      `}
     >
-      <div className="mx-auto w-full max-w-[1260px]">
+      {/* Background Glow */}
+      <div
+        className={`
+          pointer-events-none
+          absolute
+          left-1/2
+          top-20
+          h-[520px]
+          w-[520px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          blur-[150px]
+          ${
+            isDark
+              ? "bg-blue-600/[0.035]"
+              : "bg-blue-500/[0.025]"
+          }
+        `}
+      />
+
+      <div className="relative mx-auto max-w-[1250px]">
 
         {/* =====================================================
-            HEADER
+            HEADING
         ===================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
+          className="group relative inline-block"
+          initial="rest"
+          whileHover="hover"
         >
           <h2
-            className="
-              text-[38px]
-              font-bold
-              leading-tight
-              tracking-[-0.035em]
-              text-[#101d35]
-              md:text-[44px]
-            "
+            className={`
+              text-[64px]
+              font-semibold
+              leading-[1]
+              tracking-[-0.045em]
+              transition-colors
+              duration-300
+              ${
+                isLight
+                  ? "text-[#101d35]"
+                  : "text-white"
+              }
+            `}
           >
-            Professional Trainings
+            Technical{" "}
+            <span className="text-[#3b82f6]">
+              Training.
+            </span>
           </h2>
 
-          <div className="mt-3 h-[3px] w-[66px] bg-[#1769d5]" />
-
-          <p
+          <motion.span
             className="
-              mt-4
-              max-w-[940px]
-              text-[15px]
-              leading-[1.65]
-              text-[#52627d]
-              md:text-[17px]
+              absolute
+              -bottom-7
+              left-0
+              h-[4px]
+              rounded-full
+              bg-[#3b82f6]
             "
-          >
-            Specialized robot training completed across leading industrial
-            robotics platforms, strengthening practical expertise in
-            programming, troubleshooting, paint applications, and automation
-            systems.
-          </p>
+            variants={{
+              rest: {
+                width: 60,
+              },
+              hover: {
+                width: "100%",
+              },
+            }}
+            transition={{
+              duration: 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          />
         </motion.div>
 
+        {/* Description */}
+        <p
+          className={`
+            mt-7
+            max-w-3xl
+            text-[17px]
+            leading-[1.85]
+            sm:text-[18px]
+            ${
+              isDark
+                ? "text-slate-400"
+                : "text-[#506481]"
+            }
+          `}
+        >
+          Specialized training across industrial robotic
+          platforms, strengthening practical expertise in
+          robot programming, paint applications,
+          troubleshooting, and automotive production
+          systems.
+        </p>
+
         {/* =====================================================
-            TRAINING CARDS
+            TRAINING TIMELINE
         ===================================================== */}
 
-        <div
-          className="
-            mt-8
-            grid
-            grid-cols-1
-            gap-5
-            md:grid-cols-2
-            xl:grid-cols-3
-            xl:gap-6
-          "
-        >
-          {trainings.map((training, index) => {
-            const Icon = training.icon;
+        <div className="relative mt-20">
 
-            return (
-              <motion.article
-                key={training.number}
-                initial={{
-                  opacity: 0,
-                  y: 15,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                  amount: 0.1,
-                }}
-                transition={{
-                  duration: 0.4,
-                  delay: index * 0.06,
-                }}
-                className="
-                  relative
-                  flex
-                  h-[455px]
-                  flex-col
-                  overflow-hidden
-                  rounded-[9px]
-                  border
-                  border-[#dce4ee]
-                  bg-white
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:shadow-[0_10px_28px_rgba(16,29,53,0.07)]
-                "
-              >
+          {/* Timeline */}
+          <div
+            className="
+              absolute
+              left-[27px]
+              top-4
+              bottom-4
+              hidden
+              w-px
+              bg-gradient-to-b
+              from-blue-500/70
+              via-blue-500/25
+              to-transparent
+              md:block
+              md:left-[39px]
+            "
+          />
 
-                {/* =================================================
-                    TOP ACCENT
-                ================================================= */}
+          <div className="space-y-20">
 
-                <div
-                  className="h-[4px] w-full shrink-0"
-                  style={{
-                    backgroundColor: training.accent,
+            {trainings.map(
+              (training, index) => (
+                <motion.article
+                  key={training.number}
+                  initial={{
+                    opacity: 0,
+                    x: -25,
                   }}
-                />
-
-                {/* =================================================
-                    NUMBER TAB
-                ================================================= */}
-
-                <div
-                  className="
-                    absolute
-                    left-7
-                    top-0
-                    flex
-                    h-[52px]
-                    w-[46px]
-                    items-center
-                    justify-center
-                    rounded-b-[7px]
-                  "
-                  style={{
-                    backgroundColor: training.accent,
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
                   }}
+                  viewport={{
+                    once: true,
+                    amount: 0.2,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    delay: index * 0.12,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="relative"
                 >
-                  <span className="text-[15px] font-bold text-white">
-                    {training.number}
-                  </span>
-                </div>
 
-                {/* =================================================
-                    CONTENT
-                ================================================= */}
-
-                <div className="flex flex-1 flex-col px-7 pt-6">
-
-                  {/* ICON */}
-
-                  <div className="flex justify-center">
-                    <div
-                      className="
-                        flex
-                        h-[62px]
-                        w-[62px]
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                      "
-                      style={{
-                        backgroundColor: training.soft,
-                        borderColor: training.border,
-                      }}
-                    >
-                      <Icon
-                        size={28}
-                        strokeWidth={1.7}
-                        style={{
-                          color: training.accent,
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* TITLE */}
-
-                  <div
-                    className="
-                      mt-3
+                  {/* Timeline Number */}
+                  <motion.div
+                    whileHover={{
+                      scale: 1.08,
+                    }}
+                    className={`
+                      relative
+                      z-10
                       flex
-                      h-[48px]
+                      h-[56px]
+                      w-[56px]
                       items-center
                       justify-center
-                    "
+                      rounded-full
+                      border
+                      text-sm
+                      font-semibold
+                      tracking-wider
+                      md:h-[80px]
+                      md:w-[80px]
+                      md:text-base
+                      ${
+                        isDark
+                          ? "border-blue-500/40 bg-[#080814] text-blue-400"
+                          : "border-blue-500/30 bg-white text-blue-500"
+                      }
+                    `}
                   >
-                    <h3
-                      className="
-                        text-center
-                        text-[19px]
-                        font-bold
-                        leading-[1.25]
-                        tracking-[-0.02em]
-                        text-[#101d35]
-                      "
-                    >
-                      {training.title}
-                    </h3>
-                  </div>
+                    {training.number}
+                  </motion.div>
 
-                  {/* LOCATION */}
+                  {/* Content */}
+                  <div className="ml-[82px] mt-[-56px] md:ml-[120px] md:mt-[-80px]">
 
-                  <div className="mt-2 flex h-[30px] justify-center">
-                    <span
-                      className="
-                        inline-flex
-                        items-center
-                        gap-1.5
-                        rounded-full
-                        border
-                        px-3
-                        py-1
-                        text-[12px]
-                        font-semibold
-                      "
-                      style={{
-                        color: training.accent,
-                        backgroundColor: training.soft,
-                        borderColor: training.border,
+                    <motion.div
+                      whileHover={{
+                        x: 5,
                       }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 22,
+                      }}
+                      className="group cursor-default"
                     >
-                      <MapPin size={13} />
-                      {training.location}
-                    </span>
-                  </div>
 
-                  {/* DIVIDER */}
+                      {/* Top Row */}
+                      <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
 
-                  <div className="mt-4 h-px w-full bg-[#e6ebf1]" />
+                        {/* Company + Title */}
+                        <div>
 
-                  {/* DESCRIPTION */}
+                          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-500">
+                            {training.company}
+                          </p>
 
-                  <div
-                    className="
-                      flex
-                      h-[105px]
-                      items-center
-                    "
-                  >
-                    <p
-                      className="
-                        text-center
-                        text-[13.5px]
-                        leading-[1.65]
-                        text-[#52627d]
-                      "
-                    >
-                      {training.description}
-                    </p>
-                  </div>
+                          <h3
+                            className={`
+                              mt-3
+                              text-[clamp(1.7rem,3vw,2.6rem)]
+                              font-semibold
+                              leading-tight
+                              tracking-[-0.03em]
+                              transition-colors
+                              duration-300
+                              ${
+                                isDark
+                                  ? "text-white group-hover:text-blue-50"
+                                  : "text-[#101d35] group-hover:text-blue-700"
+                              }
+                            `}
+                          >
+                            {training.title}
+                          </h3>
 
-                  {/* DIVIDER */}
+                        </div>
 
-                  <div className="h-px w-full bg-[#e6ebf1]" />
-
-                  {/* TRAINING FOCUS */}
-
-                  <div className="pt-3">
-
-                    <div className="flex items-center gap-2">
-                      <GraduationCap
-                        size={15}
-                        strokeWidth={1.8}
-                        style={{
-                          color: training.accent,
-                        }}
-                      />
-
-                      <span
-                        className="
-                          text-[10px]
-                          font-bold
-                          uppercase
-                          tracking-[0.16em]
-                        "
-                        style={{
-                          color: training.accent,
-                        }}
-                      >
-                        Training Focus
-                      </span>
-                    </div>
-
-                    <div
-                      className="
-                        mt-2
-                        flex
-                        min-h-[48px]
-                        flex-wrap
-                        content-start
-                        gap-1.5
-                      "
-                    >
-                      {training.focus.map((item) => (
-                        <span
-                          key={item}
-                          className="
+                        {/* Location */}
+                        <div
+                          className={`
+                            flex
+                            w-fit
+                            shrink-0
+                            items-center
+                            gap-2
                             rounded-full
                             border
-                            px-2.5
-                            py-1
-                            text-[11px]
-                            font-medium
-                          "
-                          style={{
-                            color: training.accent,
-                            backgroundColor: training.soft,
-                            borderColor: training.border,
-                          }}
+                            px-4
+                            py-2
+                            text-sm
+                            transition-all
+                            duration-300
+                            group-hover:border-blue-500/25
+                            ${
+                              isDark
+                                ? "border-white/[0.08] bg-white/[0.025] text-slate-400"
+                                : "border-slate-200 bg-slate-50 text-[#64748b]"
+                            }
+                          `}
                         >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+                          <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+
+                          {training.location}
+                        </div>
+
+                      </div>
+
+                      {/* Description */}
+                      <p
+                        className={`
+                          mt-7
+                          max-w-[950px]
+                          text-[16px]
+                          leading-[1.85]
+                          transition-colors
+                          duration-300
+                          sm:text-[17px]
+                          ${
+                            isDark
+                              ? "text-slate-400 group-hover:text-slate-300"
+                              : "text-[#64748b] group-hover:text-[#506481]"
+                          }
+                        `}
+                      >
+                        {training.description}
+                      </p>
+
+                      {/* Lower Content */}
+                      <div className="mt-8 grid gap-8 md:grid-cols-[1fr_auto]">
+
+                        {/* Key Learnings */}
+                        <div>
+
+                          <p
+                            className={`
+                              text-xs
+                              font-semibold
+                              uppercase
+                              tracking-[0.2em]
+                              ${
+                                isDark
+                                  ? "text-slate-600"
+                                  : "text-slate-400"
+                              }
+                            `}
+                          >
+                            Key Learnings
+                          </p>
+
+                          <div className="mt-4 space-y-4">
+
+                            {training.learned.map(
+                              (learning) => (
+                                <div
+                                  key={learning}
+                                  className={`
+                                    flex
+                                    items-start
+                                    gap-3
+                                    text-[16px]
+                                    leading-[1.7]
+                                    ${
+                                      isDark
+                                        ? "text-slate-300"
+                                        : "text-[#506481]"
+                                    }
+                                  `}
+                                >
+                                  <span className="mt-[10px] h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
+
+                                  <span>
+                                    {renderBoldText(
+                                      learning,
+                                      isLight,
+                                    )}
+                                  </span>
+                                </div>
+                              ),
+                            )}
+
+                          </div>
+                        </div>
+
+                        {/* Training Focus */}
+                        <div className="md:min-w-[280px]">
+
+                          <p
+                            className={`
+                              text-xs
+                              font-semibold
+                              uppercase
+                              tracking-[0.2em]
+                              ${
+                                isDark
+                                  ? "text-slate-600"
+                                  : "text-slate-400"
+                              }
+                            `}
+                          >
+                            Training Focus
+                          </p>
+
+                          <div className="mt-4 flex flex-wrap gap-2">
+
+                            {training.focus.map(
+                              (item) => (
+                                <span
+                                  key={item}
+                                  className="
+                                    rounded-md
+                                    border
+                                    border-blue-500/20
+                                    bg-blue-500/[0.06]
+                                    px-3
+                                    py-1.5
+                                    text-xs
+                                    font-medium
+                                    text-blue-500
+                                    transition-all
+                                    duration-300
+                                    group-hover:border-blue-400/30
+                                    group-hover:bg-blue-500/[0.10]
+                                  "
+                                >
+                                  {item}
+                                </span>
+                              ),
+                            )}
+
+                          </div>
+                        </div>
+
+                      </div>
+
+                      {/* Divider */}
+                      {index !==
+                        trainings.length - 1 && (
+                        <div
+                          className={`
+                            mt-12
+                            h-px
+                            w-full
+                            bg-gradient-to-r
+                            from-blue-500/20
+                            to-transparent
+                            ${
+                              isDark
+                                ? "via-white/[0.05]"
+                                : "via-slate-200"
+                            }
+                          `}
+                        />
+                      )}
+
+                    </motion.div>
                   </div>
-                </div>
 
-                {/* =================================================
-                    COMPLETED BAR
-                ================================================= */}
+                </motion.article>
+              ),
+            )}
 
-                <div
-                  className="
-                    flex
-                    h-[46px]
-                    shrink-0
-                    items-center
-                    gap-2
-                    px-7
-                  "
-                  style={{
-                    backgroundColor: training.soft,
-                  }}
-                >
-                  <CheckCircle2
-                    size={16}
-                    strokeWidth={1.8}
-                    style={{
-                      color: training.accent,
-                    }}
-                  />
-
-                  <span
-                    className="
-                      text-[11px]
-                      font-semibold
-                    "
-                    style={{
-                      color: training.accent,
-                    }}
-                  >
-                    Professional Training Completed
-                  </span>
-                </div>
-              </motion.article>
-            );
-          })}
+          </div>
         </div>
 
-        {/* =====================================================
-            TRAINING JOURNEY
-        ===================================================== */}
-
+        {/* Bottom Highlight */}
         <motion.div
           initial={{
             opacity: 0,
-            y: 12,
+            y: 20,
           }}
           whileInView={{
             opacity: 1,
@@ -448,85 +492,60 @@ export const Trainings = () => {
             once: true,
           }}
           transition={{
-            duration: 0.4,
+            duration: 0.6,
           }}
-          className="
-            mt-5
+          className={`
+            mt-24
             flex
-            min-h-[78px]
-            items-center
-            rounded-[9px]
-            border
-            border-[#dce4ee]
-            bg-[#f8faff]
-            px-6
-            py-4
-          "
+            flex-col
+            gap-5
+            border-t
+            pt-8
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+            ${
+              isDark
+                ? "border-white/[0.07]"
+                : "border-slate-200"
+            }
+          `}
         >
 
-          {/* ICON */}
-
-          <div
-            className="
-              hidden
-              h-[48px]
-              w-[48px]
-              shrink-0
-              items-center
-              justify-center
-              rounded-full
-              bg-white
-              md:flex
-            "
-          >
-            <GraduationCap
-              size={24}
-              strokeWidth={1.7}
-              className="text-[#1769d5]"
-            />
-          </div>
-
-          {/* TITLE */}
-
-          <div
-            className="
-              shrink-0
-              md:ml-4
-              md:border-r
-              md:border-[#dce4ee]
-              md:pr-7
-            "
-          >
-            <h3
-              className="
-                text-[14px]
-                font-bold
-                text-[#101d35]
-              "
-            >
-              Robotics Training Journey
-            </h3>
-          </div>
-
-          {/* DESCRIPTION */}
-
           <p
-            className="
-              ml-0
-              mt-2
-              text-[12.5px]
-              leading-[1.55]
-              text-[#52627d]
-              md:ml-7
-              md:mt-0
-            "
+            className={`
+              text-sm
+              uppercase
+              tracking-[0.2em]
+              ${
+                isDark
+                  ? "text-slate-600"
+                  : "text-slate-400"
+              }
+            `}
           >
-            Training across ABB, Yaskawa and Dürr robotic platforms,
-            strengthening practical expertise in industrial robot programming,
-            paint applications, troubleshooting and automotive manufacturing
-            systems.
+            Robotics • Automation • Automotive Manufacturing
           </p>
+
+          <div
+            className={`
+              flex
+              items-center
+              gap-3
+              text-sm
+              ${
+                isDark
+                  ? "text-slate-400"
+                  : "text-[#64748b]"
+              }
+            `}
+          >
+            <span className="h-2 w-2 rounded-full bg-blue-500" />
+            3 Robotic Platforms
+          </div>
+
         </motion.div>
+
       </div>
     </section>
   );

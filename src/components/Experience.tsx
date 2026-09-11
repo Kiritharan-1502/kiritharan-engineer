@@ -1,600 +1,416 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  BriefcaseBusiness,
-  CalendarDays,
-  MapPin,
-  CheckCircle2,
-} from "lucide-react";
+import { experiences } from "@/data/experience";
+import { useTheme } from "@/components/ThemeProvider";
 
-const experiences = [
-  {
-    number: "01",
-    role: "Senior Offline Robot Programmer / Senior Engineer",
-    company: "Dürr India Pvt Ltd",
-    period: "Sep 2025 – Present",
-    location: "Chennai, India",
-    current: true,
-    summary:
-      "Leading offline robot programming, paint application optimization, commissioning and technical support for automotive paint shop systems.",
-    responsibilities: [
-      "Offline programming and optimization of industrial paint robots.",
-      "Robot path optimization and application prove-out.",
-      "Commissioning, debugging and production ramp-up support.",
-      "Paint process optimization for quality and cycle-time improvement.",
-      "Troubleshooting robotic and application-related issues.",
-      "Supporting customers, production teams and project execution.",
-    ],
-    technologies: [
-      "ABB",
-      "Yaskawa",
-      "Dürr",
-      "Offline Programming",
-      "Paint Robotics",
-    ],
-  },
+const renderBoldText = (
+  text: string,
+  isLight: boolean,
+) => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
 
-  {
-    number: "02",
-    role: "Vehicle Production Engineering / Engineer",
-    company: "Renault Nissan Automotive India Pvt Ltd",
-    period: "Jan 2024 – Sep 2025",
-    location: "Chennai, India",
-    current: false,
-    summary:
-      "Worked in vehicle production engineering with focus on robotic paint systems, production support, quality and process improvement.",
-    responsibilities: [
-      "Supported production engineering activities for automotive manufacturing.",
-      "Monitored robotic paint application parameters and process quality.",
-      "Worked with production and maintenance teams to resolve technical issues.",
-      "Supported process improvements and production line performance.",
-      "Investigated defects and implemented corrective actions.",
-      "Coordinated technical activities during production and commissioning.",
-    ],
-    technologies: [
-      "Production Engineering",
-      "Paint Systems",
-      "Robot Programming",
-      "Process Optimization",
-    ],
-  },
+  return parts.map((part, index) => {
+    if (
+      part.startsWith("**") &&
+      part.endsWith("**")
+    ) {
+      const boldText = part.slice(2, -2);
 
-  {
-    number: "03",
-    role: "Painting Robot Programmer / Junior Engineer",
-    company: "Seoyon E-HWA Automotive India Pvt Ltd",
-    period: "Mar 2021 – Jan 2024",
-    location: "Chennai, India",
-    current: false,
-    summary:
-      "Developed hands-on experience in industrial robot programming, paint application systems, troubleshooting and production support.",
-    responsibilities: [
-      "Programmed and modified industrial paint robot applications.",
-      "Performed robot teaching and path optimization.",
-      "Supported commissioning and production trials.",
-      "Troubleshot robot and paint application problems.",
-      "Worked on defect reduction and process improvement.",
-      "Supported production teams during line operation and ramp-up.",
-    ],
-    technologies: [
-      "ABB",
-      "Yaskawa",
-      "Robot Teaching",
-      "Paint Application",
-      "Troubleshooting",
-    ],
-  },
+      return (
+        <strong
+          key={index}
+          className={`font-semibold ${
+            isLight
+              ? "text-[#101d35]"
+              : "text-slate-100"
+          }`}
+        >
+          {boldText}
+        </strong>
+      );
+    }
 
-  {
-    number: "04",
-    role: "Painting Robot Programmer / Assistant Engineer",
-    company: "Motherson Automotive Technologies & Engineering",
-    period: "Jun 2019 – Mar 2021",
-    location: "Chennai, India",
-    current: false,
-    summary:
-      "Worked on robotic painting operations, robot programming, process support and troubleshooting within automotive manufacturing.",
-    responsibilities: [
-      "Supported industrial paint robot programming and modifications.",
-      "Performed robot teaching and application adjustments.",
-      "Supported paint quality and process validation activities.",
-      "Troubleshot robot faults and production issues.",
-      "Worked with production and maintenance teams.",
-      "Supported continuous improvement activities on the paint line.",
-    ],
-    technologies: [
-      "Robot Programming",
-      "Paint Robotics",
-      "Process Support",
-      "Maintenance",
-    ],
-  },
-
-  {
-    number: "05",
-    role: "Painting Robot Operator / Trainee",
-    company: "Royal Enfield",
-    period: "May 2017 – Nov 2018",
-    location: "Chennai, India",
-    current: false,
-    summary:
-      "Started professional experience in robotic painting operations, quality inspection, maintenance and basic robot troubleshooting.",
-    responsibilities: [
-      "Operated robotic painting systems in production.",
-      "Monitored paint application parameters and process quality.",
-      "Inspected finished products against quality requirements.",
-      "Supported breakdown maintenance and troubleshooting.",
-      "Worked with production teams to maintain line performance.",
-      "Developed foundational knowledge of industrial robot operations.",
-    ],
-    technologies: [
-      "Robot Operations",
-      "Paint Parameters",
-      "Quality Inspection",
-      "Maintenance",
-    ],
-  },
-];
+    return <span key={index}>{part}</span>;
+  });
+};
 
 export const Experience = () => {
+  const { theme } = useTheme();
+
+  const isLight = theme === "light";
+
   return (
     <section
       id="experience"
-      className="
-        scroll-mt-0
-        bg-white
-        px-6
-        py-16
-        text-[#101d35]
-        md:px-10
-        md:py-20
-        lg:px-16
-      "
+      className={`relative overflow-hidden py-28 transition-colors duration-500 ${
+        isLight
+          ? "bg-[#f7f9fc]"
+          : "bg-[#080814]"
+      }`}
     >
-      <div className="mx-auto w-full max-w-[1250px]">
+      {/* Background Glow */}
+      <div
+        className={`pointer-events-none absolute left-1/2 top-32 h-[500px] w-[700px] -translate-x-1/2 rounded-full blur-[150px] ${
+          isLight
+            ? "bg-blue-500/[0.03]"
+            : "bg-blue-600/[0.04]"
+        }`}
+      />
 
-        {/* =====================================================
-            HEADER
-        ===================================================== */}
+      <div className="relative mx-auto w-[89%] max-w-[1400px]">
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.55 }}
-        >
-          <h2
-            className="
-              text-[42px]
-              font-bold
-              leading-tight
-              tracking-[-0.035em]
-              text-[#101d35]
-              md:text-[48px]
-            "
+        {/* Heading */}
+        <div className="mb-20">
+          <motion.div
+            initial="rest"
+            whileHover="hover"
+            animate="rest"
+            className="inline-block"
           >
-            Professional Experience
-          </h2>
+            <h2
+              className={`relative inline-block cursor-default text-[64px] font-semibold leading-[1.05] tracking-[-0.045em] ${
+                isLight
+                  ? "text-[#101d35]"
+                  : "text-white"
+              }`}
+            >
+              Experience.
 
-          <div className="mt-4 h-[3px] w-16 bg-[#1768d5]" />
+              <motion.span
+                variants={{
+                  rest: {
+                    width: "58px",
+                  },
+                  hover: {
+                    width: "100%",
+                  },
+                }}
+                transition={{
+                  duration: 0.55,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="absolute -bottom-4 left-0 h-[3px] bg-[#3b82f6]"
+              />
+            </h2>
+          </motion.div>
 
           <p
-            className="
-              mt-6
-              max-w-[900px]
-              text-[16px]
-              leading-[1.8]
-              text-[#52627d]
-              md:text-[18px]
-              md:leading-[1.8]
-            "
+            className={`mt-7 max-w-[720px] text-[17px] leading-[1.8] ${
+              isLight
+                ? "text-[#506481]"
+                : "text-slate-400"
+            }`}
           >
-            A career built through hands-on experience in industrial robotics,
-            automotive paint systems, commissioning, troubleshooting and
-            production engineering.
+            A career built around industrial robotics,
+            automated painting systems, production
+            engineering, commissioning, and continuous
+            process improvement.
           </p>
-        </motion.div>
-
-        {/* =====================================================
-            CAREER TIMELINE
-        ===================================================== */}
-
-        <div className="relative mt-12">
-
-          {/* TIMELINE LINE */}
-
-          <div
-            className="
-              absolute
-              bottom-6
-              left-[23px]
-              top-6
-              hidden
-              w-px
-              bg-[#d9e2ee]
-              md:block
-            "
-          />
-
-          {/* =================================================
-              EXPERIENCE ITEMS
-          ================================================= */}
-
-          <div className="space-y-7">
-            {experiences.map((item, index) => (
-              <motion.article
-                key={item.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.12 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.05,
-                }}
-                className="relative md:pl-[64px]"
-              >
-
-                {/* TIMELINE DOT */}
-
-                <div
-                  className="
-                    absolute
-                    left-[16px]
-                    top-[30px]
-                    hidden
-                    h-[16px]
-                    w-[16px]
-                    items-center
-                    justify-center
-                    rounded-full
-                    border-[3px]
-                    border-white
-                    bg-[#1768d5]
-                    shadow-[0_0_0_1px_#1768d5]
-                    md:flex
-                  "
-                />
-
-                {/* =================================================
-                    CARD
-                ================================================= */}
-
-                <div
-                  className={`
-                    rounded-xl
-                    border
-                    bg-white
-                    p-6
-                    transition-all
-                    duration-300
-                    md:p-7
-                    ${
-                      item.current
-                        ? "border-[#1768d5] shadow-[0_8px_30px_rgba(23,104,213,0.10)]"
-                        : "border-[#e1e7ef] shadow-[0_3px_15px_rgba(16,29,53,0.035)] hover:border-[#b9cce5] hover:shadow-[0_8px_25px_rgba(16,29,53,0.06)]"
-                    }
-                  `}
-                >
-
-                  {/* =================================================
-                      TOP ROW
-                  ================================================= */}
-
-                  <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
-
-                    {/* LEFT */}
-
-                    <div className="flex min-w-0 gap-4">
-
-                      {/* NUMBER */}
-
-                      <div
-                        className="
-                          flex
-                          h-10
-                          w-10
-                          shrink-0
-                          items-center
-                          justify-center
-                          rounded-lg
-                          bg-[#f1f6fd]
-                          text-sm
-                          font-bold
-                          text-[#1768d5]
-                        "
-                      >
-                        {item.number}
-                      </div>
-
-                      {/* JOB INFORMATION */}
-
-                      <div className="min-w-0">
-
-                        <div className="flex flex-wrap items-center gap-3">
-
-                          <h3
-                            className="
-                              text-[19px]
-                              font-bold
-                              leading-7
-                              text-[#101d35]
-                              md:text-[21px]
-                            "
-                          >
-                            {item.role}
-                          </h3>
-
-                          {item.current && (
-                            <span
-                              className="
-                                rounded-full
-                                bg-[#e9f8f0]
-                                px-3
-                                py-1
-                                text-[11px]
-                                font-bold
-                                uppercase
-                                tracking-wide
-                                text-[#16834b]
-                              "
-                            >
-                              Current
-                            </span>
-                          )}
-                        </div>
-
-                        <p
-                          className="
-                            mt-1
-                            text-[15px]
-                            font-semibold
-                            text-[#1768d5]
-                          "
-                        >
-                          {item.company}
-                        </p>
-
-                      </div>
-                    </div>
-
-                    {/* DATE / LOCATION */}
-
-                    <div
-                      className="
-                        flex
-                        shrink-0
-                        flex-col
-                        gap-2
-                        text-sm
-                        text-[#65748e]
-                        md:items-end
-                      "
-                    >
-                      <div className="flex items-center gap-2">
-                        <CalendarDays
-                          size={15}
-                          strokeWidth={1.8}
-                        />
-                        <span>{item.period}</span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <MapPin
-                          size={15}
-                          strokeWidth={1.8}
-                        />
-                        <span>{item.location}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* =================================================
-                      DIVIDER
-                  ================================================= */}
-
-                  <div className="my-6 h-px bg-[#e7ecf3]" />
-
-                  {/* =================================================
-                      ROLE SUMMARY
-                  ================================================= */}
-
-                  <div>
-                    <h4
-                      className="
-                        text-[14px]
-                        font-bold
-                        uppercase
-                        tracking-[0.08em]
-                        text-[#1768d5]
-                      "
-                    >
-                      Role Summary
-                    </h4>
-
-                    <p
-                      className="
-                        mt-2
-                        max-w-[1000px]
-                        text-[15px]
-                        leading-7
-                        text-[#52627d]
-                        md:text-[16px]
-                      "
-                    >
-                      {item.summary}
-                    </p>
-                  </div>
-
-                  {/* =================================================
-                      RESPONSIBILITIES
-                  ================================================= */}
-
-                  <div className="mt-6">
-
-                    <h4
-                      className="
-                        text-[15px]
-                        font-bold
-                        text-[#101d35]
-                      "
-                    >
-                      Key Responsibilities
-                    </h4>
-
-                    <div
-                      className="
-                        mt-3
-                        grid
-                        grid-cols-1
-                        gap-x-8
-                        gap-y-2
-                        md:grid-cols-2
-                      "
-                    >
-                      {item.responsibilities.map((responsibility) => (
-                        <div
-                          key={responsibility}
-                          className="
-                            flex
-                            items-start
-                            gap-2.5
-                            text-[14px]
-                            leading-6
-                            text-[#52627d]
-                            md:text-[15px]
-                          "
-                        >
-                          <CheckCircle2
-                            size={16}
-                            strokeWidth={1.8}
-                            className="
-                              mt-[5px]
-                              shrink-0
-                              text-[#1768d5]
-                            "
-                          />
-
-                          <span>{responsibility}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* =================================================
-                      TECHNICAL AREAS
-                  ================================================= */}
-
-                  <div className="mt-6">
-
-                    <h4
-                      className="
-                        text-[14px]
-                        font-bold
-                        uppercase
-                        tracking-[0.08em]
-                        text-[#1768d5]
-                      "
-                    >
-                      Technical Areas
-                    </h4>
-
-                    <div
-                      className="
-                        mt-3
-                        flex
-                        flex-wrap
-                        gap-2
-                      "
-                    >
-                      {item.technologies.map((technology) => (
-                        <span
-                          key={technology}
-                          className="
-                            rounded-full
-                            border
-                            border-[#dce5f0]
-                            bg-[#f8fafc]
-                            px-3
-                            py-1.5
-                            text-[12px]
-                            font-medium
-                            text-[#52627d]
-                          "
-                        >
-                          {technology}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                </div>
-              </motion.article>
-            ))}
-          </div>
         </div>
 
-        {/* =====================================================
-            CAREER SUMMARY
-        ===================================================== */}
+        {/* Timeline */}
+        <div className="relative">
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.55 }}
-          className="
-            mt-10
-            rounded-xl
-            border
-            border-[#dfe7f1]
-            bg-[#f7f9fc]
-            px-6
-            py-6
-            md:px-8
-          "
-        >
-          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+          {/* Timeline Line */}
+          <div
+            className={`absolute left-[30px] top-0 hidden w-px md:block ${
+              isLight
+                ? "bg-[#1768d5]/15"
+                : "bg-blue-500/[0.20]"
+            }`}
+            style={{
+              height: "calc(100% - 20px)",
+            }}
+          />
 
-            <div
-              className="
-                flex
-                shrink-0
-                items-center
-                gap-3
-                text-[16px]
-                font-bold
-                text-[#101d35]
-                md:w-[220px]
-              "
-            >
-              <BriefcaseBusiness
-                size={20}
-                className="text-[#1768d5]"
-              />
+          <div className="space-y-12">
 
-              Career Focus
-            </div>
+            {experiences.map(
+              (experience, index) => (
+                <motion.article
+                  key={experience.number}
+                  initial={{
+                    opacity: 0,
+                    y: 30,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.08,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.06,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  whileHover={{
+                    y: -4,
+                  }}
+                  className="relative pl-0 md:pl-[96px]"
+                >
 
-            <div className="hidden h-8 w-px bg-[#dce3ed] md:block" />
+                  {/* Timeline Number */}
+                  <div className="absolute left-0 top-[38px] hidden md:block">
+                    <div
+                      className={`flex h-[62px] w-[62px] items-center justify-center rounded-full ${
+                        isLight
+                          ? "bg-[#1768d5]/[0.10]"
+                          : "bg-blue-500/[0.10]"
+                      }`}
+                    >
+                      <div
+                        className={`flex h-[44px] w-[44px] items-center justify-center rounded-full border text-[12px] font-semibold tracking-[0.08em] text-white ${
+                          isLight
+                            ? "border-[#1768d5]/40 bg-[#1768d5] shadow-[0_0_25px_rgba(23,104,213,0.25)]"
+                            : "border-blue-400/40 bg-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,0.35)]"
+                        }`}
+                      >
+                        {experience.number}
+                      </div>
+                    </div>
+                  </div>
 
-            <p
-              className="
-                text-[14px]
-                leading-6
-                text-[#52627d]
-                md:text-[15px]
-              "
-            >
-              Industrial robotics, automotive paint systems, robot
-              programming, commissioning, troubleshooting, process
-              optimization and production support.
-            </p>
+                  {/* Card */}
+                  <div
+                    className={`relative overflow-hidden rounded-[22px] border transition-all duration-500 ${
+                      isLight
+                        ? "border-[#1768d5]/15 bg-white shadow-[0_18px_60px_rgba(16,29,53,0.07)] hover:border-[#1768d5]/30 hover:shadow-[0_25px_75px_rgba(16,29,53,0.10)]"
+                        : "border-blue-500/[0.23] bg-[#0d0d19] shadow-[0_18px_70px_rgba(0,0,0,0.28)] hover:border-blue-400/[0.38] hover:shadow-[0_25px_80px_rgba(37,99,235,0.10)]"
+                    }`}
+                  >
+
+                    {/* Top Highlight */}
+                    <div
+                      className={`absolute left-0 right-0 top-0 h-px ${
+                        isLight
+                          ? "bg-gradient-to-r from-transparent via-[#1768d5]/40 to-transparent"
+                          : "bg-gradient-to-r from-transparent via-blue-400/40 to-transparent"
+                      }`}
+                    />
+
+                    {/* Header */}
+                    <div className="px-7 pb-7 pt-8 md:px-9 md:pt-9">
+
+                      <div className="flex flex-col gap-7 lg:flex-row lg:items-start lg:justify-between">
+
+                        {/* Role + Company */}
+                        <div className="flex items-start gap-5">
+
+                          {/* Company Initial */}
+                          <div
+                            className={`flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-[13px] text-[23px] font-semibold text-white ${
+                              isLight
+                                ? "bg-[#1768d5] shadow-[0_8px_25px_rgba(23,104,213,0.18)]"
+                                : "bg-[#2563eb] shadow-[0_8px_30px_rgba(37,99,235,0.25)]"
+                            }`}
+                          >
+                            {experience.company.charAt(0)}
+                          </div>
+
+                          <div>
+
+                            <div className="flex flex-wrap items-center gap-3">
+
+                              <h3
+                                className={`text-[25px] font-semibold leading-[1.3] tracking-[-0.025em] ${
+                                  isLight
+                                    ? "text-[#101d35]"
+                                    : "text-white"
+                                }`}
+                              >
+                                {experience.role}
+                              </h3>
+
+                              {/* CURRENT */}
+                              {experience.current && (
+                                <span
+                                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                                    isLight
+                                      ? "border-emerald-500/30 bg-emerald-500/[0.08] text-emerald-600"
+                                      : "border-emerald-400/30 bg-emerald-400/[0.08] text-emerald-400"
+                                  }`}
+                                >
+                                  <span
+                                    className={`h-1.5 w-1.5 rounded-full ${
+                                      isLight
+                                        ? "bg-emerald-600"
+                                        : "bg-emerald-400"
+                                    }`}
+                                  />
+
+                                  Current
+                                </span>
+                              )}
+
+                            </div>
+
+                            <p
+                              className={`mt-2 text-[16px] font-medium ${
+                                isLight
+                                  ? "text-[#1768d5]"
+                                  : "text-blue-400"
+                              }`}
+                            >
+                              {experience.company}
+                            </p>
+
+                          </div>
+                        </div>
+
+                        {/* Date / Location */}
+                        <div
+                          className={`shrink-0 rounded-[10px] border px-4 py-3 lg:min-w-[235px] ${
+                            isLight
+                              ? "border-[#101d35]/10 bg-[#f7f9fc]"
+                              : "border-white/[0.07] bg-[#0a0a14]"
+                          }`}
+                        >
+
+                          {experience.current ? (
+                            <p className="text-right font-mono text-[13px] font-semibold uppercase tracking-[0.08em] text">
+                              2025
+                            </p>
+                          ) : (
+                            <p
+                              className={`text-right font-mono text-[13px] ${
+                                isLight
+                                  ? "text-[#506481]"
+                                  : "text-slate-300"
+                              }`}
+                            >
+                              {experience.period}
+                            </p>
+                          )}
+
+                          <p
+                            className={`mt-1 text-right font-mono text-[13px] ${
+                              isLight
+                                ? "text-[#6f86a8]"
+                                : "text-slate-500"
+                            }`}
+                          >
+                            {experience.location}
+                          </p>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div
+                      className={`mx-7 h-px md:mx-9 ${
+                        isLight
+                          ? "bg-[#101d35]/[0.08]"
+                          : "bg-white/[0.07]"
+                      }`}
+                    />
+
+                    {/* Responsibilities */}
+                    <div className="px-7 py-8 md:px-9">
+
+                      <ul className="space-y-5">
+
+                        {experience.responsibilities.map(
+                          (
+                            responsibility,
+                            responsibilityIndex,
+                          ) => (
+                            <motion.li
+                              key={`${experience.number}-${responsibilityIndex}`}
+                              initial={{
+                                opacity: 0,
+                                x: -8,
+                              }}
+                              whileInView={{
+                                opacity: 1,
+                                x: 0,
+                              }}
+                              viewport={{
+                                once: true,
+                                amount: 0.1,
+                              }}
+                              transition={{
+                                duration: 0.35,
+                                delay:
+                                  responsibilityIndex *
+                                  0.025,
+                              }}
+                              className="flex items-start gap-4"
+                            >
+
+                              {/* Bullet */}
+                              <span
+                                className={`mt-[5px] shrink-0 text-[20px] leading-none ${
+                                  isLight
+                                    ? "text-[#1768d5]"
+                                    : "text-cyan-400"
+                                }`}
+                              >
+                                ›
+                              </span>
+
+                              {/* Responsibility */}
+                              <p
+                                className={`text-[16px] leading-[1.75] ${
+                                  isLight
+                                    ? "text-[#506481]"
+                                    : "text-slate-300"
+                                }`}
+                              >
+                                {renderBoldText(
+                                  responsibility,
+                                  isLight,
+                                )}
+                              </p>
+
+                            </motion.li>
+                          ),
+                        )}
+
+                      </ul>
+                    </div>
+
+                    {/* Divider */}
+                    <div
+                      className={`mx-7 h-px md:mx-9 ${
+                        isLight
+                          ? "bg-[#101d35]/[0.08]"
+                          : "bg-white/[0.07]"
+                      }`}
+                    />
+
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 px-7 py-6 md:px-9">
+
+                      {experience.technologies.map(
+                        (technology) => (
+                          <span
+                            key={technology}
+                            className={`rounded-[6px] border px-3 py-1.5 font-mono text-[11px] transition-all duration-300 ${
+                              isLight
+                                ? "border-[#1768d5]/20 bg-[#1768d5]/[0.05] text-[#1768d5] hover:border-[#1768d5]/40 hover:bg-[#1768d5]/[0.08]"
+                                : "border-blue-500/[0.25] bg-blue-500/[0.08] text-blue-300 hover:border-blue-400/[0.40] hover:bg-blue-500/[0.13]"
+                            }`}
+                          >
+                            {technology}
+                          </span>
+                        ),
+                      )}
+
+                    </div>
+
+                  </div>
+                </motion.article>
+              ),
+            )}
 
           </div>
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );

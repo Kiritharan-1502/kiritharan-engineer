@@ -1,61 +1,91 @@
+"use client";
+
 import React from "react";
-import { Mail } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { useTheme } from "@/components/ThemeProvider";
 
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
-    <footer className="relative border-t border-[#a855f7]/20 py-12 mt-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[#a855f7]/5 pointer-events-none"></div>
+    <footer
+      className={`
+        w-full border-t
+        transition-colors duration-300
+        ${
+          isLight
+            ? "border-[#101d35]/10 bg-[#f7f9fc]"
+            : "border-white/[0.08] bg-[#080814]"
+        }
+      `}
+    >
+      <div className="mx-auto w-full max-w-[1280px] px-[5.5%]">
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* FOOTER CONTENT */}
+        <div className="flex flex-col items-center py-12 text-center">
 
-          {/* Footer Identity */}
-          <div className="text-center md:text-left">
-            <h3 className="font-mono text-xl font-bold tracking-tighter text-white mb-2">
-              Shakthi Nandini
-            </h3>
+          {/* NAME */}
+          <h3
+            className={`
+              text-[21px] font-semibold
+              tracking-[-0.02em]
+              transition-colors duration-300
+              ${
+                isLight
+                  ? "text-[#101d35]"
+                  : "text-white"
+              }
+            `}
+          >
+            KIRITHARAN 
+          </h3>
 
-            <p className="text-[#94a3b8] text-sm">
-              Designed & Built by Shakthi Nandini
-              <br />
-              © {currentYear} All Rights Reserved
-            </p>
-          </div>
+          {/* CREDIT */}
+          <p
+            className={`
+              mt-3 text-[14px] leading-6
+              transition-colors duration-300
+              ${
+                isLight
+                  ? "text-[#506481]"
+                  : "text-[#94a3b8]"
+              }
+            `}
+          >
+            Designed & Built by Kírìthaṛañ
+          </p>
 
-          {/* Social Links */}
-          <div className="flex gap-4">
+          {/* COPYRIGHT */}
+          <p
+            className={`
+              text-[14px] leading-6
+              transition-colors duration-300
+              ${
+                isLight
+                  ? "text-[#506481]"
+                  : "text-[#94a3b8]"
+              }
+            `}
+          >
+            © 2026 All Rights Reserved
+          </p>
 
-            {/* GitHub */}
-            <a
-              href="https://github.com/shakthi1215"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="p-2 rounded-full glass text-[#94a3b8] hover:text-[#c084fc] hover:border-[#c084fc]/50 transition-all"
-            >
-              <FaGithub size={20} />
-            </a>
-
-            {/* Email */}
-            <a
-              href="mailto:shakthinandinij1@gmail.com"
-              aria-label="Email"
-              className="p-2 rounded-full glass text-[#94a3b8] hover:text-[#c084fc] hover:border-[#c084fc]/50 transition-all"
-            >
-              <Mail size={20} />
-            </a>
-
-          </div>
-        </div>
-
-        {/* Tech Stack */}
-        <div className="mt-12 text-center">
-          <p className="text-xs text-[#94a3b8]/60 font-mono tracking-widest uppercase">
+          {/* BUILT WITH */}
+          <p
+            className={`
+              mt-9 text-[10px] font-medium
+              uppercase tracking-[0.28em]
+              transition-colors duration-300
+              ${
+                isLight
+                  ? "text-[#6f86a8]"
+                  : "text-[#64748b]"
+              }
+            `}
+          >
             Built with Next.js, Tailwind CSS & Framer Motion
           </p>
+
         </div>
       </div>
     </footer>

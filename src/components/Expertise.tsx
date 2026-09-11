@@ -2,11 +2,23 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  Bot,
+  Droplets,
+  PlayCircle,
+  Wrench,
+  TrendingUp,
+  Headphones,
+  GraduationCap,
+  CheckCircle2,
+} from "lucide-react";
 
-const expertiseCategories = [
+const expertiseAreas = [
   {
-    name: "Robot Programming",
-    items: [
+    id: "robot-programming",
+    title: "Robot Programming",
+    icon: Bot,
+    skills: [
       "ABB",
       "Yaskawa",
       "Dürr",
@@ -16,411 +28,632 @@ const expertiseCategories = [
       "Program Modification",
       "Application Prove-out",
     ],
+    description:
+      "Hands-on experience with industrial robot programming, offline programming, path optimization, application prove-out, and robotic system programming across ABB, Yaskawa, and Dürr platforms.",
   },
+
   {
-    name: "Paint Process",
-    items: [
-      "Sealer",
-      "Primer",
-      "Base Coat",
-      "Clear Coat",
-      "Dual-Tone Application",
-      "Paint Quality",
-      "Transfer Efficiency",
-      "Process Validation",
+    id: "paint-process",
+    title: "Paint Process",
+    icon: Droplets,
+    skills: [
+      "Paint Application",
+      "Paint Parameters",
+      "Application Quality",
+      "Process Control",
+      "Defect Reduction",
+      "Paint Process Optimization",
     ],
+    description:
+      "Experience in automotive paint processes with focus on application quality, process parameters, defect reduction, and optimization of robotic paint applications.",
   },
+
   {
-    name: "Commissioning & Start-up",
-    items: [
-      "Site Commissioning",
-      "System Start-up",
-      "Application Trials",
-      "Production Ramp-up",
+    id: "commissioning",
+    title: "Commissioning & Start-up",
+    icon: PlayCircle,
+    skills: [
+      "Robot Commissioning",
+      "Application Prove-out",
+      "Production Trials",
+      "Line Start-up",
       "Debugging",
-      "Process Validation",
-      "Site Acceptance",
+      "Ramp-up Support",
     ],
+    description:
+      "Practical experience supporting robot commissioning, application prove-out, production trials, debugging, line start-up, and production ramp-up activities.",
   },
+
   {
-    name: "Troubleshooting",
-    items: [
-      "Root Cause Analysis",
-      "Robot Diagnostics",
+    id: "troubleshooting",
+    title: "Troubleshooting",
+    icon: Wrench,
+    skills: [
+      "Robot Fault Diagnosis",
       "Application Issues",
-      "Defect Elimination",
-      "Corrective Actions",
-      "Collision Avoidance",
-      "Downtime Reduction",
-      "Process Improvement",
-    ],
-  },
-  {
-    name: "Production Optimization",
-    items: [
-      "Cycle Time Improvement",
-      "Robot Path Optimization",
-      "Process Stability",
-      "Production Efficiency",
-      "Paint Application Optimization",
-      "Quality Improvement",
-      "Performance Monitoring",
-    ],
-  },
-  {
-    name: "Technical Support",
-    items: [
-      "Customer Technical Support",
-      "Field Service",
-      "Global Project Support",
-      "Technical Troubleshooting",
-      "Engineering Support",
       "Production Support",
-      "Vendor Coordination",
+      "Fault Recovery",
+      "Root Cause Analysis",
+      "Technical Problem Solving",
     ],
+    description:
+      "Experience troubleshooting robotic systems, paint application problems, production issues, and supporting teams in identifying and resolving technical faults.",
   },
+
   {
-    name: "Training & Documentation",
-    items: [
-      "Technical Training",
-      "SOP Preparation",
-      "Process Documentation",
-      "Technical Instructions",
-      "Process Sheets",
-      "Knowledge Transfer",
+    id: "production",
+    title: "Production Optimization",
+    icon: TrendingUp,
+    skills: [
+      "Cycle Time Improvement",
+      "Process Optimization",
+      "Quality Improvement",
+      "Production Performance",
+      "Continuous Improvement",
+      "Process Reliability",
     ],
+    description:
+      "Focused on improving production performance through cycle-time optimization, process improvements, quality enhancement, and reliable robotic paint shop operations.",
+  },
+
+  {
+    id: "support",
+    title: "Technical Support",
+    icon: Headphones,
+    skills: [
+      "Customer Support",
+      "Production Support",
+      "Technical Coordination",
+      "Issue Resolution",
+      "Project Support",
+      "On-site Assistance",
+    ],
+    description:
+      "Technical support experience involving customers, production teams, maintenance teams, project execution, issue resolution, and robotic system implementation.",
+  },
+
+  {
+    id: "training",
+    title: "Training & Documentation",
+    icon: GraduationCap,
+    skills: [
+      "Robot Programming Training",
+      "Technical Documentation",
+      "Program Documentation",
+      "Knowledge Transfer",
+      "Operator Support",
+    ],
+    description:
+      "Experience supporting technical knowledge transfer, robot programming training, documentation, and practical guidance for production and engineering teams.",
   },
 ];
 
 export const Expertise = () => {
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [selectedArea, setSelectedArea] = useState(0);
 
-  const active = expertiseCategories[activeCategory];
+  const selected = expertiseAreas[selectedArea];
+  const SelectedIcon = selected.icon;
 
   return (
     <section
       id="expertise"
       className="
-        scroll-mt-0
-        bg-white
+        relative
+        w-full
+        overflow-hidden
+        bg-[#080814]
         px-6
-        py-20
-        text-[#101d35]
+        py-28
+        text-white
         md:px-10
-        md:py-24
         lg:px-16
-        xl:px-20
       "
     >
-      <div className="mx-auto w-full max-w-[1320px]">
+      {/* =====================================================
+          BACKGROUND GLOW
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-20
+          h-[520px]
+          w-[520px]
+          -translate-x-1/2
+          rounded-full
+          bg-blue-600/[0.035]
+          blur-[150px]
+        "
+      />
+
+      <div className="relative mx-auto w-full max-w-[1250px]">
 
         {/* =====================================================
-            HEADING
+            SKILLS & EXPERTISE HEADING
         ===================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
+          initial="rest"
+          whileHover="hover"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          className="
+            inline-flex
+            cursor-default
+            flex-col
+            items-start
+          "
         >
-          <h2
+          <motion.h2
+            variants={{
+              rest: {
+                y: 0,
+              },
+
+              hover: {
+                y: -1,
+              },
+
+              visible: {
+                y: 0,
+              },
+            }}
+            transition={{
+              duration: 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="
-              text-[40px]
+              text-[clamp(2.8rem,4.2vw,4rem)]
               font-bold
-              leading-tight
-              tracking-[-0.035em]
-              text-[#101d35]
-              md:text-[48px]
+              leading-[0.95]
+              tracking-[-0.05em]
+              text-white
             "
           >
-            Areas of Expertise
-          </h2>
+            Skills &{" "}
+            <span className="text-[#3b82f6]">
+              Expertise.
+            </span>
+          </motion.h2>
 
-          <div className="mt-4 h-[3px] w-16 bg-[#1768d5]" />
+          {/* Animated underline */}
+          <motion.div
+            variants={{
+              rest: {
+                width: "58px",
+              },
 
-          <p
+              hover: {
+                width: "100%",
+              },
+
+              visible: {
+                width: "58px",
+              },
+            }}
+            transition={{
+              duration: 0.5,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="
-              mt-5
-              max-w-[900px]
-              text-[16px]
-              leading-7
-              text-[#52627d]
-              md:text-[17px]
+              mt-6
+              h-[4px]
+              rounded-full
+              bg-[#3b82f6]
             "
-          >
-            Specialized experience in industrial robotics, automotive paint
-            systems, commissioning, troubleshooting, and production process
-            optimization.
-          </p>
+          />
         </motion.div>
+
+        {/* =====================================================
+            INTRODUCTION
+        ===================================================== */}
+
+        <motion.p
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.6,
+            delay: 0.15,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            mt-12
+            max-w-[900px]
+            text-[17px]
+            leading-[1.85]
+            text-slate-400
+            sm:text-[18px]
+            lg:text-[19px]
+          "
+        >
+          Specialized experience in industrial robotics, automotive paint
+          systems, commissioning, troubleshooting, and production process
+          optimization.
+        </motion.p>
 
         {/* =====================================================
             EXPERTISE CONTENT
         ===================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6 }}
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.12,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
           className="
             mt-12
             grid
-            grid-cols-1
-            gap-8
-            lg:grid-cols-[300px_1fr]
+            gap-6
+            lg:grid-cols-[275px_1fr]
           "
         >
 
-          {/* ===================================================
+          {/* =================================================
               LEFT CATEGORY LIST
-          =================================================== */}
+          ================================================= */}
 
           <div
             className="
-              flex
-              flex-col
-              gap-2
+              rounded-2xl
+              border
+              border-white/[0.08]
+              bg-white/[0.025]
+              p-3
             "
           >
-            {expertiseCategories.map((category, index) => {
-              const isActive = activeCategory === index;
+            <div className="px-4 pt-3 pb-2">
+              <p
+                className="
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.3em]
+                  text-slate-600
+                "
+              >
+                Core Capabilities
+              </p>
+            </div>
 
-              return (
-                <button
-                  key={category.name}
-                  onClick={() => setActiveCategory(index)}
-                  className={`
-                    relative
-                    flex
-                    min-h-[54px]
-                    w-full
-                    items-center
-                    rounded-lg
-                    px-5
-                    text-left
-                    text-[15px]
-                    font-medium
-                    transition-all
-                    duration-200
-                    ${
-                      isActive
-                        ? "bg-[#f3edfb] text-[#101d35] shadow-sm"
-                        : "text-[#8da0bb] hover:bg-[#f8f9fb] hover:text-[#43516b]"
-                    }
-                  `}
-                >
-                  {/* Active blue/purple accent */}
+            <div className="mt-2 space-y-1">
+              {expertiseAreas.map((area, index) => {
+                const Icon = area.icon;
+                const isSelected = selectedArea === index;
 
-                  {isActive && (
-                    <span
-                      className="
-                        absolute
-                        left-0
-                        top-0
-                        h-full
-                        w-[4px]
-                        rounded-l-lg
-                        bg-gradient-to-b
-                        from-[#1768d5]
-                        to-[#b44cf0]
-                      "
+                return (
+                  <button
+                    key={area.id}
+                    type="button"
+                    onClick={() => setSelectedArea(index)}
+                    className={`
+                      group
+                      flex
+                      w-full
+                      items-center
+                      gap-3
+                      rounded-xl
+                      px-4
+                      py-3.5
+                      text-left
+                      transition-all
+                      duration-300
+                      ${
+                        isSelected
+                          ? "bg-blue-600 text-white shadow-[0_8px_25px_rgba(37,99,235,0.16)]"
+                          : "text-slate-400 hover:bg-white/[0.045] hover:text-white"
+                      }
+                    `}
+                  >
+                    <Icon
+                      size={17}
+                      strokeWidth={2}
+                      className={
+                        isSelected
+                          ? "text-white"
+                          : "text-slate-600 transition-colors duration-300 group-hover:text-blue-400"
+                      }
                     />
-                  )}
 
-                  {category.name}
-                </button>
-              );
-            })}
+                    <span
+                      className={`
+                        text-[13px]
+                        font-semibold
+                        transition-colors
+                        duration-300
+                        ${
+                          isSelected
+                            ? "text-white"
+                            : "text-slate-400 group-hover:text-white"
+                        }
+                      `}
+                    >
+                      {area.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* ===================================================
-              RIGHT CONTENT
-          =================================================== */}
+          {/* =================================================
+              RIGHT CAPABILITY PANEL
+          ================================================= */}
 
-          <div
+          <motion.div
+            key={selected.id}
+            initial={{
+              opacity: 0,
+              x: 12,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              duration: 0.3,
+            }}
             className="
-              min-h-[360px]
-              rounded-xl
+              rounded-2xl
               border
-              border-[#e4e8ef]
-              bg-white
+              border-white/[0.08]
+              bg-white/[0.025]
               p-7
+              transition-all
+              duration-300
+              hover:border-blue-400/25
+              hover:bg-white/[0.035]
               md:p-9
             "
           >
 
-            {/* Category title */}
+            {/* TOP */}
 
-            <div className="mb-7">
+            <div className="flex items-start gap-4">
               <div
                 className="
-                  text-[13px]
-                  font-semibold
-                  uppercase
-                  tracking-[0.12em]
-                  text-[#1768d5]
+                  flex
+                  h-12
+                  w-12
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-blue-500/20
+                  bg-blue-500/[0.08]
+                  text-blue-400
                 "
               >
-                Core Capability
+                <SelectedIcon
+                  size={23}
+                  strokeWidth={1.8}
+                />
               </div>
 
-              <h3
-                className="
-                  mt-2
-                  text-[24px]
-                  font-bold
-                  tracking-tight
-                  text-[#101d35]
-                  md:text-[28px]
-                "
-              >
-                {active.name}
-              </h3>
-            </div>
-
-            {/* =================================================
-                EXPERTISE PILLS
-            ================================================= */}
-
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="
-                flex
-                flex-wrap
-                content-start
-                gap-3
-              "
-            >
-              {active.items.map((item) => (
-                <span
-                  key={item}
+              <div>
+                <p
                   className="
-                    inline-flex
-                    min-h-[42px]
-                    items-center
-                    rounded-full
-                    border
-                    border-[#dfe4eb]
-                    bg-[#f8f9fb]
-                    px-5
-                    py-2
-                    text-[14px]
-                    font-medium
-                    text-[#43516b]
-                    transition-all
-                    duration-200
-                    hover:border-[#1768d5]
-                    hover:bg-[#f1f6fd]
-                    hover:text-[#1768d5]
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.3em]
+                    text-blue-400
                   "
                 >
-                  {item}
-                </span>
-              ))}
-            </motion.div>
+                  Core Capability
+                </p>
 
-            {/* =================================================
-                DESCRIPTION
-            ================================================= */}
+                <h3
+                  className="
+                    mt-2
+                    text-[clamp(1.7rem,3vw,2rem)]
+                    font-semibold
+                    leading-tight
+                    tracking-[-0.03em]
+                    text-white
+                  "
+                >
+                  {selected.title}
+                </h3>
+              </div>
+            </div>
+
+            {/* SKILLS */}
 
             <div
               className="
-                mt-10
-                border-t
-                border-[#edf0f4]
-                pt-6
+                mt-7
+                flex
+                flex-wrap
+                gap-2.5
               "
             >
+              {selected.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="
+                    rounded-full
+                    border
+                    border-blue-500/20
+                    bg-blue-500/[0.06]
+                    px-3.5
+                    py-2
+                    text-[12px]
+                    font-medium
+                    text-blue-300
+                    transition-all
+                    duration-200
+                    hover:border-blue-400/40
+                    hover:bg-blue-500/[0.12]
+                    hover:text-blue-200
+                  "
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            {/* DIVIDER */}
+
+            <div
+              className="
+                my-7
+                h-px
+                w-full
+                bg-white/[0.07]
+              "
+            />
+
+            {/* DESCRIPTION */}
+
+            <div className="flex items-start gap-3">
+              <CheckCircle2
+                size={18}
+                className="
+                  mt-0.5
+                  shrink-0
+                  text-blue-400
+                "
+              />
+
               <p
                 className="
                   max-w-[850px]
                   text-[15px]
                   leading-7
-                  text-[#66758d]
+                  text-slate-400
+                  md:text-[16px]
                 "
               >
-                {activeCategory === 0 &&
-                  "Hands-on experience with industrial robot programming, offline programming, path optimization, application prove-out, and robotic system programming across ABB, Yaskawa, and Dürr platforms."}
-
-                {activeCategory === 1 &&
-                  "Practical experience across automotive paint application processes including sealer, primer, base coat, clear coat, and dual-tone applications with focus on quality and transfer efficiency."}
-
-                {activeCategory === 2 &&
-                  "Experience supporting system commissioning, application trials, debugging, production ramp-up, process validation, and site acceptance activities."}
-
-                {activeCategory === 3 &&
-                  "Strong troubleshooting capability focused on identifying root causes, eliminating defects, resolving robotic and application issues, and improving production reliability."}
-
-                {activeCategory === 4 &&
-                  "Experience improving robot paths, cycle time, process stability, paint application quality, production efficiency, and overall line performance."}
-
-                {activeCategory === 5 &&
-                  "Technical support experience involving customer assistance, field service, troubleshooting, engineering coordination, vendor interaction, and project execution."}
-
-                {activeCategory === 6 &&
-                  "Experience preparing technical documentation, SOPs, process sheets, technical instructions, and supporting knowledge transfer and engineering team training."}
+                {selected.description}
               </p>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* =====================================================
-            BOTTOM SUMMARY
+            PROFESSIONAL FOCUS
         ===================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
           className="
-            mt-8
-            rounded-xl
+            mt-6
+            rounded-2xl
             border
-            border-[#e1e7ef]
-            bg-[#f7f9fc]
+            border-white/[0.08]
+            bg-white/[0.025]
             px-6
-            py-6
+            py-5
             md:px-8
           "
         >
-          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+          <div
+            className="
+              flex
+              flex-col
+              gap-3
+              md:flex-row
+              md:items-center
+              md:gap-6
+            "
+          >
+            <div
+              className="
+                flex
+                shrink-0
+                items-center
+                gap-3
+              "
+            >
+              <div
+                className="
+                  h-[3px]
+                  w-8
+                  bg-[#3b82f6]
+                "
+              />
+
+              <p
+                className="
+                  text-[13px]
+                  font-semibold
+                  text-white
+                "
+              >
+                Professional Focus
+              </p>
+            </div>
 
             <div
               className="
-                shrink-0
-                text-[15px]
-                font-bold
-                text-[#101d35]
-                md:w-[190px]
+                hidden
+                h-8
+                w-px
+                bg-white/[0.08]
+                md:block
               "
-            >
-              Professional Focus
-            </div>
-
-            <div className="h-px bg-[#dfe5ed] md:h-8 md:w-px" />
+            />
 
             <p
               className="
                 text-[14px]
                 leading-6
-                text-[#52627d]
+                text-slate-400
                 md:text-[15px]
               "
             >
               Combining robotic programming, paint process knowledge,
-              commissioning, troubleshooting, and production optimization to
-              deliver reliable and efficient automotive manufacturing
+              commissioning, troubleshooting, and production optimization
+              to deliver reliable and efficient automotive manufacturing
               solutions.
             </p>
           </div>
         </motion.div>
+
       </div>
     </section>
   );
 };
+
+export default Expertise;
