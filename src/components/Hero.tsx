@@ -156,12 +156,8 @@ export function Hero() {
 
       {/* =========================================================
           HERO IMAGE
-          
+
           ONE IMAGE FOR ALL SCREEN SIZES.
-          
-          The photograph fills the hero.
-          We control its position instead of creating a
-          separate mobile image box.
       ========================================================= */}
 
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -174,25 +170,17 @@ export function Hero() {
           className="
             object-cover
 
-            /* MOBILE
-               Keep robot large and on the right.
-            */
             object-[72%_center]
 
-            /* LARGE PHONES */
             sm:object-[70%_center]
 
-            /* TABLET */
             md:object-[69%_center]
 
-            /* DESKTOP */
             lg:object-[center_center]
           "
         />
 
-        {/* =======================================================
-            IMAGE CONTRAST
-        ======================================================= */}
+        {/* IMAGE CONTRAST */}
 
         <div
           className={`
@@ -207,12 +195,7 @@ export function Hero() {
           `}
         />
 
-        {/* =======================================================
-            LEFT TEXT GRADIENT
-          
-            This is what creates the clean split:
-            dark/clean left → visible robot right.
-        ======================================================= */}
+        {/* LEFT TEXT GRADIENT */}
 
         <div
           className={`
@@ -239,9 +222,7 @@ export function Hero() {
           `}
         />
 
-        {/* =======================================================
-            MOBILE LEFT READABILITY
-        ======================================================= */}
+        {/* MOBILE LEFT READABILITY */}
 
         <div
           className={`
@@ -260,9 +241,7 @@ export function Hero() {
           `}
         />
 
-        {/* =======================================================
-            TOP FADE
-        ======================================================= */}
+        {/* TOP FADE */}
 
         <div
           className={`
@@ -279,9 +258,7 @@ export function Hero() {
           `}
         />
 
-        {/* =======================================================
-            BOTTOM FADE
-        ======================================================= */}
+        {/* BOTTOM FADE */}
 
         <div
           className={`
@@ -298,9 +275,7 @@ export function Hero() {
           `}
         />
 
-        {/* =======================================================
-            SUBTLE BLUE ATMOSPHERE
-        ======================================================= */}
+        {/* SUBTLE BLUE ATMOSPHERE */}
 
         <div
           className="
@@ -439,6 +414,7 @@ export function Hero() {
 
             {/* =================================================
                 DESCRIPTION
+                Slightly increased font size
             ================================================= */}
 
             <motion.p
@@ -459,11 +435,11 @@ export function Hero() {
                 w-full
                 max-w-[620px]
 
-                text-[12px]
-                leading-6
+                text-[14px]
+                leading-7
 
-                sm:text-[14px]
-                sm:leading-7
+                sm:text-[16px]
+                sm:leading-8
 
                 ${
                   isLight
