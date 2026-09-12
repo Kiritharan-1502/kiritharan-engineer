@@ -30,7 +30,6 @@ const renderBoldText = (
 
 export const Experience = () => {
   const { theme } = useTheme();
-
   const isLight = theme === "light";
 
   return (
@@ -38,23 +37,35 @@ export const Experience = () => {
       id="experience"
       className={`relative overflow-hidden py-16 transition-colors duration-500 sm:py-20 lg:py-28 ${
         isLight
-          ? "bg-[#f7f9fc]"
-          : "bg-[#080814]"
+          ? "bg-[#f7f9fc] text-[#101d35]"
+          : "bg-[#080814] text-white"
       }`}
     >
-      {/* Background Glow */}
+      {/* =========================================================
+          BACKGROUND AMBIENT LIGHT
+      ========================================================= */}
 
       <div
-        className={`pointer-events-none absolute left-1/2 top-32 h-[500px] w-[700px] -translate-x-1/2 rounded-full blur-[150px] ${
+        className={`pointer-events-none absolute left-1/2 top-20 h-[520px] w-[700px] -translate-x-1/2 rounded-full blur-[150px] ${
           isLight
-            ? "bg-blue-500/[0.03]"
-            : "bg-blue-600/[0.04]"
+            ? "bg-blue-500/[0.035]"
+            : "bg-blue-600/[0.055]"
+        }`}
+      />
+
+      <div
+        className={`pointer-events-none absolute right-[-220px] top-[45%] h-[420px] w-[420px] rounded-full blur-[140px] ${
+          isLight
+            ? "bg-blue-500/[0.025]"
+            : "bg-blue-500/[0.035]"
         }`}
       />
 
       <div className="relative mx-auto w-[92%] max-w-[1400px] sm:w-[89%]">
 
-        {/* HEADING */}
+        {/* =========================================================
+            HEADING
+        ========================================================= */}
 
         <div className="mb-12 sm:mb-16 lg:mb-20">
           <motion.div
@@ -103,7 +114,9 @@ export const Experience = () => {
           </p>
         </div>
 
-        {/* TIMELINE */}
+        {/* =========================================================
+            TIMELINE
+        ========================================================= */}
 
         <div className="relative">
 
@@ -124,22 +137,32 @@ export const Experience = () => {
               (experience, index) => (
                 <motion.article
                   key={experience.number}
-                  initial={false}
-                  animate={{
+                  initial={{
+                    opacity: 0,
+                    y: 24,
+                  }}
+                  whileInView={{
                     opacity: 1,
                     y: 0,
                   }}
+                  viewport={{
+                    once: true,
+                    amount: 0.12,
+                  }}
                   transition={{
-                    duration: 0.35,
-                    delay: index * 0.03,
+                    duration: 0.55,
+                    delay: index * 0.04,
                   }}
                   whileHover={{
-                    y: -4,
+                    y: -5,
+                    scale: 1.008,
                   }}
-                  className="relative pl-0 md:pl-[96px]"
+                  className="group relative pl-0 md:pl-[96px]"
                 >
 
-                  {/* TIMELINE NUMBER */}
+                  {/* =================================================
+                      TIMELINE NUMBER
+                  ================================================= */}
 
                   <div className="absolute left-0 top-[38px] hidden md:block">
                     <div
@@ -161,33 +184,64 @@ export const Experience = () => {
                     </div>
                   </div>
 
-                  {/* CARD */}
+                  {/* =================================================
+                      CARD
+                  ================================================= */}
 
-                  <div
-                    className={`relative overflow-hidden rounded-[18px] border transition-all duration-500 sm:rounded-[22px] ${
+                  <motion.div
+                    initial={{
+                      boxShadow: isLight
+                        ? "0 18px 60px rgba(16,29,53,.07)"
+                        : "0 18px 70px rgba(0,0,0,.28)",
+                    }}
+                    whileInView={{
+                      boxShadow: isLight
+                        ? "0 18px 60px rgba(37,99,235,.10)"
+                        : "0 0 34px rgba(59,130,246,.075), 0 18px 70px rgba(0,0,0,.28)",
+                    }}
+                    viewport={{
+                      once: true,
+                      amount: 0.18,
+                    }}
+                    transition={{
+                      duration: 0.8,
+                    }}
+                    className={`relative overflow-hidden rounded-[18px] border transition-colors duration-500 sm:rounded-[22px] ${
                       isLight
-                        ? "border-[#1768d5]/15 bg-white shadow-[0_18px_60px_rgba(16,29,53,.07)] hover:border-[#1768d5]/30"
-                        : "border-blue-500/[.23] bg-[#0d0d19] shadow-[0_18px_70px_rgba(0,0,0,.28)] hover:border-blue-400/[.38]"
+                        ? "border-[#1768d5]/15 bg-white hover:border-[#1768d5]/30"
+                        : "border-blue-500/[.23] bg-[#0d0d19] hover:border-blue-400/[.40]"
                     }`}
                   >
 
-                    {/* Top Highlight */}
+                    {/* Mobile scroll glow */}
+
+                    <div
+                      className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 ${
+                        isLight
+                          ? "bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,.055),transparent_55%)]"
+                          : "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.065),transparent_55%)]"
+                      }`}
+                    />
+
+                    {/* Top highlight */}
 
                     <div
                       className={`absolute left-0 right-0 top-0 h-px ${
                         isLight
-                          ? "bg-gradient-to-r from-transparent via-[#1768d5]/40 to-transparent"
-                          : "bg-gradient-to-r from-transparent via-blue-400/40 to-transparent"
+                          ? "bg-gradient-to-r from-transparent via-[#1768d5]/45 to-transparent"
+                          : "bg-gradient-to-r from-transparent via-blue-400/50 to-transparent"
                       }`}
                     />
 
-                    {/* Header */}
+                    {/* =================================================
+                        HEADER
+                    ================================================= */}
 
-                    <div className="px-5 pb-6 pt-6 sm:px-7 sm:pb-7 sm:pt-8 md:px-9 md:pt-9">
+                    <div className="relative z-10 px-5 pb-6 pt-6 sm:px-7 sm:pb-7 sm:pt-8 md:px-9 md:pt-9">
 
                       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
 
-                        {/* Role + Company */}
+                        {/* ROLE */}
 
                         <div className="flex items-start gap-4 sm:gap-5">
 
@@ -215,8 +269,6 @@ export const Experience = () => {
                                 {experience.role}
                               </h3>
 
-                              {/* CURRENT */}
-
                               {experience.current && (
                                 <span
                                   className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] ${
@@ -232,7 +284,6 @@ export const Experience = () => {
                                         : "bg-emerald-400"
                                     }`}
                                   />
-
                                   Current
                                 </span>
                               )}
@@ -248,10 +299,11 @@ export const Experience = () => {
                             >
                               {experience.company}
                             </p>
+
                           </div>
                         </div>
 
-                        {/* DATE / LOCATION */}
+                        {/* DATE */}
 
                         <div
                           className={`w-full rounded-[10px] border px-4 py-3 lg:w-auto lg:min-w-[235px] ${
@@ -261,19 +313,19 @@ export const Experience = () => {
                           }`}
                         >
                           <p
-                            className={`text-left font-mono text-[12px] font-semibold uppercase tracking-[0.08em] lg:text-right ${
+                            className={`font-mono text-[12px] font-semibold uppercase tracking-[0.08em] ${
                               isLight
                                 ? "text-[#506481]"
                                 : "text-slate-300"
                             }`}
                           >
                             {experience.current
-                              ? "2025"
+                              ? "Present"
                               : experience.period}
                           </p>
 
                           <p
-                            className={`mt-1 text-left font-mono text-[12px] lg:text-right ${
+                            className={`mt-1 font-mono text-[12px] ${
                               isLight
                                 ? "text-[#6f86a8]"
                                 : "text-slate-500"
@@ -282,10 +334,11 @@ export const Experience = () => {
                             {experience.location}
                           </p>
                         </div>
+
                       </div>
                     </div>
 
-                    {/* Divider */}
+                    {/* DIVIDER */}
 
                     <div
                       className={`mx-5 h-px sm:mx-7 md:mx-9 ${
@@ -295,9 +348,12 @@ export const Experience = () => {
                       }`}
                     />
 
-                    {/* RESPONSIBILITIES */}
+                    {/* =================================================
+                        RESPONSIBILITIES
+                    ================================================= */}
 
-                    <div className="px-5 py-6 sm:px-7 sm:py-8 md:px-9">
+                    <div className="relative z-10 px-5 py-6 sm:px-7 sm:py-8 md:px-9">
+
                       <ul className="space-y-4 sm:space-y-5">
 
                         {experience.responsibilities.map(
@@ -334,10 +390,11 @@ export const Experience = () => {
                             </li>
                           ),
                         )}
+
                       </ul>
                     </div>
 
-                    {/* Divider */}
+                    {/* DIVIDER */}
 
                     <div
                       className={`mx-5 h-px sm:mx-7 md:mx-9 ${
@@ -347,9 +404,12 @@ export const Experience = () => {
                       }`}
                     />
 
-                    {/* TECHNOLOGIES */}
+                    {/* =================================================
+                        TECHNOLOGIES
+                    ================================================= */}
 
-                    <div className="flex flex-wrap gap-2 px-5 py-5 sm:px-7 sm:py-6 md:px-9">
+                    <div className="relative z-10 flex flex-wrap gap-2 px-5 py-5 sm:px-7 sm:py-6 md:px-9">
+
                       {experience.technologies.map(
                         (technology) => (
                           <span
@@ -364,15 +424,20 @@ export const Experience = () => {
                           </span>
                         ),
                       )}
+
                     </div>
-                  </div>
+
+                  </motion.div>
                 </motion.article>
               ),
             )}
+
           </div>
         </div>
 
-        {/* FOOTER LINE */}
+        {/* =========================================================
+            FOOTER LINE
+        ========================================================= */}
 
         <div
           className={`mt-14 flex flex-col gap-5 border-t pt-7 sm:mt-20 sm:flex-row sm:items-center sm:justify-between ${
@@ -403,6 +468,7 @@ export const Experience = () => {
             3 Robotic Platforms
           </div>
         </div>
+
       </div>
     </section>
   );

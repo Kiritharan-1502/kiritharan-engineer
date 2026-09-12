@@ -115,7 +115,6 @@ export const Skills = () => {
     useState(0);
 
   const { theme } = useTheme();
-
   const isDark = theme === "dark";
 
   const activeSkills =
@@ -130,14 +129,38 @@ export const Skills = () => {
           : "bg-white text-[#101d35]"
       }`}
     >
+
       {/* =========================================================
-          BACKGROUND GLOW
+          AMBIENT LIGHT
       ========================================================= */}
 
-      <div
-        className={`pointer-events-none absolute right-[-180px] top-[100px] h-[500px] w-[500px] rounded-full blur-[150px] ${
+      <motion.div
+        initial={{
+          opacity: 0,
+          scale: 0.9,
+        }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.18,
+        }}
+        transition={{
+          duration: 0.9,
+        }}
+        className={`pointer-events-none absolute left-1/2 top-16 h-[420px] w-[650px] -translate-x-1/2 rounded-full blur-[150px] ${
           isDark
-            ? "bg-blue-600/[.045]"
+            ? "bg-blue-600/[.055]"
+            : "bg-blue-500/[.035]"
+        }`}
+      />
+
+      <div
+        className={`pointer-events-none absolute right-[-180px] top-[40%] h-[420px] w-[420px] rounded-full blur-[140px] ${
+          isDark
+            ? "bg-blue-600/[.035]"
             : "bg-blue-500/[.025]"
         }`}
       />
@@ -204,27 +227,37 @@ export const Skills = () => {
         </motion.div>
 
         {/* =========================================================
-            SKILLS AREA
+            SKILLS CONTENT
         ========================================================= */}
 
         <motion.div
-          initial={false}
-          animate={{
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
             opacity: 1,
             y: 0,
           }}
-          className="mt-10 grid items-start gap-8 lg:grid-cols-[.75fr_1.25fr] lg:gap-14"
+          viewport={{
+            once: true,
+            amount: 0.18,
+          }}
+          transition={{
+            duration: 0.65,
+          }}
+          className="relative mt-10 grid items-start gap-8 lg:grid-cols-[.75fr_1.25fr] lg:gap-14"
         >
 
           {/* =======================================================
-              LEFT — SKILL CATEGORIES
+              LEFT — CATEGORIES
           ======================================================= */}
 
           <div
-            className={`border-l ${
+            className={`overflow-hidden rounded-[16px] border ${
               isDark
-                ? "border-white/[.07]"
-                : "border-slate-200"
+                ? "border-blue-500/[.10] bg-white/[.012]"
+                : "border-slate-200 bg-slate-50/[.7]"
             }`}
           >
             {skillCategories.map(
@@ -248,16 +281,18 @@ export const Skills = () => {
                     }`}
                   >
 
-                    {/* Active blue line */}
+                    {/* Active line */}
+
                     <span
-                      className={`absolute left-[-2px] top-0 h-full w-[3px] bg-blue-500 transition-opacity duration-300 ${
+                      className={`absolute left-0 top-0 h-full w-[3px] bg-blue-500 transition-opacity duration-300 ${
                         active
                           ? "opacity-100"
                           : "opacity-0"
                       }`}
                     />
 
-                    {/* Category title */}
+                    {/* Category */}
+
                     <span
                       className={`text-[13px] font-medium leading-6 transition-colors duration-300 sm:text-[15px] ${
                         active
@@ -293,11 +328,11 @@ export const Skills = () => {
                         ${
                           active
                             ? isDark
-                              ? "border-blue-500/40 bg-blue-500/[.08] text-blue-400 opacity-100 shadow-[0_0_18px_rgba(59,130,246,0.10)]"
-                              : "border-blue-500/30 bg-blue-500/[.06] text-blue-500 opacity-100"
+                              ? "border-blue-500/40 bg-blue-500/[.08] text-blue-400 shadow-[0_0_20px_rgba(59,130,246,.12)]"
+                              : "border-blue-500/30 bg-blue-500/[.06] text-blue-500"
                             : isDark
-                              ? "border-white/[.06] bg-white/[.015] text-slate-500 opacity-40 group-hover:border-blue-500/30 group-hover:bg-blue-500/[.05] group-hover:text-blue-400 group-hover:opacity-100"
-                              : "border-slate-200 bg-slate-50 text-slate-400 opacity-40 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-500 group-hover:opacity-100"
+                              ? "border-white/[.06] bg-white/[.015] text-slate-500 opacity-50 group-hover:border-blue-500/30 group-hover:bg-blue-500/[.05] group-hover:text-blue-400 group-hover:opacity-100"
+                              : "border-slate-200 bg-slate-50 text-slate-400 opacity-50 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-500 group-hover:opacity-100"
                         }
                       `}
                     >
@@ -307,7 +342,6 @@ export const Skills = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-[19px] w-[19px] transition-transform duration-300 group-hover:scale-110"
                       >
-                        {/* Antenna */}
                         <path
                           d="M12 3.5V5.5"
                           stroke="currentColor"
@@ -315,7 +349,6 @@ export const Skills = () => {
                           strokeLinecap="round"
                         />
 
-                        {/* Antenna light */}
                         <circle
                           cx="12"
                           cy="2.5"
@@ -323,7 +356,6 @@ export const Skills = () => {
                           fill="currentColor"
                         />
 
-                        {/* Robot head */}
                         <rect
                           x="5"
                           y="6"
@@ -334,7 +366,6 @@ export const Skills = () => {
                           strokeWidth="1.5"
                         />
 
-                        {/* Left eye */}
                         <circle
                           cx="9"
                           cy="11"
@@ -342,7 +373,6 @@ export const Skills = () => {
                           fill="currentColor"
                         />
 
-                        {/* Right eye */}
                         <circle
                           cx="15"
                           cy="11"
@@ -350,7 +380,6 @@ export const Skills = () => {
                           fill="currentColor"
                         />
 
-                        {/* Mouth */}
                         <path
                           d="M9 14H15"
                           stroke="currentColor"
@@ -358,7 +387,6 @@ export const Skills = () => {
                           strokeLinecap="round"
                         />
 
-                        {/* Left side */}
                         <path
                           d="M3.5 10.5V13.5"
                           stroke="currentColor"
@@ -366,7 +394,6 @@ export const Skills = () => {
                           strokeLinecap="round"
                         />
 
-                        {/* Right side */}
                         <path
                           d="M20.5 10.5V13.5"
                           stroke="currentColor"
@@ -385,7 +412,8 @@ export const Skills = () => {
               RIGHT — ACTIVE SKILLS
           ======================================================= */}
 
-          <div className="pt-1">
+          <div className="relative min-w-0 pt-1">
+
             <AnimatePresence mode="wait">
 
               <motion.div
@@ -396,7 +424,7 @@ export const Skills = () => {
                 }
                 initial={{
                   opacity: 0,
-                  y: 8,
+                  y: 10,
                 }}
                 animate={{
                   opacity: 1,
@@ -411,7 +439,6 @@ export const Skills = () => {
                 }}
               >
 
-                {/* Category number */}
                 <div className="flex items-center gap-4">
                   <span className="text-[11px] font-medium uppercase tracking-[.25em] text-blue-400">
                     {String(
@@ -422,7 +449,6 @@ export const Skills = () => {
                   <span className="h-px w-8 bg-blue-500/40" />
                 </div>
 
-                {/* Active category title */}
                 <h3
                   className={`mt-4 text-[clamp(1.7rem,3vw,2.4rem)] font-semibold leading-tight tracking-[-.04em] ${
                     isDark
@@ -437,7 +463,6 @@ export const Skills = () => {
                   }
                 </h3>
 
-                {/* Skill pills */}
                 <div className="mt-5 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3">
                   {activeSkills.map(
                     (skill, index) => (
@@ -468,6 +493,11 @@ export const Skills = () => {
                           py-2
                           text-[13px]
                           text-blue-500
+                          transition-all
+                          duration-300
+                          hover:border-blue-500/40
+                          hover:bg-blue-500/[.08]
+                          hover:shadow-[0_0_18px_rgba(59,130,246,.08)]
                           sm:px-5
                           sm:py-2.5
                           sm:text-sm
@@ -478,6 +508,7 @@ export const Skills = () => {
                     ),
                   )}
                 </div>
+
               </motion.div>
 
             </AnimatePresence>
@@ -489,12 +520,22 @@ export const Skills = () => {
         ========================================================= */}
 
         <motion.div
-          initial={false}
-          animate={{
+          initial={{
+            opacity: 0,
+            y: 15,
+          }}
+          whileInView={{
             opacity: 1,
             y: 0,
           }}
-          className={`mt-10 border-t pt-7 sm:mt-12 sm:pt-8 ${
+          viewport={{
+            once: true,
+            amount: 0.18,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
+          className={`relative mt-10 border-t pt-7 sm:mt-12 sm:pt-8 ${
             isDark
               ? "border-white/[.07]"
               : "border-slate-200"
@@ -503,7 +544,6 @@ export const Skills = () => {
 
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
 
-            {/* Toolkit heading */}
             <div>
               <p className="text-[10px] font-medium uppercase tracking-[.28em] text-blue-500/80">
                 Software & Tools
@@ -520,12 +560,11 @@ export const Skills = () => {
               </h3>
             </div>
 
-            {/* Tools */}
             <div className="flex flex-wrap gap-2.5 md:justify-end">
               {tools.map((tool) => (
                 <span
                   key={tool}
-                  className={`rounded-full border px-4 py-2 text-[13px] sm:px-5 sm:py-2.5 sm:text-sm ${
+                  className={`rounded-full border px-4 py-2 text-[13px] transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500/30 sm:px-5 sm:py-2.5 sm:text-sm ${
                     isDark
                       ? "border-white/[.09] bg-white/[.025] text-slate-400"
                       : "border-slate-200 bg-slate-50 text-[#64748b]"
@@ -535,8 +574,10 @@ export const Skills = () => {
                 </span>
               ))}
             </div>
+
           </div>
         </motion.div>
+
       </div>
     </section>
   );

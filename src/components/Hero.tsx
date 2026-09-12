@@ -37,9 +37,9 @@ export function Hero() {
         }
         className={`
           absolute
-          right-5
+          right-4
           top-24
-          z-40
+          z-50
           flex
           h-11
           w-11
@@ -50,24 +50,22 @@ export function Hero() {
           backdrop-blur-md
           transition-all
           duration-300
+
           sm:right-7
           sm:h-12
           sm:w-12
+
           lg:right-6
           lg:top-24
 
           ${
             isLight
-              ? "border-slate-300 bg-white/75 text-slate-600 hover:border-blue-400 hover:text-blue-600"
-              : "border-white/[0.15] bg-white/[0.035] text-slate-300 hover:border-blue-400 hover:bg-blue-500/[0.06] hover:text-blue-400"
+              ? "border-slate-300 bg-white/80 text-slate-600 hover:border-blue-400 hover:text-blue-600"
+              : "border-white/[0.16] bg-white/[0.04] text-slate-300 hover:border-blue-400 hover:bg-blue-500/[0.07] hover:text-blue-400"
           }
         `}
       >
         {isLight ? (
-          /* =======================================================
-             SUN ICON
-          ======================================================= */
-
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -139,10 +137,6 @@ export function Hero() {
             />
           </svg>
         ) : (
-          /* =======================================================
-             MOON ICON
-          ======================================================= */
-
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -161,36 +155,24 @@ export function Hero() {
       </button>
 
       {/* =========================================================
-          HERO CONTAINER
+          HERO
       ========================================================= */}
 
       <div className="mx-auto w-full max-w-[1600px]">
-
-        {/* =======================================================
-            DESKTOP / LAPTOP
-
-            44% CONTENT
-            56% IMAGE
-
-            MOBILE
-
-            CONTENT
-            ↓
-            IMAGE
-        ======================================================= */}
-
         <div
           className="
             grid
+            w-full
             min-w-0
             grid-cols-1
+
             lg:min-h-screen
             lg:grid-cols-[44%_56%]
           "
         >
 
           {/* =====================================================
-              LEFT — CONTENT
+              CONTENT
           ===================================================== */}
 
           <div
@@ -199,33 +181,32 @@ export function Hero() {
               z-20
               flex
               min-w-0
+              w-full
               flex-col
               justify-center
+
               px-7
-              pb-12
               pt-28
+              pb-12
 
               sm:px-10
-              sm:pb-16
               sm:pt-32
+              sm:pb-16
 
               md:px-14
 
               lg:px-16
-              lg:pb-20
               lg:pt-32
+              lg:pb-20
 
               xl:px-20
             "
           >
 
-            {/* ===================================================
-                EYEBROW
-            =================================================== */}
+            {/* EYEBROW */}
 
             <div className="mb-7 flex items-center gap-4 sm:mb-8">
-
-              <span className="h-[2px] w-10 bg-blue-500 sm:w-12" />
+              <span className="h-[2px] w-10 shrink-0 bg-blue-500 sm:w-12" />
 
               <span
                 className={`
@@ -244,12 +225,9 @@ export function Hero() {
               >
                 Senior Engineer
               </span>
-
             </div>
 
-            {/* ===================================================
-                MAIN HEADING
-            =================================================== */}
+            {/* HEADING */}
 
             <motion.h1
               initial={{
@@ -264,8 +242,11 @@ export function Hero() {
                 duration: 0.7,
               }}
               className="
+                w-full
                 max-w-full
-                text-[3.1rem]
+                break-words
+
+                text-[3.05rem]
                 font-bold
                 leading-[0.94]
                 tracking-[-0.055em]
@@ -291,9 +272,7 @@ export function Hero() {
               Solutions.
             </motion.h1>
 
-            {/* ===================================================
-                DESCRIPTION
-            =================================================== */}
+            {/* DESCRIPTION */}
 
             <motion.p
               initial={{
@@ -310,6 +289,7 @@ export function Hero() {
               }}
               className={`
                 mt-8
+                w-full
                 max-w-[620px]
                 text-[12px]
                 leading-6
@@ -329,9 +309,7 @@ export function Hero() {
               engineering.
             </motion.p>
 
-            {/* ===================================================
-                BUTTONS
-            =================================================== */}
+            {/* BUTTONS */}
 
             <motion.div
               initial={{
@@ -349,6 +327,7 @@ export function Hero() {
               className="
                 mt-8
                 flex
+                w-full
                 flex-wrap
                 items-center
                 gap-x-5
@@ -356,8 +335,6 @@ export function Hero() {
                 sm:mt-9
               "
             >
-
-              {/* Explore */}
               <a
                 href="#experience"
                 className={`
@@ -386,16 +363,13 @@ export function Hero() {
                   }
                 `}
               >
-                <span>
-                  Explore My Work
-                </span>
+                <span>Explore My Work</span>
 
                 <span className="ml-7 text-blue-500 transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
               </a>
 
-              {/* Resume */}
               <a
                 href="/logos/Kiritharan.K%20CV.pdf"
                 target="_blank"
@@ -446,17 +420,15 @@ export function Hero() {
                   ↓
                 </span>
               </a>
-
             </motion.div>
 
-            {/* ===================================================
-                STATS
-            =================================================== */}
+            {/* STATS */}
 
             <div
               className={`
                 mt-9
                 grid
+                w-full
                 grid-cols-4
                 border-t
                 pt-5
@@ -471,17 +443,13 @@ export function Hero() {
                 }
               `}
             >
-
               {[
                 ["9+", "YEARS", "EXPERIENCE"],
                 ["3", "ROBOT", "PLATFORMS"],
                 ["10+", "KEY", "SKILLS"],
                 ["∞", "CONTINUOUS", "LEARNING"],
               ].map(
-                (
-                  [number, line1, line2],
-                  index,
-                ) => (
+                ([number, line1, line2], index) => (
                   <div
                     key={`${number}-${line1}`}
                     className={`
@@ -504,7 +472,6 @@ export function Hero() {
                       }
                     `}
                   >
-
                     <div className="text-[21px] font-semibold leading-none sm:text-[26px]">
                       {number}
                     </div>
@@ -534,35 +501,34 @@ export function Hero() {
                         {line2}
                       </span>
                     </div>
-
                   </div>
                 ),
               )}
-
             </div>
           </div>
 
           {/* =====================================================
-              RIGHT — ROBOT IMAGE
+              ROBOT IMAGE
           ===================================================== */}
 
           <div
             className="
               relative
               z-10
+              w-full
               min-w-0
               overflow-hidden
 
-              min-h-[360px]
+              h-[360px]
 
-              sm:min-h-[430px]
+              sm:h-[430px]
 
-              md:min-h-[500px]
+              md:h-[500px]
 
+              lg:h-auto
               lg:min-h-screen
             "
           >
-
             <Image
               src="/logos/robotics-hero.jpg"
               alt="Industrial robotic painting system"
@@ -575,15 +541,7 @@ export function Hero() {
               "
             />
 
-            {/* ===================================================
-                DESKTOP IMAGE → DARK BLEND
-
-                This is the important part.
-
-                It makes the robot image merge naturally
-                into the dark content instead of creating
-                a hard vertical line.
-            =================================================== */}
+            {/* MOBILE / DESKTOP IMAGE BLEND */}
 
             <div
               className={`
@@ -593,33 +551,30 @@ export function Hero() {
 
                 ${
                   isLight
-                    ? "bg-gradient-to-r from-white via-white/30 to-transparent"
-                    : "bg-gradient-to-r from-[#080814] via-[#080814]/45 to-transparent"
+                    ? "bg-gradient-to-b from-white/10 via-transparent to-white/15 lg:bg-gradient-to-r lg:from-white lg:via-white/25 lg:to-transparent"
+                    : "bg-gradient-to-b from-[#080814]/10 via-transparent to-[#080814]/45 lg:bg-gradient-to-r lg:from-[#080814] lg:via-[#080814]/45 lg:to-transparent"
                 }
-
-                lg:block
               `}
             />
 
-            {/* Additional subtle bottom fade */}
+            {/* EDGE LIGHT */}
+
             <div
               className={`
                 pointer-events-none
                 absolute
                 inset-x-0
                 bottom-0
-                h-32
+                h-24
 
                 ${
                   isLight
                     ? "bg-gradient-to-t from-white/20 to-transparent"
-                    : "bg-gradient-to-t from-[#080814]/40 to-transparent"
+                    : "bg-gradient-to-t from-[#080814]/45 to-transparent"
                 }
               `}
             />
-
           </div>
-
         </div>
       </div>
     </section>
