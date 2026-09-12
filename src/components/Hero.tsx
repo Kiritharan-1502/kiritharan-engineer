@@ -17,6 +17,7 @@ export function Hero() {
         w-full
         max-w-full
         overflow-hidden
+
         ${
           isLight
             ? "bg-white text-slate-950"
@@ -41,19 +42,24 @@ export function Hero() {
           right-4
           top-24
           z-50
+
           flex
           h-11
           w-11
           items-center
           justify-center
+
           rounded-full
           border
           backdrop-blur-md
+
           transition-all
           duration-300
+
           sm:right-7
           sm:h-12
           sm:w-12
+
           lg:right-6
           lg:top-24
 
@@ -65,6 +71,10 @@ export function Hero() {
         `}
       >
         {isLight ? (
+          /* =====================================================
+             SUN
+          ===================================================== */
+
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -136,6 +146,10 @@ export function Hero() {
             />
           </svg>
         ) : (
+          /* =====================================================
+             MOON
+          ===================================================== */
+
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -154,82 +168,195 @@ export function Hero() {
       </button>
 
       {/* =========================================================
-          ROBOT IMAGE
-          Same visual composition on desktop + mobile
+          DESKTOP ROBOT
+          
+          Desktop keeps the original large cinematic composition.
       ========================================================= */}
 
-      <div className="absolute inset-0 z-0">
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-y-0
+          right-0
+          hidden
+          w-[56%]
+          overflow-hidden
+
+          lg:block
+        "
+      >
         <Image
           src="/logos/robotics-hero.jpg"
           alt="Industrial robotic painting system"
           fill
           priority
-          sizes="100vw"
+          sizes="56vw"
           className="
             object-cover
-            object-[68%_center]
-            sm:object-[70%_center]
-            lg:object-center
+            object-center
           "
         />
 
-        {/* Main desktop-style left blend */}
+        {/* DESKTOP LEFT BLEND */}
+
         <div
           className={`
             absolute
             inset-0
-            ${
-              isLight
-                ? `
-                  bg-gradient-to-r
-                  from-white
-                  via-white/[0.96]
-                  via-[45%]
-                  to-white/[0.05]
-                `
-                : `
-                  bg-gradient-to-r
-                  from-[#080814]
-                  via-[#080814]/[0.96]
-                  via-[43%]
-                  to-[#080814]/[0.08]
-                `
-            }
-          `}
-        />
 
-        {/* Extra mobile readability layer */}
-        <div
-          className={`
-            absolute
-            inset-0
-            lg:hidden
             ${
               isLight
-                ? "bg-gradient-to-b from-white/20 via-transparent to-white/35"
-                : "bg-gradient-to-b from-[#080814]/20 via-transparent to-[#080814]/40"
-            }
-          `}
-        />
-
-        {/* Bottom fade */}
-        <div
-          className={`
-            absolute
-            inset-x-0
-            bottom-0
-            h-32
-            ${
-              isLight
-                ? "bg-gradient-to-t from-white/30 to-transparent"
-                : "bg-gradient-to-t from-[#080814]/55 to-transparent"
+                ? "bg-gradient-to-r from-white via-white/30 to-transparent"
+                : "bg-gradient-to-r from-[#080814] via-[#080814]/30 to-transparent"
             }
           `}
         />
       </div>
 
       {/* =========================================================
-          CONTENT
+          MOBILE ROBOT
+          
+          IMPORTANT:
+          We deliberately make the SOURCE IMAGE large and move it
+          left. This makes the ROBOT large while keeping the robot
+          itself inside the phone viewport.
+      ========================================================= */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          overflow-hidden
+
+          lg:hidden
+        "
+      >
+        <div
+          className="
+            absolute
+
+            /* large image */
+            h-auto
+            w-[820px]
+            max-w-none
+
+            /* position */
+            left-[-390px]
+            top-[155px]
+
+            /* tablet phones */
+            sm:left-[-330px]
+            sm:top-[145px]
+            sm:w-[900px]
+          "
+        >
+          <Image
+            src="/logos/robotics-hero.jpg"
+            alt="Industrial robotic painting system"
+            width={1536}
+            height={1024}
+            priority
+            className="
+              block
+              h-auto
+              w-full
+              max-w-none
+            "
+          />
+        </div>
+
+        {/* =====================================================
+            MOBILE DARK BLEND
+        ===================================================== */}
+
+        <div
+          className={`
+            absolute
+            inset-0
+
+            ${
+              isLight
+                ? `
+                  bg-gradient-to-r
+                  from-white
+                  via-white/[0.82]
+                  via-[45%]
+                  to-transparent
+                `
+                : `
+                  bg-gradient-to-r
+                  from-[#080814]
+                  via-[#080814]/[0.72]
+                  via-[43%]
+                  to-transparent
+                `
+            }
+          `}
+        />
+
+        {/* =====================================================
+            EXTRA MOBILE LEFT READABILITY
+        ===================================================== */}
+
+        <div
+          className={`
+            absolute
+            inset-y-0
+            left-0
+            w-[58%]
+
+            ${
+              isLight
+                ? "bg-gradient-to-r from-white via-white/90 to-transparent"
+                : "bg-gradient-to-r from-[#080814] via-[#080814]/85 to-transparent"
+            }
+          `}
+        />
+
+        {/* =====================================================
+            MOBILE TOP FADE
+        ===================================================== */}
+
+        <div
+          className={`
+            absolute
+            inset-x-0
+            top-0
+            h-40
+
+            ${
+              isLight
+                ? "bg-gradient-to-b from-white/35 to-transparent"
+                : "bg-gradient-to-b from-[#080814]/60 to-transparent"
+            }
+          `}
+        />
+
+        {/* =====================================================
+            MOBILE BOTTOM FADE
+        ===================================================== */}
+
+        <div
+          className={`
+            absolute
+            inset-x-0
+            bottom-0
+            h-32
+
+            ${
+              isLight
+                ? "bg-gradient-to-t from-white/35 to-transparent"
+                : "bg-gradient-to-t from-[#080814]/65 to-transparent"
+            }
+          `}
+        />
+      </div>
+
+      {/* =========================================================
+          HERO CONTENT
       ========================================================= */}
 
       <div
@@ -246,6 +373,7 @@ export function Hero() {
           className="
             w-full
             max-w-[1600px]
+
             px-6
             pb-10
             pt-32
@@ -264,7 +392,7 @@ export function Hero() {
           "
         >
           {/* =====================================================
-              CONTENT WIDTH
+              CONTENT
           ===================================================== */}
 
           <div
@@ -273,10 +401,13 @@ export function Hero() {
               max-w-[680px]
 
               lg:max-w-[650px]
+
               xl:max-w-[700px]
             "
           >
-            {/* EYEBROW */}
+            {/* =================================================
+                EYEBROW
+            ================================================= */}
 
             <div className="mb-7 flex items-center gap-4 sm:mb-8">
               <span className="h-[2px] w-10 shrink-0 bg-blue-500 sm:w-12" />
@@ -287,7 +418,9 @@ export function Hero() {
                   font-semibold
                   uppercase
                   tracking-[0.32em]
+
                   sm:text-[9px]
+
                   ${
                     isLight
                       ? "text-slate-500"
@@ -299,7 +432,9 @@ export function Hero() {
               </span>
             </div>
 
-            {/* HEADING */}
+            {/* =================================================
+                HEADING
+            ================================================= */}
 
             <motion.h1
               initial={{
@@ -316,12 +451,14 @@ export function Hero() {
               className="
                 max-w-full
                 break-words
+
                 text-[3.05rem]
                 font-bold
                 leading-[0.94]
                 tracking-[-0.055em]
 
                 sm:text-[4.4rem]
+
                 md:text-[5rem]
 
                 lg:max-w-[650px]
@@ -342,7 +479,9 @@ export function Hero() {
               Solutions.
             </motion.h1>
 
-            {/* DESCRIPTION */}
+            {/* =================================================
+                DESCRIPTION
+            ================================================= */}
 
             <motion.p
               initial={{
@@ -361,6 +500,7 @@ export function Hero() {
                 mt-8
                 w-full
                 max-w-[620px]
+
                 text-[12px]
                 leading-6
 
@@ -380,7 +520,9 @@ export function Hero() {
               engineering.
             </motion.p>
 
-            {/* BUTTONS */}
+            {/* =================================================
+                BUTTONS
+            ================================================= */}
 
             <motion.div
               initial={{
@@ -407,6 +549,8 @@ export function Hero() {
                 sm:mt-9
               "
             >
+              {/* EXPLORE MY WORK */}
+
               <a
                 href="#experience"
                 className={`
@@ -417,10 +561,12 @@ export function Hero() {
                   justify-between
                   border
                   px-5
+
                   text-[8px]
                   font-semibold
                   uppercase
                   tracking-[0.22em]
+
                   transition-all
                   duration-300
 
@@ -435,12 +581,16 @@ export function Hero() {
                   }
                 `}
               >
-                <span>Explore My Work</span>
+                <span>
+                  Explore My Work
+                </span>
 
                 <span className="ml-7 text-blue-500 transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
               </a>
+
+              {/* DOWNLOAD RESUME */}
 
               <a
                 href="/logos/Kiritharan.K%20CV.pdf"
@@ -450,10 +600,12 @@ export function Hero() {
                   group
                   inline-flex
                   items-center
+
                   text-[8px]
                   font-semibold
                   uppercase
                   tracking-[0.22em]
+
                   transition-colors
                   duration-300
 
@@ -480,6 +632,7 @@ export function Hero() {
                     rounded-full
                     border
                     text-[12px]
+
                     transition-all
                     duration-300
 
@@ -495,7 +648,9 @@ export function Hero() {
               </a>
             </motion.div>
 
-            {/* STATS */}
+            {/* =================================================
+                STATS
+            ================================================= */}
 
             <div
               className={`
@@ -529,6 +684,7 @@ export function Hero() {
                     className={`
                       min-w-0
                       px-2
+
                       sm:px-4
 
                       ${
