@@ -13,6 +13,7 @@ export function Hero() {
       id="home"
       className={`
         relative
+        min-h-[100svh]
         w-full
         max-w-full
         overflow-hidden
@@ -50,11 +51,9 @@ export function Hero() {
           backdrop-blur-md
           transition-all
           duration-300
-
           sm:right-7
           sm:h-12
           sm:w-12
-
           lg:right-6
           lg:top-24
 
@@ -155,54 +154,128 @@ export function Hero() {
       </button>
 
       {/* =========================================================
-          HERO
+          ROBOT IMAGE
+          Same visual composition on desktop + mobile
       ========================================================= */}
 
-      <div className="mx-auto w-full max-w-[1600px]">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/logos/robotics-hero.jpg"
+          alt="Industrial robotic painting system"
+          fill
+          priority
+          sizes="100vw"
+          className="
+            object-cover
+            object-[68%_center]
+            sm:object-[70%_center]
+            lg:object-center
+          "
+        />
+
+        {/* Main desktop-style left blend */}
+        <div
+          className={`
+            absolute
+            inset-0
+            ${
+              isLight
+                ? `
+                  bg-gradient-to-r
+                  from-white
+                  via-white/[0.96]
+                  via-[45%]
+                  to-white/[0.05]
+                `
+                : `
+                  bg-gradient-to-r
+                  from-[#080814]
+                  via-[#080814]/[0.96]
+                  via-[43%]
+                  to-[#080814]/[0.08]
+                `
+            }
+          `}
+        />
+
+        {/* Extra mobile readability layer */}
+        <div
+          className={`
+            absolute
+            inset-0
+            lg:hidden
+            ${
+              isLight
+                ? "bg-gradient-to-b from-white/20 via-transparent to-white/35"
+                : "bg-gradient-to-b from-[#080814]/20 via-transparent to-[#080814]/40"
+            }
+          `}
+        />
+
+        {/* Bottom fade */}
+        <div
+          className={`
+            absolute
+            inset-x-0
+            bottom-0
+            h-32
+            ${
+              isLight
+                ? "bg-gradient-to-t from-white/30 to-transparent"
+                : "bg-gradient-to-t from-[#080814]/55 to-transparent"
+            }
+          `}
+        />
+      </div>
+
+      {/* =========================================================
+          CONTENT
+      ========================================================= */}
+
+      <div
+        className="
+          relative
+          z-20
+          flex
+          min-h-[100svh]
+          w-full
+          items-center
+        "
+      >
         <div
           className="
-            grid
             w-full
-            min-w-0
-            grid-cols-1
+            max-w-[1600px]
+            px-6
+            pb-10
+            pt-32
 
-            lg:min-h-screen
-            lg:grid-cols-[44%_56%]
+            sm:px-10
+            sm:pb-14
+            sm:pt-36
+
+            md:px-14
+
+            lg:px-16
+            lg:pb-20
+            lg:pt-32
+
+            xl:px-20
           "
         >
-
           {/* =====================================================
-              CONTENT
+              CONTENT WIDTH
           ===================================================== */}
 
           <div
             className="
-              relative
-              z-20
-              flex
-              min-w-0
               w-full
-              flex-col
-              justify-center
+              max-w-[680px]
 
-              px-7
-              pt-28
-              pb-12
-
-              sm:px-10
-              sm:pt-32
-              sm:pb-16
-
-              md:px-14
-
-              lg:px-16
-              lg:pt-32
-              lg:pb-20
-
-              xl:px-20
+              lg:max-w-[650px]
+              xl:max-w-[700px]
             "
           >
-
             {/* EYEBROW */}
 
             <div className="mb-7 flex items-center gap-4 sm:mb-8">
@@ -215,7 +288,6 @@ export function Hero() {
                   uppercase
                   tracking-[0.32em]
                   sm:text-[9px]
-
                   ${
                     isLight
                       ? "text-slate-500"
@@ -242,10 +314,8 @@ export function Hero() {
                 duration: 0.7,
               }}
               className="
-                w-full
                 max-w-full
                 break-words
-
                 text-[3.05rem]
                 font-bold
                 leading-[0.94]
@@ -293,6 +363,7 @@ export function Hero() {
                 max-w-[620px]
                 text-[12px]
                 leading-6
+
                 sm:text-[14px]
                 sm:leading-7
 
@@ -332,6 +403,7 @@ export function Hero() {
                 items-center
                 gap-x-5
                 gap-y-4
+
                 sm:mt-9
               "
             >
@@ -384,6 +456,7 @@ export function Hero() {
                   tracking-[0.22em]
                   transition-colors
                   duration-300
+
                   sm:text-[9px]
 
                   ${
@@ -429,6 +502,7 @@ export function Hero() {
                 mt-9
                 grid
                 w-full
+                max-w-[510px]
                 grid-cols-4
                 border-t
                 pt-5
@@ -484,6 +558,7 @@ export function Hero() {
                         uppercase
                         tracking-[0.2em]
                         leading-[1.55]
+
                         sm:text-[7px]
 
                         ${
@@ -505,75 +580,6 @@ export function Hero() {
                 ),
               )}
             </div>
-          </div>
-
-          {/* =====================================================
-              ROBOT IMAGE
-          ===================================================== */}
-
-          <div
-            className="
-              relative
-              z-10
-              w-full
-              min-w-0
-              overflow-hidden
-
-              h-[360px]
-
-              sm:h-[430px]
-
-              md:h-[500px]
-
-              lg:h-auto
-              lg:min-h-screen
-            "
-          >
-            <Image
-              src="/logos/robotics-hero.jpg"
-              alt="Industrial robotic painting system"
-              fill
-              priority
-              sizes="(max-width: 1023px) 100vw, 56vw"
-              className="
-                object-cover
-                object-center
-              "
-            />
-
-            {/* MOBILE / DESKTOP IMAGE BLEND */}
-
-            <div
-              className={`
-                pointer-events-none
-                absolute
-                inset-0
-
-                ${
-                  isLight
-                    ? "bg-gradient-to-b from-white/10 via-transparent to-white/15 lg:bg-gradient-to-r lg:from-white lg:via-white/25 lg:to-transparent"
-                    : "bg-gradient-to-b from-[#080814]/10 via-transparent to-[#080814]/45 lg:bg-gradient-to-r lg:from-[#080814] lg:via-[#080814]/45 lg:to-transparent"
-                }
-              `}
-            />
-
-            {/* EDGE LIGHT */}
-
-            <div
-              className={`
-                pointer-events-none
-                absolute
-                inset-x-0
-                bottom-0
-                h-24
-
-                ${
-                  isLight
-                    ? "bg-gradient-to-t from-white/20 to-transparent"
-                    : "bg-gradient-to-t from-[#080814]/45 to-transparent"
-                }
-              `}
-            />
           </div>
         </div>
       </div>
