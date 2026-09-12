@@ -5,24 +5,6 @@ import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 import { trainings } from "@/data/trainings";
 
-const renderBoldText = (text: string) => {
-  const parts = text.split(/(\*\*.*?\*\*)/g);
-
-  return parts.map((part, index) =>
-    part.startsWith("**") &&
-    part.endsWith("**") ? (
-      <strong
-        key={index}
-        className="font-semibold text-current"
-      >
-        {part.slice(2, -2)}
-      </strong>
-    ) : (
-      <span key={index}>{part}</span>
-    ),
-  );
-};
-
 export function Trainings() {
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -30,74 +12,40 @@ export function Trainings() {
   return (
     <section
       id="training"
-      className={`relative overflow-hidden transition-colors duration-500 ${
+      className={`relative overflow-hidden ${
         isLight
           ? "bg-white text-slate-950"
           : "bg-[#080814] text-white"
       }`}
     >
-
-      {/* =========================================================
-          AMBIENT LIGHT
-      ========================================================= */}
-
-      <div
-        className={`pointer-events-none absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full blur-[150px] ${
-          isLight
-            ? "bg-blue-500/[.035]"
-            : "bg-blue-600/[.055]"
-        }`}
-      />
-
-      <div
-        className={`pointer-events-none absolute bottom-[15%] right-[-180px] h-[400px] w-[400px] rounded-full blur-[140px] ${
-          isLight
-            ? "bg-blue-500/[.025]"
-            : "bg-blue-600/[.035]"
-        }`}
-      />
-
       <div
         className="
-          mx-auto
-          w-full
-          max-w-[1400px]
-          px-7
-          py-20
-          sm:px-10
-          sm:py-24
+          mx-auto w-full max-w-[1400px]
+          px-7 py-20
+          sm:px-10 sm:py-24
           md:px-14
           lg:px-16
           xl:px-20
         "
       >
-
         {/* =========================================================
             HEADER
         ========================================================= */}
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 15,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.2,
-          }}
-          transition={{
-            duration: 0.6,
-          }}
-          className="max-w-[900px]"
-        >
-
+        <div className="max-w-[900px]">
           <motion.h2
-            initial="rest"
-            whileHover="hover"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
             className="
               group
               inline-block
@@ -114,31 +62,24 @@ export function Trainings() {
               Training.
             </span>
 
-            <motion.span
-              variants={{
-                rest: {
-                  width: "58px",
-                },
-                hover: {
-                  width: "100%",
-                },
-              }}
-              transition={{
-                duration: 0.55,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+            {/* Animated underline */}
+            <span
               className="
                 mt-3
                 block
                 h-[3px]
                 w-10
                 bg-blue-500
+                transition-all
+                duration-500
+                ease-out
+                group-hover:w-full
               "
             />
           </motion.h2>
 
           <p
-            className={`mt-5 max-w-[820px] text-[14px] leading-6 sm:text-[16px] sm:leading-7 ${
+            className={`mt-5 max-w-[820px] text-[13px] leading-6 sm:text-[1px] sm:leading-7 ${
               isLight
                 ? "text-slate-600"
                 : "text-slate-400"
@@ -150,8 +91,7 @@ export function Trainings() {
             troubleshooting, and automotive production
             systems.
           </p>
-
-        </motion.div>
+        </div>
 
         {/* =========================================================
             TIMELINE
@@ -159,8 +99,7 @@ export function Trainings() {
 
         <div className="relative mt-14 sm:mt-16">
 
-          {/* Timeline */}
-
+          {/* Timeline line */}
           <div
             className={`absolute bottom-0 left-[28px] top-0 w-px sm:left-[29px] ${
               isLight
@@ -171,439 +110,426 @@ export function Trainings() {
 
           <div className="space-y-12 sm:space-y-16">
 
-            {trainings.map(
-              (training, index) => (
-                <motion.article
-                  key={training.title}
-                  initial={{
-                    opacity: 0,
-                    y: 24,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.15,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    delay: index * 0.06,
-                  }}
-                  whileHover={{
-                    y: -5,
-                    scale: 1.006,
-                  }}
-                  className="group relative pl-[84px] sm:pl-[86px]"
-                >
+            {trainings.map((training, index) => (
+              <motion.article
+                key={training.title}
+                initial={{
+                  opacity: 0,
+                  y: 18,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.05,
+                }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.05,
+                }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.006,
+                  transition: {
+                    duration: 0.25,
+                    ease: "easeOut",
+                  },
+                }}
+                className="
+                  group
+                  relative
+                  pl-[84px]
+                  sm:pl-[86px]
+                "
+              >
+                {/* =================================================
+                    NUMBER CIRCLE
+                ================================================= */}
 
+                <div
+                  className={`
+                    absolute
+                    left-0
+                    top-0
+                    flex
+                    h-[58px]
+                    w-[58px]
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    text-[12px]
+                    font-medium
+                    transition-all
+                    duration-300
+
+                    ${
+                      isLight
+                        ? "border-blue-200 bg-white text-blue-500 group-hover:border-blue-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.10)]"
+                        : "border-blue-500/[0.30] bg-[#080814] text-blue-400 group-hover:border-blue-500/[0.50] group-hover:shadow-[0_0_22px_rgba(59,130,246,0.14)]"
+                    }
+                  `}
+                >
+                  {training.number}
+                </div>
+
+                {/* =================================================
+                    TRAINING CONTENT CARD
+                ================================================= */}
+
+                <div
+                  className={`
+                    relative
+                    overflow-hidden
+                    rounded-[4px]
+                    border
+                    px-5
+                    py-6
+                    sm:px-7
+                    sm:py-7
+                    lg:px-8
+                    transition-all
+                    duration-300
+
+                    ${
+                      isLight
+                        ? "border-slate-200 bg-white hover:border-blue-300 hover:shadow-[0_12px_45px_rgba(37,99,235,0.12)]"
+                        : "border-white/[0.08] bg-[#0b0d1a] hover:border-blue-500/[0.38] hover:bg-[#0d1020] hover:shadow-[0_0_35px_rgba(37,99,235,0.10)]"
+                    }
+                  `}
+                >
                   {/* =================================================
-                      NUMBER
+                      SUBTLE INNER HOVER GLOW
                   ================================================= */}
 
-                  <motion.div
-                    initial={{
-                      boxShadow: isLight
-                        ? "0 0 0 rgba(37,99,235,0)"
-                        : "0 0 0 rgba(59,130,246,0)",
-                    }}
-                    whileInView={{
-                      boxShadow: isLight
-                        ? "0 0 25px rgba(37,99,235,.12)"
-                        : "0 0 28px rgba(59,130,246,.10)",
-                    }}
-                    viewport={{
-                      once: true,
-                      amount: 0.2,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                    }}
+                  <div
                     className={`
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      rounded-[4px]
+                      opacity-0
+                      transition-opacity
+                      duration-300
+                      group-hover:opacity-100
+
+                      ${
+                        isLight
+                          ? "shadow-[inset_0_0_35px_rgba(37,99,235,0.045)]"
+                          : "shadow-[inset_0_0_40px_rgba(37,99,235,0.07)]"
+                      }
+                    `}
+                  />
+
+                  {/* =================================================
+                      BLUE TOP ACCENT
+                  ================================================= */}
+
+                  <div
+                    className="
                       absolute
                       left-0
                       top-0
-                      flex
-                      h-[58px]
-                      w-[58px]
-                      items-center
-                      justify-center
-                      rounded-full
-                      border
-                      text-[12px]
-                      font-medium
+                      h-[2px]
+                      w-16
+                      bg-blue-500
                       transition-all
                       duration-300
-
-                      ${
-                        isLight
-                          ? "border-blue-200 bg-white text-blue-500 group-hover:border-blue-300"
-                          : "border-blue-500/[0.30] bg-[#080814] text-blue-400 group-hover:border-blue-500/[0.50]"
-                      }
-                    `}
-                  >
-                    {training.number}
-                  </motion.div>
+                      group-hover:w-24
+                    "
+                  />
 
                   {/* =================================================
-                      CARD
+                      TITLE + LOCATION
                   ================================================= */}
 
-                  <motion.div
-                    initial={{
-                      boxShadow: isLight
-                        ? "0 12px 45px rgba(37,99,235,.06)"
-                        : "0 0 0 rgba(37,99,235,0)",
-                    }}
-                    whileInView={{
-                      boxShadow: isLight
-                        ? "0 12px 50px rgba(37,99,235,.13), 0 0 25px rgba(37,99,235,.04)"
-                        : "0 0 35px rgba(37,99,235,.085), 0 18px 60px rgba(0,0,0,.22)",
-                    }}
-                    viewport={{
-                      once: true,
-                      amount: 0.18,
-                    }}
-                    transition={{
-                      duration: 0.85,
-                    }}
-                    className={`
+                  <div
+                    className="
                       relative
-                      overflow-hidden
-                      rounded-[8px]
-                      border
-                      px-5
-                      py-6
-                      transition-colors
-                      duration-500
-                      sm:px-7
-                      sm:py-7
-                      lg:px-8
-
-                      ${
-                        isLight
-                          ? "border-slate-200 bg-white hover:border-blue-300"
-                          : "border-white/[0.08] bg-[#0b0d1a] hover:border-blue-500/[0.38] hover:bg-[#0d1020]"
-                      }
-                    `}
+                      z-10
+                      flex
+                      flex-col
+                      gap-4
+                      sm:flex-row
+                      sm:items-start
+                      sm:justify-between
+                    "
                   >
+                    <div className="min-w-0">
 
-                    {/* =================================================
-                        SCROLL GLOW
-                    ================================================= */}
+                      {/* Logo / Category */}
+                      <div className="mb-3 flex flex-wrap items-center gap-3">
 
+                        {training.logo && (
+                          <div className="relative h-6 w-20 shrink-0">
+                            <Image
+                              src={training.logo}
+                              alt={`${training.title} logo`}
+                              fill
+                              sizes="80px"
+                              className="object-contain object-left"
+                            />
+                          </div>
+                        )}
+
+                        <span
+                          className={`text-[8px] font-semibold uppercase tracking-[0.3em] ${
+                            isLight
+                              ? "text-slate-400"
+                              : "text-slate-500"
+                          }`}
+                        >
+                          {training.category}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3
+                        className="
+                          text-[21px]
+                          font-semibold
+                          leading-tight
+                          tracking-[-0.025em]
+                          transition-colors
+                          duration-300
+                          sm:text-[23px]
+                          md:text-[24px]
+                          group-hover:text-blue-500
+                        "
+                      >
+                        {training.title}
+                      </h3>
+                    </div>
+
+                    {/* Location */}
                     <div
                       className={`
-                        pointer-events-none
-                        absolute
-                        inset-0
-                        opacity-0
-                        transition-opacity
-                        duration-700
-                        group-hover:opacity-100
-                        group-focus-within:opacity-100
+                        inline-flex
+                        w-fit
+                        shrink-0
+                        items-center
+                        gap-2
+                        rounded-full
+                        border
+                        px-3
+                        py-2
+                        text-[10px]
+                        transition-all
+                        duration-300
 
                         ${
                           isLight
-                            ? "bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,.06),transparent_60%)]"
-                            : "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.075),transparent_60%)]"
+                            ? "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-blue-200 group-hover:text-blue-600"
+                            : "border-white/[0.07] bg-white/[0.025] text-slate-400 group-hover:border-blue-500/[0.20] group-hover:text-blue-400"
                         }
                       `}
-                    />
+                    >
+                      <span className="h-1 w-1 rounded-full bg-blue-500" />
 
-                    {/* TOP ACCENT */}
+                      {training.location}
+                    </div>
+                  </div>
 
-                    <motion.div
-                      initial={{
-                        width: "48px",
-                      }}
-                      whileInView={{
-                        width: "82px",
-                      }}
-                      viewport={{
-                        once: true,
-                        amount: 0.2,
-                      }}
-                      transition={{
-                        duration: 0.7,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      className="
-                        absolute
-                        left-0
-                        top-0
-                        h-[2px]
-                        bg-blue-500
-                      "
-                    />
+                  {/* =================================================
+                      DESCRIPTION
+                  ================================================= */}
 
+                  <p
+                    className={`
+                      relative
+                      z-10
+                      mt-5
+                      max-w-[900px]
+                      text-[13px]
+                      leading-6
+                      sm:text-[14px]
+                      sm:leading-7
+
+                      ${
+                        isLight
+                          ? "text-slate-600"
+                          : "text-slate-400"
+                      }
+                    `}
+                  >
+                    {training.description}
+                  </p>
+
+                  {/* =================================================
+                      LEARNINGS + FOCUS
+
+                      MOBILE:
+                      ONE COLUMN
+
+                      LAPTOP:
+                      TWO COLUMNS
+                  ================================================= */}
+
+                  <div
+                    className="
+                      relative
+                      z-10
+                      mt-7
+                      grid
+                      grid-cols-1
+                      gap-8
+                      lg:grid-cols-[minmax(0,1fr)_minmax(280px,1.1fr)]
+                      lg:gap-12
+                    "
+                  >
                     {/* =================================================
-                        TITLE + LOCATION
+                        KEY LEARNINGS
                     ================================================= */}
 
-                    <div
-                      className="
-                        relative
-                        z-10
-                        flex
-                        flex-col
-                        gap-4
-                        sm:flex-row
-                        sm:items-start
-                        sm:justify-between
-                      "
-                    >
-
-                      <div className="min-w-0">
-
-                        {/* LOGO */}
-
-                        <div className="mb-3 flex flex-wrap items-center gap-3">
-
-                          {training.logo && (
-                            <div className="relative h-6 w-20 shrink-0">
-                              <Image
-                                src={training.logo}
-                                alt={`${training.title} logo`}
-                                fill
-                                sizes="80px"
-                                className="object-contain object-left"
-                              />
-                            </div>
-                          )}
-
-                          <span
-                            className={`text-[8px] font-semibold uppercase tracking-[0.3em] ${
-                              isLight
-                                ? "text-slate-400"
-                                : "text-slate-500"
-                            }`}
-                          >
-                            {training.category}
-                          </span>
-
-                        </div>
-
-                        {/* TITLE */}
-
-                        <h3
-                          className="
-                            text-[21px]
-                            font-semibold
-                            leading-tight
-                            tracking-[-0.025em]
-                            transition-colors
-                            duration-300
-                            group-hover:text-blue-500
-                            sm:text-[23px]
-                            md:text-[24px]
-                          "
-                        >
-                          {training.title}
-                        </h3>
-
-                      </div>
-
-                      {/* LOCATION */}
+                    <div className="min-w-0">
 
                       <div
                         className={`
-                          inline-flex
-                          w-fit
-                          shrink-0
-                          items-center
-                          gap-2
-                          rounded-full
-                          border
-                          px-3
-                          py-2
-                          text-[10px]
-                          transition-all
-                          duration-300
+                          mb-4
+                          text-[8px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.28em]
 
                           ${
                             isLight
-                              ? "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-blue-200 group-hover:text-blue-600"
-                              : "border-white/[0.07] bg-white/[0.025] text-slate-400 group-hover:border-blue-500/[0.20] group-hover:text-blue-400"
+                              ? "text-slate-400"
+                              : "text-slate-500"
                           }
                         `}
                       >
-                        <span className="h-1 w-1 rounded-full bg-blue-500" />
-
-                        {training.location}
+                        Key Learnings
                       </div>
 
-                    </div>
+                      <ul className="space-y-4">
 
-                    {/* =================================================
-                        DESCRIPTION
-                    ================================================= */}
+                        {training.learned.map(
+                          (item) => (
+                            <li
+                              key={item}
+                              className={`
+                                relative
+                                pl-4
+                                text-[13px]
+                                leading-6
+                                sm:text-[14px]
+                                sm:leading-7
 
-                    <p
-                      className={`
-                        relative
-                        z-10
-                        mt-5
-                        max-w-[900px]
-                        text-[13px]
-                        leading-6
-                        sm:text-[14px]
-                        sm:leading-7
-
-                        ${
-                          isLight
-                            ? "text-slate-600"
-                            : "text-slate-400"
-                        }
-                      `}
-                    >
-                      {training.description}
-                    </p>
-
-                    {/* =================================================
-                        LEARNINGS + FOCUS
-                    ================================================= */}
-
-                    <div
-                      className="
-                        relative
-                        z-10
-                        mt-7
-                        grid
-                        grid-cols-1
-                        gap-8
-                        lg:grid-cols-[minmax(0,1fr)_minmax(280px,1.1fr)]
-                        lg:gap-12
-                      "
-                    >
-
-                      {/* KEY LEARNINGS */}
-
-                      <div className="min-w-0">
-
-                        <div
-                          className={`
-                            mb-4
-                            text-[8px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.28em]
-                            ${
-                              isLight
-                                ? "text-slate-400"
-                                : "text-slate-500"
-                            }
-                          `}
-                        >
-                          Key Learnings
-                        </div>
-
-                        <ul className="space-y-4">
-
-                          {training.learned.map(
-                            (item) => (
-                              <li
-                                key={item}
-                                className={`
-                                  relative
-                                  pl-4
-                                  text-[13px]
-                                  leading-6
-                                  sm:text-[14px]
-                                  sm:leading-7
-
-                                  ${
-                                    isLight
-                                      ? "text-slate-600"
-                                      : "text-slate-300"
-                                  }
-                                `}
-                              >
-                                <span
-                                  className="
-                                    absolute
-                                    left-0
-                                    top-[10px]
-                                    h-1
-                                    w-1
-                                    rounded-full
-                                    bg-blue-500
-                                  "
-                                />
-
-                                {renderBoldText(item)}
-                              </li>
-                            ),
-                          )}
-
-                        </ul>
-                      </div>
-
-                      {/* TRAINING FOCUS */}
-
-                      <div className="min-w-0">
-
-                        <div
-                          className={`
-                            mb-4
-                            text-[8px]
-                            font-semibold
-                            uppercase
-                            tracking-[0.28em]
-                            ${
-                              isLight
-                                ? "text-slate-400"
-                                : "text-slate-500"
-                            }
-                          `}
-                        >
-                          Training Focus
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-
-                          {training.focus.map(
-                            (item) => (
+                                ${
+                                  isLight
+                                    ? "text-slate-600"
+                                    : "text-slate-300"
+                                }
+                              `}
+                            >
                               <span
-                                key={item}
-                                className={`
-                                  rounded-[3px]
-                                  border
-                                  px-3
-                                  py-2
-                                  text-[9px]
-                                  font-medium
-                                  leading-none
-                                  transition-all
-                                  duration-300
-                                  hover:-translate-y-0.5
+                                className="
+                                  absolute
+                                  left-0
+                                  top-[10px]
+                                  h-1
+                                  w-1
+                                  rounded-full
+                                  bg-blue-500
+                                "
+                              />
 
-                                  ${
-                                    isLight
-                                      ? "border-blue-100 bg-blue-50 text-blue-600 hover:border-blue-200"
-                                      : "border-blue-500/[0.16] bg-blue-500/[0.06] text-blue-400 hover:border-blue-500/[0.30] hover:bg-blue-500/[0.09]"
-                                  }
-                                `}
-                              >
-                                {item}
-                              </span>
-                            ),
-                          )}
+                              {renderBoldText(item)}
+                            </li>
+                          ),
+                        )}
 
-                        </div>
-                      </div>
-
+                      </ul>
                     </div>
 
-                  </motion.div>
-                </motion.article>
-              ),
-            )}
+                    {/* =================================================
+                        TRAINING FOCUS
+                    ================================================= */}
+
+                    <div className="min-w-0">
+
+                      <div
+                        className={`
+                          mb-4
+                          text-[8px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.28em]
+
+                          ${
+                            isLight
+                              ? "text-slate-400"
+                              : "text-slate-500"
+                          }
+                        `}
+                      >
+                        Training Focus
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+
+                        {training.focus.map(
+                          (item) => (
+                            <span
+                              key={item}
+                              className={`
+                                rounded-[3px]
+                                border
+                                px-3
+                                py-2
+                                text-[9px]
+                                font-medium
+                                leading-none
+                                transition-all
+                                duration-300
+
+                                ${
+                                  isLight
+                                    ? "border-blue-100 bg-blue-50 text-blue-600 group-hover:border-blue-200"
+                                    : "border-blue-500/[0.16] bg-blue-500/[0.06] text-blue-400 group-hover:border-blue-500/[0.25]"
+                                }
+                              `}
+                            >
+                              {item}
+                            </span>
+                          ),
+                        )}
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
 
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* =========================================================
+   BOLD TEXT SUPPORT
+========================================================= */
+
+function renderBoldText(text: string) {
+  const parts = text.split("**");
+
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <strong
+        key={index}
+        className="font-semibold text-current"
+      >
+        {part}
+      </strong>
+    ) : (
+      <span key={index}>
+        {part}
+      </span>
+    ),
   );
 }

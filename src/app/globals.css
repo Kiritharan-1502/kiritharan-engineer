@@ -17,7 +17,7 @@
 
 /* =========================================================
    DARK THEME
-========================================================= */
+   ========================================================= */
 
 :root,
 [data-theme="dark"] {
@@ -38,19 +38,23 @@
   --blue: #3b82f6;
   --blue-light: #60a5fa;
 
-  --grid-line: rgba(59, 130, 246, 0.08);
+  /* Engineering background */
+  --tech-line: rgba(59, 130, 246, 0.095);
+  --tech-line-strong: rgba(59, 130, 246, 0.13);
+  --tech-dot: rgba(96, 165, 250, 0.18);
+  --tech-glow: rgba(37, 99, 235, 0.045);
 }
 
 /* =========================================================
    LIGHT THEME
-========================================================= */
+   ========================================================= */
 
 [data-theme="light"] {
   --background: #f7f9fc;
   --foreground: #101d35;
 
   --surface: #ffffff;
-  --surface-soft: rgba(255, 255, 255, 0.85);
+  --surface-soft: rgba(255, 255, 255, 0.88);
   --surface-hover: #ffffff;
 
   --text-primary: #101d35;
@@ -63,12 +67,16 @@
   --blue: #1768d5;
   --blue-light: #3b82f6;
 
-  --grid-line: rgba(23, 104, 213, 0.07);
+  /* Engineering background */
+  --tech-line: rgba(23, 104, 213, 0.075);
+  --tech-line-strong: rgba(23, 104, 213, 0.11);
+  --tech-dot: rgba(23, 104, 213, 0.14);
+  --tech-glow: rgba(37, 99, 235, 0.035);
 }
 
 /* =========================================================
    GLOBAL RESET
-========================================================= */
+   ========================================================= */
 
 html {
   scroll-behavior: smooth;
@@ -80,6 +88,8 @@ html {
 html,
 body {
   margin: 0;
+  padding: 0;
+
   min-height: 100%;
   width: 100%;
   max-width: 100%;
@@ -88,6 +98,7 @@ body {
 body {
   background: var(--background);
   color: var(--foreground);
+
   font-family: var(--font-sans);
 
   overflow-x: hidden;
@@ -101,6 +112,10 @@ body {
     background-color 0.4s ease,
     color 0.4s ease;
 }
+
+/* =========================================================
+   BOX SIZING
+   ========================================================= */
 
 *,
 *::before,
@@ -124,7 +139,7 @@ textarea {
 
 /* =========================================================
    MOBILE SAFE AREA
-========================================================= */
+   ========================================================= */
 
 @supports (padding: env(safe-area-inset-top)) {
   body {
@@ -135,7 +150,7 @@ textarea {
 
 /* =========================================================
    THEME UTILITIES
-========================================================= */
+   ========================================================= */
 
 @utility portfolio-bg {
   background-color: var(--background);
@@ -167,18 +182,20 @@ textarea {
 
 /* =========================================================
    GLASS
-========================================================= */
+   ========================================================= */
 
 @utility glass {
   background-color: var(--surface-soft);
+
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+
   border: 1px solid var(--border);
 }
 
 /* =========================================================
    LENIS
-========================================================= */
+   ========================================================= */
 
 html.lenis,
 html.lenis body {
@@ -203,172 +220,237 @@ html.lenis body {
 
 /* =========================================================
    SAFE TRANSITIONS
-   Do not create animations here.
-========================================================= */
+   ========================================================= */
 
 a,
 button,
 input,
-textarea,
-section,
-[class*="border"] {
-  transition-property:
-    background-color,
-    border-color,
-    color,
-    box-shadow,
-    opacity,
-    transform;
-
-  transition-duration: 350ms;
-  transition-timing-function: ease;
+textarea {
+  transition:
+    background-color 350ms ease,
+    border-color 350ms ease,
+    color 350ms ease,
+    box-shadow 350ms ease,
+    opacity 350ms ease,
+    transform 350ms ease;
 }
 
 /* =========================================================
-   SECTION SCROLL POSITION
-========================================================= */
+   SECTION FOUNDATION
+   =========================================================
+   
+   IMPORTANT:
+   These rules prevent the global stylesheet from creating
+   full-screen section gaps.
+   ========================================================= */
 
 section {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
   scroll-margin-top: 86px;
 }
 
 /* =========================================================
-   ENGINEERING AMBIENT LIGHT
-   BOTH DARK + LIGHT MODE
-========================================================= */
+   CONTENT SECTIONS
+   ========================================================= */
 
+#about,
 #experience,
 #training,
 #skills,
 #education,
 #contact {
   position: relative;
+
+  width: 100%;
+
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+
+  overflow: hidden;
+
   isolation: isolate;
-}
-
-/* =========================================================
-   PRIMARY BLUE ATMOSPHERE
-========================================================= */
-
-#experience::before,
-#training::before,
-#skills::before,
-#education::before,
-#contact::before {
-  content: "";
-
-  position: absolute;
-
-  top: -70px;
-  left: 50%;
-
-  width: min(900px, 90vw);
-  height: 480px;
-
-  transform: translateX(-50%);
-
-  pointer-events: none;
-
-  z-index: -1;
-
-  border-radius: 999px;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(59, 130, 246, 0.065) 0%,
-      rgba(59, 130, 246, 0.035) 32%,
-      rgba(59, 130, 246, 0.012) 55%,
-      transparent 75%
-    );
-
-  filter: blur(55px);
 
   /*
-   * Static atmosphere only.
-   * No animation.
-   * No shake.
-   * No movement.
+   * Engineering background is directly attached
+   * to the section.
    */
+  background-color: var(--background);
+
+  background-image:
+    /* Vertical engineering lines */
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 24.85%,
+      var(--tech-line) 25%,
+      transparent 25.15%,
+      transparent 49.85%,
+      var(--tech-line) 50%,
+      transparent 50.15%,
+      transparent 74.85%,
+      var(--tech-line) 75%,
+      transparent 75.15%,
+      transparent 100%
+    ),
+
+    /* Horizontal engineering lines */
+    linear-gradient(
+      0deg,
+      transparent 0%,
+      transparent 24.85%,
+      var(--tech-line) 25%,
+      transparent 25.15%,
+      transparent 49.85%,
+      var(--tech-line) 50%,
+      transparent 50.15%,
+      transparent 74.85%,
+      var(--tech-line) 75%,
+      transparent 75.15%,
+      transparent 100%
+    ),
+
+    /* Diagonal circuit trace */
+    linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 44%,
+      var(--tech-line-strong) 44.08%,
+      var(--tech-line-strong) 44.18%,
+      transparent 44.25%,
+      transparent 100%
+    ),
+
+    /* Opposite circuit trace */
+    linear-gradient(
+      315deg,
+      transparent 0%,
+      transparent 67%,
+      var(--tech-line) 67.08%,
+      var(--tech-line) 67.16%,
+      transparent 67.23%,
+      transparent 100%
+    ),
+
+    /* Very soft blue atmosphere */
+    radial-gradient(
+      circle at 20% 20%,
+      var(--tech-glow),
+      transparent 30%
+    ),
+
+    radial-gradient(
+      circle at 80% 70%,
+      var(--tech-glow),
+      transparent 32%
+    );
+
+  background-size:
+    100% 100%,
+    100% 100%,
+    950px 950px,
+    1100px 1100px,
+    100% 100%,
+    100% 100%;
+
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    100% 100%,
+    0 0,
+    0 0;
+
+  background-repeat: no-repeat;
 }
 
 /* =========================================================
-   SECONDARY BLUE ATMOSPHERE
-========================================================= */
+   SLOW ENGINEERING MOTION
+   ========================================================= */
 
-#experience::after,
-#training::after,
-#skills::after,
-#education::after,
-#contact::after {
-  content: "";
+@keyframes engineeringBackgroundMove {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      100% 100%,
+      0 0,
+      0 0;
+  }
 
-  position: absolute;
+  50% {
+    background-position:
+      0 0,
+      0 0,
+      28px 18px,
+      calc(100% - 18px) calc(100% - 12px),
+      0 0,
+      0 0;
+  }
 
-  right: -160px;
-  bottom: 12%;
+  100% {
+    background-position:
+      0 0,
+      0 0,
+      56px 36px,
+      calc(100% - 36px) calc(100% - 24px),
+      0 0,
+      0 0;
+  }
+}
 
-  width: 420px;
-  height: 420px;
+/*
+ * Very slow movement.
+ * The engineering lines should feel alive,
+ * not like a distracting animation.
+ */
 
-  pointer-events: none;
-
-  z-index: -1;
-
-  border-radius: 999px;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(37, 99, 235, 0.035) 0%,
-      rgba(37, 99, 235, 0.018) 35%,
-      transparent 72%
-    );
-
-  filter: blur(70px);
+#about,
+#experience,
+#training,
+#skills,
+#education,
+#contact {
+  animation:
+    engineeringBackgroundMove 32s linear infinite alternate;
 }
 
 /* =========================================================
-   LIGHT MODE BLUE ATMOSPHERE
-   Slightly brighter so it is visible on white.
-========================================================= */
+   IMPORTANT DIRECT CHILD RESET
+   =========================================================
+   
+   If a section wrapper accidentally has min-h-screen,
+   this prevents it from producing giant blank spaces.
+   ========================================================= */
 
-[data-theme="light"] #experience::before,
-[data-theme="light"] #training::before,
-[data-theme="light"] #skills::before,
-[data-theme="light"] #education::before,
-[data-theme="light"] #contact::before {
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(37, 99, 235, 0.105) 0%,
-      rgba(37, 99, 235, 0.060) 28%,
-      rgba(59, 130, 246, 0.025) 52%,
-      transparent 75%
-    );
-
-  filter: blur(55px);
-}
-
-[data-theme="light"] #experience::after,
-[data-theme="light"] #training::after,
-[data-theme="light"] #skills::after,
-[data-theme="light"] #education::after,
-[data-theme="light"] #contact::after {
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(37, 99, 235, 0.055) 0%,
-      rgba(59, 130, 246, 0.025) 35%,
-      transparent 72%
-    );
-
-  filter: blur(70px);
+#about > div,
+#experience > div,
+#training > div,
+#skills > div,
+#education > div,
+#contact > div {
+  min-height: 0 !important;
+  height: auto !important;
 }
 
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
 @media (max-width: 767px) {
   html {
@@ -380,15 +462,70 @@ section {
   }
 
   section {
-    position: relative;
-
     width: 100%;
     max-width: 100vw;
+
+    height: auto !important;
+    min-height: 0 !important;
 
     overflow-x: clip;
 
     scroll-margin-top: 68px;
   }
+
+  #about,
+  #experience,
+  #training,
+  #skills,
+  #education,
+  #contact {
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+
+    /*
+     * Smaller technical pattern on phones.
+     */
+    background-size:
+      100% 100%,
+      100% 100%,
+      650px 650px,
+      750px 750px,
+      100% 100%,
+      100% 100%;
+  }
+
+  /*
+   * Keep section wrappers from creating
+   * accidental viewport-sized gaps.
+   */
+
+  #about > div,
+  #experience > div,
+  #training > div,
+  #skills > div,
+  #education > div,
+  #contact > div {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  /*
+   * Prevent horizontal expansion.
+   */
+
+  section > div,
+  section > main,
+  section > article {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /*
+   * Text wrapping.
+   */
 
   p,
   li,
@@ -400,125 +537,43 @@ section {
     overflow-wrap: break-word;
   }
 
-  section > div,
-  section > main,
-  section > article {
-    max-width: 100%;
-    min-width: 0;
-  }
+  /*
+   * Images stay inside the phone viewport.
+   */
 
   img {
     max-width: 100%;
+    height: auto;
   }
 }
 
 /* =========================================================
-   MOBILE — AMBIENT LIGHT
-========================================================= */
+   MOBILE ENGINEERING VISIBILITY
+   ========================================================= */
 
 @media (max-width: 767px) {
-  #experience::before,
-  #training::before,
-  #skills::before,
-  #education::before,
-  #contact::before {
-    top: -55px;
-    left: 50%;
-
-    width: 120vw;
-    height: 360px;
-
-    transform: translateX(-50%);
-
-    filter: blur(48px);
+  [data-theme="dark"] #about,
+  [data-theme="dark"] #experience,
+  [data-theme="dark"] #training,
+  [data-theme="dark"] #skills,
+  [data-theme="dark"] #education,
+  [data-theme="dark"] #contact {
+    background-color: #080814;
   }
 
-  #experience::after,
-  #training::after,
-  #skills::after,
-  #education::after,
-  #contact::after {
-    right: -180px;
-    bottom: 12%;
-
-    width: 340px;
-    height: 340px;
-
-    filter: blur(60px);
-  }
-
-  /* Light mode gets a little more visible blue atmosphere */
-
-  [data-theme="light"] #experience::before,
-  [data-theme="light"] #training::before,
-  [data-theme="light"] #skills::before,
-  [data-theme="light"] #education::before,
-  [data-theme="light"] #contact::before {
-    background:
-      radial-gradient(
-        ellipse at center,
-        rgba(37, 99, 235, 0.12) 0%,
-        rgba(37, 99, 235, 0.065) 30%,
-        rgba(59, 130, 246, 0.025) 55%,
-        transparent 76%
-      );
-
-    filter: blur(48px);
-  }
-
-  [data-theme="light"] #experience::after,
-  [data-theme="light"] #training::after,
-  [data-theme="light"] #skills::after,
-  [data-theme="light"] #education::after,
-  [data-theme="light"] #contact::after {
-    background:
-      radial-gradient(
-        circle,
-        rgba(37, 99, 235, 0.065) 0%,
-        rgba(59, 130, 246, 0.025) 38%,
-        transparent 72%
-      );
-
-    filter: blur(60px);
-  }
-}
-
-/* =========================================================
-   DARK MODE — MOBILE CARD ATMOSPHERE
-========================================================= */
-
-@media (max-width: 767px) {
-  [data-theme="dark"] #experience article,
-  [data-theme="dark"] #training article {
-    box-shadow:
-      0 0 0 1px rgba(59, 130, 246, 0.035),
-      0 18px 45px rgba(0, 0, 0, 0.16);
-  }
-
-  [data-theme="dark"] #experience [class*="border-white"],
-  [data-theme="dark"] #training [class*="border-white"] {
-    border-color: rgba(96, 165, 250, 0.12);
-  }
-}
-
-/* =========================================================
-   LIGHT MODE — MOBILE CARD EDGE
-========================================================= */
-
-@media (max-width: 767px) {
-  [data-theme="light"] #experience article,
-  [data-theme="light"] #training article {
-    box-shadow:
-      0 0 0 1px rgba(37, 99, 235, 0.045),
-      0 18px 45px rgba(37, 99, 235, 0.055);
+  [data-theme="light"] #about,
+  [data-theme="light"] #experience,
+  [data-theme="light"] #training,
+  [data-theme="light"] #skills,
+  [data-theme="light"] #education,
+  [data-theme="light"] #contact {
+    background-color: #f7f9fc;
   }
 }
 
 /* =========================================================
    TOUCH DEVICES
-   NO SHAKE
-   NO ROTATION
-========================================================= */
+   ========================================================= */
 
 @media (hover: none) and (pointer: coarse) {
   #experience article,
@@ -535,23 +590,33 @@ section {
     transform: scale(0.997);
 
     box-shadow:
-      0 0 0 1px rgba(59, 130, 246, 0.10),
-      0 0 28px rgba(59, 130, 246, 0.06),
-      0 20px 50px rgba(0, 0, 0, 0.16);
+      0 0 0 1px rgba(59, 130, 246, 0.12),
+      0 0 28px rgba(59, 130, 246, 0.07),
+      0 20px 50px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* =========================================================
+   DARK MOBILE CARDS
+   ========================================================= */
+
+@media (max-width: 767px) {
+  [data-theme="dark"] #experience article,
+  [data-theme="dark"] #training article {
+    box-shadow:
+      0 0 0 1px rgba(59, 130, 246, 0.025),
+      0 18px 45px rgba(0, 0, 0, 0.16);
   }
 
-  [data-theme="light"] #experience article:active,
-  [data-theme="light"] #training article:active {
-    box-shadow:
-      0 0 0 1px rgba(37, 99, 235, 0.10),
-      0 0 28px rgba(37, 99, 235, 0.07),
-      0 20px 50px rgba(37, 99, 235, 0.08);
+  [data-theme="dark"] #experience [class*="border-white"],
+  [data-theme="dark"] #training [class*="border-white"] {
+    border-color: rgba(96, 165, 250, 0.12);
   }
 }
 
 /* =========================================================
    TABLET
-========================================================= */
+   ========================================================= */
 
 @media (min-width: 768px) and (max-width: 1023px) {
   html {
@@ -559,72 +624,97 @@ section {
   }
 
   section {
+    height: auto !important;
+    min-height: 0 !important;
+
     scroll-margin-top: 78px;
   }
 
-  #experience::before,
-  #training::before,
-  #skills::before,
-  #education::before,
-  #contact::before {
-    top: -90px;
-    left: 50%;
-
-    width: 620px;
-    height: 320px;
-
-    transform: translateX(-50%);
-
-    filter: blur(55px);
+  #about,
+  #experience,
+  #training,
+  #skills,
+  #education,
+  #contact {
+    height: auto !important;
+    min-height: 0 !important;
   }
 
-  #experience::after,
-  #training::after,
-  #skills::after,
-  #education::after,
-  #contact::after {
-    right: -180px;
-    bottom: 12%;
-
-    width: 380px;
-    height: 380px;
-
-    filter: blur(65px);
+  #about > div,
+  #experience > div,
+  #training > div,
+  #skills > div,
+  #education > div,
+  #contact > div {
+    min-height: 0 !important;
+    height: auto !important;
   }
 
-  [data-theme="light"] #experience::before,
-  [data-theme="light"] #training::before,
-  [data-theme="light"] #skills::before,
-  [data-theme="light"] #education::before,
-  [data-theme="light"] #contact::before {
-    background:
-      radial-gradient(
-        ellipse at center,
-        rgba(37, 99, 235, 0.095),
-        rgba(59, 130, 246, 0.025) 50%,
-        transparent 75%
-      );
+  #about,
+  #experience,
+  #training,
+  #skills,
+  #education,
+  #contact {
+    background-size:
+      100% 100%,
+      100% 100%,
+      800px 800px,
+      900px 900px,
+      100% 100%,
+      100% 100%;
   }
 }
 
 /* =========================================================
    DESKTOP
-   Keep clean.
-========================================================= */
+   ========================================================= */
 
 @media (min-width: 1024px) {
   section {
+    height: auto !important;
+    min-height: 0 !important;
+
     scroll-margin-top: 86px;
+  }
+
+  #about,
+  #experience,
+  #training,
+  #skills,
+  #education,
+  #contact {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  #about > div,
+  #experience > div,
+  #training > div,
+  #skills > div,
+  #education > div,
+  #contact > div {
+    min-height: 0 !important;
+    height: auto !important;
   }
 }
 
 /* =========================================================
-   REDUCE MOTION
-========================================================= */
+   REDUCED MOTION
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  #about,
+  #experience,
+  #training,
+  #skills,
+  #education,
+  #contact {
+    animation: none !important;
   }
 
   *,

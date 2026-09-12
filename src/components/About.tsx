@@ -8,16 +8,12 @@ export const About = () => {
 
   const isDark = theme === "dark";
 
-  const paragraphClass = `text-[16px] leading-[1.8] sm:text-[17px] lg:text-[19px] ${
-    isDark
-      ? "text-slate-300"
-      : "text-[#506481]"
-  }`;
+  const paragraphClass = `text-[15px] leading-[1.75] sm:text-[17px] lg:text-[16px] ${
+  isDark ? "text-slate-300" : "text-[#506481]"
+}`;
 
   const strongClass = `font-semibold ${
-    isDark
-      ? "text-white"
-      : "text-[#101d35]"
+    isDark ? "text-white" : "text-[#101d35]"
   }`;
 
   return (
@@ -26,37 +22,29 @@ export const About = () => {
       className={`relative w-full overflow-hidden transition-colors duration-500 ${
         isDark
           ? "bg-[#080814] text-white"
-          : "bg-white text-[#101d35]"
+          : "bg-[#f7f9fc] text-[#101d35]"
       }`}
     >
-      {/* Background Glow */}
+      {/* =====================================================
+          CONTENT
+          Engineering background is handled by globals.css.
+          No AnimatedBackground here.
+      ===================================================== */}
 
-      <div
-        className={`pointer-events-none absolute left-1/2 top-20 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[140px] ${
-          isDark
-            ? "bg-blue-600/[0.035]"
-            : "bg-blue-500/[0.025]"
-        }`}
-      />
+      <div className="relative z-10 mx-auto w-full max-w-[1550px] px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-28 xl:px-[7.8vw]">
 
-      <div className="relative mx-auto w-full max-w-[1550px] px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-28 xl:px-[7.8vw]">
-
-        {/* HEADING */}
+        {/* ===================================================
+            ABOUT HEADING
+            Short underline → full heading width on hover
+        =================================================== */}
 
         <motion.div
           initial="rest"
           whileHover="hover"
-          className="inline-flex cursor-default flex-col items-start"
+          animate="rest"
+          className="group inline-flex cursor-default flex-col items-start"
         >
-          <motion.h2
-            variants={{
-              rest: {
-                y: 0,
-              },
-              hover: {
-                y: -1,
-              },
-            }}
+          <h2
             className={`text-[clamp(2.8rem,4.2vw,4rem)] font-bold leading-[0.95] tracking-[-0.05em] ${
               isDark
                 ? "text-white"
@@ -67,7 +55,12 @@ export const About = () => {
             <span className="text-[#3b82f6]">
               Me.
             </span>
-          </motion.h2>
+          </h2>
+
+          {/* =================================================
+              NOTION-STYLE UNDERLINE
+              Starts short, expands toward full heading width
+          ================================================= */}
 
           <motion.div
             variants={{
@@ -79,20 +72,34 @@ export const About = () => {
               },
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.55,
               ease: [0.22, 1, 0.36, 1],
             }}
             className="mt-5 h-[4px] rounded-full bg-[#3b82f6]"
           />
         </motion.div>
 
-        {/* ABOUT CONTENT */}
+        {/* ===================================================
+            ABOUT CONTENT
+        =================================================== */}
 
         <motion.div
-          initial={false}
-          animate={{
+          initial={{
+            opacity: 0,
+            y: 24,
+          }}
+          whileInView={{
             opacity: 1,
             y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          transition={{
+            duration: 0.75,
+            delay: 0.15,
+            ease: [0.22, 1, 0.36, 1],
           }}
           className={`mt-10 max-w-[1240px] border-l-2 pl-5 sm:mt-12 sm:pl-8 lg:pl-12 ${
             isDark
@@ -100,6 +107,10 @@ export const About = () => {
               : "border-[#075baa]/15"
           }`}
         >
+          {/* =================================================
+              PARAGRAPH 1
+          ================================================= */}
+
           <p className={paragraphClass}>
             I am a{" "}
             <strong className={strongClass}>
@@ -123,9 +134,11 @@ export const About = () => {
             support, and continuous improvement.
           </p>
 
-          <p
-            className={`${paragraphClass} mt-6`}
-          >
+          {/* =================================================
+              PARAGRAPH 2
+          ================================================= */}
+
+          <p className={`${paragraphClass} mt-6`}>
             My technical expertise covers automotive paint
             applications including{" "}
             <strong className={strongClass}>
@@ -145,9 +158,11 @@ export const About = () => {
             .
           </p>
 
-          <p
-            className={`${paragraphClass} mt-6`}
-          >
+          {/* =================================================
+              PARAGRAPH 3
+          ================================================= */}
+
+          <p className={`${paragraphClass} mt-6`}>
             I am proficient in{" "}
             <strong className={strongClass}>
               DXQ 3D OnSite, RobotStudio, Robview, FFFTP,
@@ -166,9 +181,11 @@ export const About = () => {
             .
           </p>
 
-          <p
-            className={`${paragraphClass} mt-6`}
-          >
+          {/* =================================================
+              PARAGRAPH 4
+          ================================================= */}
+
+          <p className={`${paragraphClass} mt-6`}>
             I have successfully supported{" "}
             <strong className={strongClass}>
               new model launches, line modifications,
@@ -180,9 +197,11 @@ export const About = () => {
             automation teams, suppliers, and vendors.
           </p>
 
-          <p
-            className={`${paragraphClass} mt-6`}
-          >
+          {/* =================================================
+              PARAGRAPH 5
+          ================================================= */}
+
+          <p className={`${paragraphClass} mt-6`}>
             I have also completed{" "}
             <strong className={strongClass}>
               ABB and Yaskawa robot training in India and
