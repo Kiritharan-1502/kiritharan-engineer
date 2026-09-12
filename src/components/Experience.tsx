@@ -146,12 +146,13 @@ export const Experience = () => {
                     y: 0,
                   }}
                   viewport={{
-                    once: true,
-                    amount: 0.12,
+                    once: false,
+                    amount: 0.18,
                   }}
                   transition={{
-                    duration: 0.55,
+                    duration: 0.65,
                     delay: index * 0.04,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
                   whileHover={{
                     y: -5,
@@ -186,25 +187,46 @@ export const Experience = () => {
 
                   {/* =================================================
                       CARD
+                      MOBILE:
+                      SCROLL → LIFT + BLUE GLOW
+                      DESKTOP:
+                      SCROLL + CURSOR → LIFT + BLUE GLOW
                   ================================================= */}
 
                   <motion.div
                     initial={{
+                      opacity: 0.82,
+                      y: 24,
+                      scale: 0.985,
+                      filter: "brightness(0.97)",
                       boxShadow: isLight
                         ? "0 18px 60px rgba(16,29,53,.07)"
                         : "0 18px 70px rgba(0,0,0,.28)",
                     }}
                     whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                      filter: "brightness(1)",
                       boxShadow: isLight
-                        ? "0 18px 60px rgba(37,99,235,.10)"
-                        : "0 0 34px rgba(59,130,246,.075), 0 18px 70px rgba(0,0,0,.28)",
+                        ? "0 18px 60px rgba(37,99,235,.13), 0 0 28px rgba(59,130,246,.08)"
+                        : "0 0 38px rgba(59,130,246,.12), 0 18px 70px rgba(0,0,0,.30)",
+                    }}
+                    whileHover={{
+                      y: -5,
+                      scale: 1.008,
+                      filter: "brightness(1.035)",
+                      boxShadow: isLight
+                        ? "0 20px 65px rgba(37,99,235,.16), 0 0 38px rgba(59,130,246,.12)"
+                        : "0 0 46px rgba(59,130,246,.17), 0 20px 75px rgba(0,0,0,.32)",
                     }}
                     viewport={{
-                      once: true,
+                      once: false,
                       amount: 0.18,
                     }}
                     transition={{
-                      duration: 0.8,
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
                     className={`relative overflow-hidden rounded-[18px] border transition-colors duration-500 sm:rounded-[22px] ${
                       isLight
@@ -213,13 +235,36 @@ export const Experience = () => {
                     }`}
                   >
 
-                    {/* Mobile scroll glow */}
+                    {/* Mobile + Desktop inner glow */}
 
                     <div
                       className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 ${
                         isLight
-                          ? "bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,.055),transparent_55%)]"
-                          : "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.065),transparent_55%)]"
+                          ? "bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,.07),transparent_55%)]"
+                          : "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.09),transparent_55%)]"
+                      }`}
+                    />
+
+                    {/* Scroll glow layer */}
+
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                      }}
+                      viewport={{
+                        once: false,
+                        amount: 0.18,
+                      }}
+                      transition={{
+                        duration: 0.8,
+                      }}
+                      className={`pointer-events-none absolute inset-0 ${
+                        isLight
+                          ? "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.035),transparent_60%)]"
+                          : "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.045),transparent_60%)]"
                       }`}
                     />
 
@@ -240,8 +285,6 @@ export const Experience = () => {
                     <div className="relative z-10 px-5 pb-6 pt-6 sm:px-7 sm:pb-7 sm:pt-8 md:px-9 md:pt-9">
 
                       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-
-                        {/* ROLE */}
 
                         <div className="flex items-start gap-4 sm:gap-5">
 
@@ -303,8 +346,6 @@ export const Experience = () => {
                           </div>
                         </div>
 
-                        {/* DATE */}
-
                         <div
                           className={`w-full rounded-[10px] border px-4 py-3 lg:w-auto lg:min-w-[235px] ${
                             isLight
@@ -338,8 +379,6 @@ export const Experience = () => {
                       </div>
                     </div>
 
-                    {/* DIVIDER */}
-
                     <div
                       className={`mx-5 h-px sm:mx-7 md:mx-9 ${
                         isLight
@@ -348,9 +387,7 @@ export const Experience = () => {
                       }`}
                     />
 
-                    {/* =================================================
-                        RESPONSIBILITIES
-                    ================================================= */}
+                    {/* RESPONSIBILITIES */}
 
                     <div className="relative z-10 px-5 py-6 sm:px-7 sm:py-8 md:px-9">
 
@@ -394,8 +431,6 @@ export const Experience = () => {
                       </ul>
                     </div>
 
-                    {/* DIVIDER */}
-
                     <div
                       className={`mx-5 h-px sm:mx-7 md:mx-9 ${
                         isLight
@@ -404,9 +439,7 @@ export const Experience = () => {
                       }`}
                     />
 
-                    {/* =================================================
-                        TECHNOLOGIES
-                    ================================================= */}
+                    {/* TECHNOLOGIES */}
 
                     <div className="relative z-10 flex flex-wrap gap-2 px-5 py-5 sm:px-7 sm:py-6 md:px-9">
 
@@ -434,10 +467,6 @@ export const Experience = () => {
 
           </div>
         </div>
-
-        {/* =========================================================
-            FOOTER LINE
-        ========================================================= */}
 
         <div
           className={`mt-14 flex flex-col gap-5 border-t pt-7 sm:mt-20 sm:flex-row sm:items-center sm:justify-between ${

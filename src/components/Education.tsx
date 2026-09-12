@@ -121,27 +121,75 @@ export const Education = () => {
             {education.map((item) => (
               <motion.article
                 key={item.number}
-                initial={false}
-                animate={{
+                initial={{
+                  opacity: 0.82,
+                  y: 24,
+                  scale: 0.985,
+                  filter: "brightness(0.97)",
+                  boxShadow: isDark
+                    ? "0 0 0 rgba(59,130,246,0)"
+                    : "0 0 0 rgba(59,130,246,0)",
+                }}
+                whileInView={{
                   opacity: 1,
-                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  filter: "brightness(1)",
+                  boxShadow: isDark
+                    ? "0 0 32px rgba(59,130,246,.10), 0 18px 60px rgba(0,0,0,.20)"
+                    : "0 12px 45px rgba(59,130,246,.11), 0 0 28px rgba(59,130,246,.06)",
                 }}
                 whileHover={{
                   y: -4,
                   scale: 1.005,
+                  filter: "brightness(1.03)",
+                  boxShadow: isDark
+                    ? "0 0 42px rgba(59,130,246,.15), 0 20px 65px rgba(0,0,0,.24)"
+                    : "0 15px 52px rgba(59,130,246,.15), 0 0 34px rgba(59,130,246,.09)",
                 }}
-                className={`group relative overflow-hidden rounded-2xl border px-5 py-6 transition-all duration-300 md:ml-[55px] md:px-8 md:py-8 ${
+                viewport={{
+                  once: false,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.7,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={`group relative overflow-hidden rounded-2xl border px-5 py-6 md:ml-[55px] md:px-8 md:py-8 ${
                   isDark
                     ? "border-white/[.08] bg-white/[.02] hover:border-blue-500/30"
                     : "border-slate-200 bg-slate-50/70 hover:border-blue-500/30"
                 }`}
               >
 
+                {/* Scroll glow */}
+
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                  }}
+                  viewport={{
+                    once: false,
+                    amount: 0.2,
+                  }}
+                  transition={{
+                    duration: 0.8,
+                  }}
+                  className={`pointer-events-none absolute inset-0 ${
+                    isDark
+                      ? "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.055),transparent_58%)]"
+                      : "bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.035),transparent_58%)]"
+                  }`}
+                />
+
                 {/* Top glow */}
 
                 <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 
                   {/* LEFT */}
 
@@ -149,9 +197,17 @@ export const Education = () => {
 
                     {/* NUMBER */}
 
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-blue-500/25 bg-blue-500/[.07] text-sm font-semibold text-blue-500 sm:h-12 sm:w-12">
+                    <motion.div
+                      whileHover={{
+                        scale: 1.05,
+                      }}
+                      transition={{
+                        duration: 0.25,
+                      }}
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-blue-500/25 bg-blue-500/[.07] text-sm font-semibold text-blue-500 sm:h-12 sm:w-12"
+                    >
                       {item.number}
-                    </div>
+                    </motion.div>
 
                     {/* DETAILS */}
 
@@ -244,7 +300,7 @@ export const Education = () => {
 
                 {/* Bottom accent */}
 
-                <div className="mt-6 h-px w-16 bg-blue-500/40 transition-all duration-300 group-hover:w-24 group-hover:bg-blue-400" />
+                <div className="relative z-10 mt-6 h-px w-16 bg-blue-500/40 transition-all duration-300 group-hover:w-24 group-hover:bg-blue-400" />
               </motion.article>
             ))}
           </div>

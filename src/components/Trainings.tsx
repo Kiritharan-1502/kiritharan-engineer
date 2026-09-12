@@ -62,7 +62,6 @@ export function Trainings() {
               Training.
             </span>
 
-            {/* Animated underline */}
             <span
               className="
                 mt-3
@@ -99,7 +98,6 @@ export function Trainings() {
 
         <div className="relative mt-14 sm:mt-16">
 
-          {/* Timeline line */}
           <div
             className={`absolute bottom-0 left-[28px] top-0 w-px sm:left-[29px] ${
               isLight
@@ -115,19 +113,22 @@ export function Trainings() {
                 key={training.title}
                 initial={{
                   opacity: 0,
-                  y: 18,
+                  y: 22,
+                  scale: 0.985,
                 }}
                 whileInView={{
                   opacity: 1,
                   y: 0,
+                  scale: 1,
                 }}
                 viewport={{
-                  once: true,
-                  amount: 0.05,
+                  once: false,
+                  amount: 0.18,
                 }}
                 transition={{
-                  duration: 0.55,
+                  duration: 0.65,
                   delay: index * 0.05,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
                 whileHover={{
                   y: -4,
@@ -148,7 +149,26 @@ export function Trainings() {
                     NUMBER CIRCLE
                 ================================================= */}
 
-                <div
+                <motion.div
+                  initial={{
+                    scale: 0.94,
+                    opacity: 0.7,
+                  }}
+                  whileInView={{
+                    scale: 1,
+                    opacity: 1,
+                  }}
+                  whileHover={{
+                    scale: 1.04,
+                  }}
+                  viewport={{
+                    once: false,
+                    amount: 0.18,
+                  }}
+                  transition={{
+                    duration: 0.55,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className={`
                     absolute
                     left-0
@@ -167,19 +187,59 @@ export function Trainings() {
 
                     ${
                       isLight
-                        ? "border-blue-200 bg-white text-blue-500 group-hover:border-blue-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.10)]"
-                        : "border-blue-500/[0.30] bg-[#080814] text-blue-400 group-hover:border-blue-500/[0.50] group-hover:shadow-[0_0_22px_rgba(59,130,246,0.14)]"
+                        ? "border-blue-200 bg-white text-blue-500 group-hover:border-blue-300 group-hover:shadow-[0_0_24px_rgba(37,99,235,0.16)]"
+                        : "border-blue-500/[0.30] bg-[#080814] text-blue-400 group-hover:border-blue-500/[0.50] group-hover:shadow-[0_0_26px_rgba(59,130,246,0.20)]"
                     }
                   `}
                 >
                   {training.number}
-                </div>
+                </motion.div>
 
                 {/* =================================================
                     TRAINING CONTENT CARD
+
+                    MOBILE:
+                    SCROLL → BLUE GLOW
+
+                    DESKTOP:
+                    SCROLL + HOVER → BLUE GLOW
                 ================================================= */}
 
-                <div
+                <motion.div
+                  initial={{
+                    opacity: 0.82,
+                    y: 20,
+                    scale: 0.985,
+                    filter: "brightness(0.97)",
+                    boxShadow: isLight
+                      ? "0 12px 45px rgba(37,99,235,0)"
+                      : "0 0 0 rgba(37,99,235,0)",
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: "brightness(1)",
+                    boxShadow: isLight
+                      ? "0 12px 45px rgba(37,99,235,0.13), 0 0 28px rgba(59,130,246,0.07)"
+                      : "0 0 38px rgba(37,99,235,0.12), 0 18px 55px rgba(0,0,0,0.24)",
+                  }}
+                  whileHover={{
+                    y: -4,
+                    scale: 1.006,
+                    filter: "brightness(1.035)",
+                    boxShadow: isLight
+                      ? "0 16px 52px rgba(37,99,235,0.16), 0 0 38px rgba(59,130,246,0.11)"
+                      : "0 0 46px rgba(37,99,235,0.17), 0 18px 60px rgba(0,0,0,0.28)",
+                  }}
+                  viewport={{
+                    once: false,
+                    amount: 0.18,
+                  }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className={`
                     relative
                     overflow-hidden
@@ -190,19 +250,44 @@ export function Trainings() {
                     sm:px-7
                     sm:py-7
                     lg:px-8
-                    transition-all
-                    duration-300
 
                     ${
                       isLight
-                        ? "border-slate-200 bg-white hover:border-blue-300 hover:shadow-[0_12px_45px_rgba(37,99,235,0.12)]"
-                        : "border-white/[0.08] bg-[#0b0d1a] hover:border-blue-500/[0.38] hover:bg-[#0d1020] hover:shadow-[0_0_35px_rgba(37,99,235,0.10)]"
+                        ? "border-slate-200 bg-white hover:border-blue-300"
+                        : "border-white/[0.08] bg-[#0b0d1a] hover:border-blue-500/[0.38] hover:bg-[#0d1020]"
                     }
                   `}
                 >
-                  {/* =================================================
-                      SUBTLE INNER HOVER GLOW
-                  ================================================= */}
+
+                  {/* SCROLL GLOW */}
+
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                    }}
+                    viewport={{
+                      once: false,
+                      amount: 0.18,
+                    }}
+                    transition={{
+                      duration: 0.8,
+                    }}
+                    className={`
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      ${
+                        isLight
+                          ? "bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,.045),transparent_58%)]"
+                          : "bg-[radial-gradient(circle_at_50%_0%,rgba(37,99,235,.065),transparent_58%)]"
+                      }
+                    `}
+                  />
+
+                  {/* HOVER GLOW */}
 
                   <div
                     className={`
@@ -212,20 +297,18 @@ export function Trainings() {
                       rounded-[4px]
                       opacity-0
                       transition-opacity
-                      duration-300
+                      duration-500
                       group-hover:opacity-100
 
                       ${
                         isLight
-                          ? "shadow-[inset_0_0_35px_rgba(37,99,235,0.045)]"
-                          : "shadow-[inset_0_0_40px_rgba(37,99,235,0.07)]"
+                          ? "shadow-[inset_0_0_38px_rgba(37,99,235,0.055)]"
+                          : "shadow-[inset_0_0_45px_rgba(37,99,235,0.08)]"
                       }
                     `}
                   />
 
-                  {/* =================================================
-                      BLUE TOP ACCENT
-                  ================================================= */}
+                  {/* BLUE TOP ACCENT */}
 
                   <div
                     className="
@@ -241,9 +324,7 @@ export function Trainings() {
                     "
                   />
 
-                  {/* =================================================
-                      TITLE + LOCATION
-                  ================================================= */}
+                  {/* TITLE + LOCATION */}
 
                   <div
                     className="
@@ -259,7 +340,6 @@ export function Trainings() {
                   >
                     <div className="min-w-0">
 
-                      {/* Logo / Category */}
                       <div className="mb-3 flex flex-wrap items-center gap-3">
 
                         {training.logo && (
@@ -285,7 +365,6 @@ export function Trainings() {
                         </span>
                       </div>
 
-                      {/* Title */}
                       <h3
                         className="
                           text-[21px]
@@ -303,7 +382,6 @@ export function Trainings() {
                       </h3>
                     </div>
 
-                    {/* Location */}
                     <div
                       className={`
                         inline-flex
@@ -332,9 +410,7 @@ export function Trainings() {
                     </div>
                   </div>
 
-                  {/* =================================================
-                      DESCRIPTION
-                  ================================================= */}
+                  {/* DESCRIPTION */}
 
                   <p
                     className={`
@@ -357,15 +433,7 @@ export function Trainings() {
                     {training.description}
                   </p>
 
-                  {/* =================================================
-                      LEARNINGS + FOCUS
-
-                      MOBILE:
-                      ONE COLUMN
-
-                      LAPTOP:
-                      TWO COLUMNS
-                  ================================================= */}
+                  {/* LEARNINGS + FOCUS */}
 
                   <div
                     className="
@@ -379,9 +447,8 @@ export function Trainings() {
                       lg:gap-12
                     "
                   >
-                    {/* =================================================
-                        KEY LEARNINGS
-                    ================================================= */}
+
+                    {/* KEY LEARNINGS */}
 
                     <div className="min-w-0">
 
@@ -444,9 +511,7 @@ export function Trainings() {
                       </ul>
                     </div>
 
-                    {/* =================================================
-                        TRAINING FOCUS
-                    ================================================= */}
+                    {/* TRAINING FOCUS */}
 
                     <div className="min-w-0">
 
@@ -499,8 +564,9 @@ export function Trainings() {
 
                       </div>
                     </div>
+
                   </div>
-                </div>
+                </motion.div>
               </motion.article>
             ))}
 

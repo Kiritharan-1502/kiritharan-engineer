@@ -240,11 +240,12 @@ export const Skills = () => {
             y: 0,
           }}
           viewport={{
-            once: true,
+            once: false,
             amount: 0.18,
           }}
           transition={{
             duration: 0.65,
+            ease: [0.22, 1, 0.36, 1],
           }}
           className="relative mt-10 grid items-start gap-8 lg:grid-cols-[.75fr_1.25fr] lg:gap-14"
         >
@@ -253,7 +254,41 @@ export const Skills = () => {
               LEFT — CATEGORIES
           ======================================================= */}
 
-          <div
+          <motion.div
+            initial={{
+              opacity: 0.82,
+              y: 20,
+              scale: 0.985,
+              filter: "brightness(0.97)",
+              boxShadow: isDark
+                ? "0 0 0 rgba(59,130,246,0)"
+                : "0 0 0 rgba(59,130,246,0)",
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: "brightness(1)",
+              boxShadow: isDark
+                ? "0 0 34px rgba(59,130,246,.10)"
+                : "0 12px 45px rgba(59,130,246,.10), 0 0 28px rgba(59,130,246,.06)",
+            }}
+            whileHover={{
+              y: -3,
+              scale: 1.004,
+              filter: "brightness(1.025)",
+              boxShadow: isDark
+                ? "0 0 42px rgba(59,130,246,.15)"
+                : "0 14px 50px rgba(59,130,246,.14), 0 0 34px rgba(59,130,246,.08)",
+            }}
+            viewport={{
+              once: false,
+              amount: 0.18,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className={`overflow-hidden rounded-[16px] border ${
               isDark
                 ? "border-blue-500/[.10] bg-white/[.012]"
@@ -281,8 +316,6 @@ export const Skills = () => {
                     }`}
                   >
 
-                    {/* Active line */}
-
                     <span
                       className={`absolute left-0 top-0 h-full w-[3px] bg-blue-500 transition-opacity duration-300 ${
                         active
@@ -290,8 +323,6 @@ export const Skills = () => {
                           : "opacity-0"
                       }`}
                     />
-
-                    {/* Category */}
 
                     <span
                       className={`text-[13px] font-medium leading-6 transition-colors duration-300 sm:text-[15px] ${
@@ -307,9 +338,7 @@ export const Skills = () => {
                       {category.title}
                     </span>
 
-                    {/* =================================================
-                        ROBOT ICON
-                    ================================================= */}
+                    {/* ROBOT ICON */}
 
                     <span
                       className={`
@@ -406,13 +435,39 @@ export const Skills = () => {
                 );
               },
             )}
-          </div>
+          </motion.div>
 
           {/* =======================================================
               RIGHT — ACTIVE SKILLS
           ======================================================= */}
 
-          <div className="relative min-w-0 pt-1">
+          <motion.div
+            initial={{
+              opacity: 0.82,
+              y: 20,
+              scale: 0.985,
+              filter: "brightness(0.97)",
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: "brightness(1)",
+            }}
+            whileHover={{
+              y: -2,
+              filter: "brightness(1.02)",
+            }}
+            viewport={{
+              once: false,
+              amount: 0.18,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="relative min-w-0 rounded-[16px]"
+          >
 
             <AnimatePresence mode="wait">
 
@@ -471,18 +526,33 @@ export const Skills = () => {
                         initial={{
                           opacity: 0,
                           y: 8,
+                          scale: 0.97,
                         }}
                         animate={{
                           opacity: 1,
                           y: 0,
+                          scale: 1,
                         }}
-                        transition={{
-                          duration: 0.25,
-                          delay:
-                            index * 0.03,
+                        whileInView={{
+                          boxShadow: isDark
+                            ? "0 0 18px rgba(59,130,246,.06)"
+                            : "0 0 18px rgba(59,130,246,.05)",
                         }}
                         whileHover={{
                           y: -2,
+                          scale: 1.015,
+                          boxShadow: isDark
+                            ? "0 0 22px rgba(59,130,246,.12)"
+                            : "0 0 22px rgba(59,130,246,.09)",
+                        }}
+                        viewport={{
+                          once: false,
+                          amount: 0.35,
+                        }}
+                        transition={{
+                          duration: 0.3,
+                          delay: index * 0.03,
+                          ease: [0.22, 1, 0.36, 1],
                         }}
                         className="
                           rounded-full
@@ -497,7 +567,6 @@ export const Skills = () => {
                           duration-300
                           hover:border-blue-500/40
                           hover:bg-blue-500/[.08]
-                          hover:shadow-[0_0_18px_rgba(59,130,246,.08)]
                           sm:px-5
                           sm:py-2.5
                           sm:text-sm
@@ -512,7 +581,7 @@ export const Skills = () => {
               </motion.div>
 
             </AnimatePresence>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* =========================================================
@@ -521,19 +590,34 @@ export const Skills = () => {
 
         <motion.div
           initial={{
-            opacity: 0,
-            y: 15,
+            opacity: 0.82,
+            y: 20,
+            scale: 0.985,
+            filter: "brightness(0.97)",
           }}
           whileInView={{
             opacity: 1,
             y: 0,
+            scale: 1,
+            filter: "brightness(1)",
+            boxShadow: isDark
+              ? "0 0 30px rgba(59,130,246,.07)"
+              : "0 0 28px rgba(59,130,246,.05)",
+          }}
+          whileHover={{
+            y: -2,
+            filter: "brightness(1.02)",
+            boxShadow: isDark
+              ? "0 0 38px rgba(59,130,246,.11)"
+              : "0 0 35px rgba(59,130,246,.08)",
           }}
           viewport={{
-            once: true,
+            once: false,
             amount: 0.18,
           }}
           transition={{
-            duration: 0.6,
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
           }}
           className={`relative mt-10 border-t pt-7 sm:mt-12 sm:pt-8 ${
             isDark
@@ -562,8 +646,33 @@ export const Skills = () => {
 
             <div className="flex flex-wrap gap-2.5 md:justify-end">
               {tools.map((tool) => (
-                <span
+                <motion.span
                   key={tool}
+                  initial={{
+                    opacity: 0.75,
+                    y: 8,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                    boxShadow: isDark
+                      ? "0 0 16px rgba(59,130,246,.05)"
+                      : "0 0 16px rgba(59,130,246,.04)",
+                  }}
+                  whileHover={{
+                    y: -2,
+                    boxShadow: isDark
+                      ? "0 0 20px rgba(59,130,246,.10)"
+                      : "0 0 20px rgba(59,130,246,.08)",
+                  }}
+                  viewport={{
+                    once: false,
+                    amount: 0.35,
+                  }}
+                  transition={{
+                    duration: 0.35,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className={`rounded-full border px-4 py-2 text-[13px] transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500/30 sm:px-5 sm:py-2.5 sm:text-sm ${
                     isDark
                       ? "border-white/[.09] bg-white/[.025] text-slate-400"
@@ -571,7 +680,7 @@ export const Skills = () => {
                   }`}
                 >
                   {tool}
-                </span>
+                </motion.span>
               ))}
             </div>
 
