@@ -1,28 +1,34 @@
 export const trainings = [
   {
     number: "01",
-    company: "ABB",
-    title: "ABB Robot Training",
-    location: "Bangalore, India",
+    company: "DÜRR",
+    title: "Dürr Robot Systems Training",
+    location: "Germany",
     category: "Industrial Robotics & Automation",
-    logo: "/logos/ABB logo.png",
+    logo: "/logos/Durr logo.png",
 
     description:
-      "Professional training focused on ABB industrial robot programming, operation, and application fundamentals for automotive manufacturing environments.",
+      "Advanced training on Dürr robot systems covering robotic paint applications, programming, process optimization, system operation, and commissioning support.",
 
     focus: [
-      "ABB Robotics",
+      "Dürr Robotics",
+      "Paint Robot Systems",
       "Robot Programming",
-      "Robot Operation",
-      "Industrial Automation",
+      "Process Optimization",
     ],
 
     learned: [
-      "Trained in ABB robot operation, safety procedures, FlexPendant controls, coordinate systems, and robot motion.",
-      "Developed hands-on knowledge of RAPID programming, program editing, I/O configuration, and robot troubleshooting.",
-      "Gained practical exposure to RobotStudio for offline programming, simulation, path creation, and collision checking.",
-      "Learned basic robot calibration, backup/restore, alarm handling, and system maintenance procedures.",
+      "Received specialized training in Dürr EcoPaint robotic systems, including robot mechanics, electrical equipment, and controller integration.",
+      "Trained in teach-pendant operation, coordinate systems, operating modes, and robot motion programming.",
+      "Developed programming skills using **EcoTalk**, including commands, motion sequences, main programs, and subprograms.",
+      "Gained practical knowledge of **path influence, overlap, SPM, and painting-process parameters**.",
+      "Trained in **DXQ3D.onsite / EcoScreen 3D-OnSite** for offline programming, 3D simulation, and robot-program editing.",
+      "Learned workpiece-geometry management, trigger commands, project/program handling, backup functions, and change tracking.",
+      "Gained exposure to **automotive paint-application systems**, including rotary atomizers, colour changers, paint supply, dosing systems, and spray equipment.",
+      "Applied knowledge of robotic painting processes and **automated paint-shop system integration**.",
     ],
+
+    international: true,
   },
 
   {
@@ -53,33 +59,27 @@ export const trainings = [
 
   {
     number: "03",
-    company: "DÜRR",
-    title: "Dürr Robot Systems Training",
-    location: "Germany",
+    company: "ABB",
+    title: "ABB Robot Training",
+    location: "Bangalore, India",
     category: "Industrial Robotics & Automation",
-    logo: "/logos/Durr logo.png",
+    logo: "/logos/ABB logo.png",
 
     description:
-      "Advanced training on Dürr robot systems covering robotic paint applications, programming, process optimization, system operation, and commissioning support.",
+      "Professional training focused on ABB industrial robot programming, operation, and application fundamentals for automotive manufacturing environments.",
 
     focus: [
-      "Dürr Robotics",
-      "Paint Robot Systems",
+      "ABB Robotics",
       "Robot Programming",
-      "Process Optimization",
+      "Robot Operation",
+      "Industrial Automation",
     ],
 
     learned: [
-      "Received specialized training in Dürr EcoPaint robotic systems, including robot mechanics, electrical equipment, and controller integration.",
-      "Trained in teach-pendant operation, coordinate systems, operating modes, and robot motion programming.",
-      "Developed programming skills using **EcoTalk**, including commands, motion sequences, main programs, and subprograms.",
-      "Gained practical knowledge of **path influence, overlap, SPM, and painting-process parameters**.",
-      "Trained in **DXQ3D.onsite / EcoScreen 3D-OnSite** for offline programming, 3D simulation, and robot-program editing.",
-      "Learned workpiece-geometry management, trigger commands, project/program handling, backup functions, and change tracking.",
-      "Gained exposure to **automotive paint-application systems**, including rotary atomizers, colour changers, paint supply, dosing systems, and spray equipment.",
-      "Applied knowledge of robotic painting processes and **automated paint-shop system integration**.",
+      "Trained in ABB robot operation, safety procedures, FlexPendant controls, coordinate systems, and robot motion.",
+      "Developed hands-on knowledge of RAPID programming, program editing, I/O configuration, and robot troubleshooting.",
+      "Gained practical exposure to RobotStudio for offline programming, simulation, path creation, and collision checking.",
+      "Learned basic robot calibration, backup/restore, alarm handling, and system maintenance procedures.",
     ],
-
-    international: true,
   },
 ];

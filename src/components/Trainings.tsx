@@ -1,312 +1,535 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useTheme } from "./ThemeProvider";
 import { trainings } from "@/data/trainings";
-import { useTheme } from "@/components/ThemeProvider";
 
-const renderBoldText = (
-  text: string,
-  isLight: boolean,
-) =>
-  text
-    .split(/(\*\*.*?\*\*)/g)
-    .map((part, index) =>
-      part.startsWith("**") &&
-      part.endsWith("**") ? (
-        <strong
-          key={index}
-          className={
-            isLight
-              ? "font-semibold text-[#101d35]"
-              : "font-semibold text-slate-100"
-          }
-        >
-          {part.slice(2, -2)}
-        </strong>
-      ) : (
-        <span key={index}>{part}</span>
-      ),
-    );
-
-export const Trainings = () => {
+export function Trainings() {
   const { theme } = useTheme();
-
-  const isDark = theme === "dark";
   const isLight = theme === "light";
 
   return (
     <section
       id="training"
-      className={`relative w-full overflow-hidden px-6 py-16 transition-colors duration-500 sm:px-8 sm:py-20 md:px-10 lg:px-16 lg:py-28 ${
-        isDark
-          ? "bg-[#080814] text-white"
-          : "bg-white text-[#101d35]"
+      className={`relative overflow-hidden ${
+        isLight
+          ? "bg-white text-slate-950"
+          : "bg-[#080814] text-white"
       }`}
     >
-      {/* Background Glow */}
-
       <div
-        className={`pointer-events-none absolute left-1/2 top-20 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px] ${
-          isDark
-            ? "bg-blue-600/[.035]"
-            : "bg-blue-500/[.025]"
-        }`}
-      />
+        className="
+          mx-auto w-full max-w-[1400px]
+          px-7 py-20
+          sm:px-10 sm:py-24
+          md:px-14
+          lg:px-16
+          xl:px-20
+        "
+      >
+        {/* =========================================================
+            HEADER
+        ========================================================= */}
 
-      <div className="relative mx-auto max-w-[1250px]">
-
-        {/* HEADING */}
-
-        <motion.div
-          initial="rest"
-          whileHover="hover"
-          className="group relative inline-block"
-        >
-          <h2
-            className={`text-[clamp(2.8rem,4.2vw,4rem)] font-bold leading-[.95] tracking-[-.05em] ${
-              isLight
-                ? "text-[#101d35]"
-                : "text-white"
-            }`}
-          >
-            Technical{" "}
-            <span className="text-[#3b82f6]">
-              Training.
-            </span>
-          </h2>
-
-          <motion.span
-            variants={{
-              rest: {
-                width: 60,
-              },
-              hover: {
-                width: "100%",
-              },
+        <div className="max-w-[900px]">
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
             }}
             transition={{
-              duration: 0.55,
-              ease: [0.22, 1, 0.36, 1],
+              duration: 0.6,
             }}
-            className="absolute -bottom-6 left-0 h-[4px] rounded-full bg-[#3b82f6]"
-          />
-        </motion.div>
+            className="
+              group
+              inline-block
+              text-[2.1rem]
+              font-bold
+              leading-none
+              tracking-[-0.045em]
+              sm:text-[2.7rem]
+              md:text-[3.1rem]
+            "
+          >
+            Technical{" "}
+            <span className="text-blue-500">
+              Training.
+            </span>
 
-        {/* DESCRIPTION */}
+            {/* Animated underline */}
+            <span
+              className="
+                mt-3
+                block
+                h-[3px]
+                w-10
+                bg-blue-500
+                transition-all
+                duration-500
+                ease-out
+                group-hover:w-full
+              "
+            />
+          </motion.h2>
 
-        <p
-          className={`mt-9 max-w-3xl text-[15px] leading-[1.8] sm:text-[17px] sm:leading-[1.85] ${
-            isDark
-              ? "text-slate-400"
-              : "text-[#506481]"
-          }`}
-        >
-          Specialized training across industrial robotic
-          platforms, strengthening practical expertise in
-          robot programming, paint applications,
-          troubleshooting, and automotive production
-          systems.
-        </p>
-
-        {/* TRAINING TIMELINE */}
-
-        <div className="relative mt-12 sm:mt-16 lg:mt-20">
-
-          <div className="absolute bottom-4 left-[27px] top-4 hidden w-px bg-gradient-to-b from-blue-500/70 via-blue-500/25 to-transparent md:block md:left-[39px]" />
-
-          <div className="space-y-12 sm:space-y-16 lg:space-y-20">
-
-            {trainings.map((training) => (
-              <motion.article
-                key={training.number}
-                initial={false}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                className="relative"
-              >
-
-                {/* NUMBER */}
-
-                <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-full border text-sm font-semibold tracking-wider md:h-20 md:w-20 md:text-base ${
-                    isDark
-                      ? "border-blue-500/40 bg-[#080814] text-blue-400"
-                      : "border-blue-500/30 bg-white text-blue-500"
-                  }`}
-                >
-                  {training.number}
-                </motion.div>
-
-                {/* CONTENT */}
-
-                <div className="ml-[72px] mt-[-56px] sm:ml-[82px] md:ml-[120px] md:mt-[-80px]">
-
-                  <motion.div
-                    whileHover={{
-                      x: 4,
-                    }}
-                    className="group"
-                  >
-
-                    {/* TOP ROW */}
-
-                    <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-
-                      <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[.22em] text-blue-500 sm:text-xs">
-                          {training.company}
-                        </p>
-
-                        <h3
-                          className={`mt-3 text-[clamp(1.7rem,3vw,2.6rem)] font-semibold leading-tight tracking-[-.03em] ${
-                            isDark
-                              ? "text-white"
-                              : "text-[#101d35]"
-                          }`}
-                        >
-                          {training.title}
-                        </h3>
-                      </div>
-
-                      {/* LOCATION */}
-
-                      <div
-                        className={`flex w-fit shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-xs sm:text-sm ${
-                          isDark
-                            ? "border-white/[.08] bg-white/[.025] text-slate-400"
-                            : "border-slate-200 bg-slate-50 text-[#64748b]"
-                        }`}
-                      >
-                        <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />
-
-                        {training.location}
-                      </div>
-                    </div>
-
-                    {/* DESCRIPTION */}
-
-                    <p
-                      className={`mt-6 max-w-[950px] text-[14px] leading-[1.8] sm:mt-7 sm:text-[16px] sm:leading-[1.85] ${
-                        isDark
-                          ? "text-slate-400"
-                          : "text-[#64748b]"
-                      }`}
-                    >
-                      {training.description}
-                    </p>
-
-                    {/* LOWER CONTENT */}
-
-                    <div className="mt-7 grid gap-7 md:grid-cols-[1fr_auto] md:gap-8">
-
-                      {/* LEARNINGS */}
-
-                      <div>
-                        <p
-                          className={`text-[10px] font-semibold uppercase tracking-[.2em] ${
-                            isDark
-                              ? "text-slate-600"
-                              : "text-slate-400"
-                          }`}
-                        >
-                          Key Learnings
-                        </p>
-
-                        <div className="mt-4 space-y-3 sm:space-y-4">
-                          {training.learned.map(
-                            (learning) => (
-                              <div
-                                key={learning}
-                                className={`flex items-start gap-3 text-[14px] leading-[1.7] sm:text-[16px] ${
-                                  isDark
-                                    ? "text-slate-300"
-                                    : "text-[#506481]"
-                                }`}
-                              >
-                                <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-
-                                <span>
-                                  {renderBoldText(
-                                    learning,
-                                    isLight,
-                                  )}
-                                </span>
-                              </div>
-                            ),
-                          )}
-                        </div>
-                      </div>
-
-                      {/* FOCUS */}
-
-                      <div className="md:min-w-[280px]">
-                        <p
-                          className={`text-[10px] font-semibold uppercase tracking-[.2em] ${
-                            isDark
-                              ? "text-slate-600"
-                              : "text-slate-400"
-                          }`}
-                        >
-                          Training Focus
-                        </p>
-
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {training.focus.map(
-                            (item) => (
-                              <span
-                                key={item}
-                                className="rounded-md border border-blue-500/20 bg-blue-500/[.06] px-3 py-1.5 text-xs font-medium text-blue-500"
-                              >
-                                {item}
-                              </span>
-                            ),
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* DIVIDER */}
-
-                    <div
-                      className={`mt-10 h-px w-full bg-gradient-to-r from-blue-500/20 via-white/[.05] to-transparent ${
-                        isDark
-                          ? ""
-                          : "opacity-60"
-                      }`}
-                    />
-                  </motion.div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-
-        {/* FOOTER */}
-
-        <div
-          className={`mt-16 border-t pt-7 sm:mt-20 ${
-            isDark
-              ? "border-white/[.07]"
-              : "border-slate-200"
-          }`}
-        >
           <p
-            className={`text-[10px] uppercase tracking-[.18em] sm:text-sm ${
-              isDark
+            className={`mt-5 max-w-[820px] text-[13px] leading-6 sm:text-[16px] sm:leading-7 ${
+              isLight
                 ? "text-slate-600"
                 : "text-slate-400"
             }`}
           >
-            Robotics • Automation • Automotive
-            Manufacturing
+            Specialized training across industrial robotic
+            platforms, strengthening practical expertise in
+            robot programming, paint applications,
+            troubleshooting, and automotive production
+            systems.
           </p>
+        </div>
+
+        {/* =========================================================
+            TIMELINE
+        ========================================================= */}
+
+        <div className="relative mt-14 sm:mt-16">
+
+          {/* Timeline line */}
+          <div
+            className={`absolute bottom-0 left-[28px] top-0 w-px sm:left-[29px] ${
+              isLight
+                ? "bg-slate-200"
+                : "bg-blue-500/[0.22]"
+            }`}
+          />
+
+          <div className="space-y-12 sm:space-y-16">
+
+            {trainings.map((training, index) => (
+              <motion.article
+                key={training.title}
+                initial={{
+                  opacity: 0,
+                  y: 18,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.05,
+                }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.05,
+                }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.006,
+                  transition: {
+                    duration: 0.25,
+                    ease: "easeOut",
+                  },
+                }}
+                className="
+                  group
+                  relative
+                  pl-[84px]
+                  sm:pl-[86px]
+                "
+              >
+                {/* =================================================
+                    NUMBER CIRCLE
+                ================================================= */}
+
+                <div
+                  className={`
+                    absolute
+                    left-0
+                    top-0
+                    flex
+                    h-[58px]
+                    w-[58px]
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    text-[12px]
+                    font-medium
+                    transition-all
+                    duration-300
+
+                    ${
+                      isLight
+                        ? "border-blue-200 bg-white text-blue-500 group-hover:border-blue-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.10)]"
+                        : "border-blue-500/[0.30] bg-[#080814] text-blue-400 group-hover:border-blue-500/[0.50] group-hover:shadow-[0_0_22px_rgba(59,130,246,0.14)]"
+                    }
+                  `}
+                >
+                  {training.number}
+                </div>
+
+                {/* =================================================
+                    TRAINING CONTENT CARD
+                ================================================= */}
+
+                <div
+                  className={`
+                    relative
+                    overflow-hidden
+                    rounded-[4px]
+                    border
+                    px-5
+                    py-6
+                    sm:px-7
+                    sm:py-7
+                    lg:px-8
+                    transition-all
+                    duration-300
+
+                    ${
+                      isLight
+                        ? "border-slate-200 bg-white hover:border-blue-300 hover:shadow-[0_12px_45px_rgba(37,99,235,0.12)]"
+                        : "border-white/[0.08] bg-[#0b0d1a] hover:border-blue-500/[0.38] hover:bg-[#0d1020] hover:shadow-[0_0_35px_rgba(37,99,235,0.10)]"
+                    }
+                  `}
+                >
+                  {/* =================================================
+                      SUBTLE INNER HOVER GLOW
+                  ================================================= */}
+
+                  <div
+                    className={`
+                      pointer-events-none
+                      absolute
+                      inset-0
+                      rounded-[4px]
+                      opacity-0
+                      transition-opacity
+                      duration-300
+                      group-hover:opacity-100
+
+                      ${
+                        isLight
+                          ? "shadow-[inset_0_0_35px_rgba(37,99,235,0.045)]"
+                          : "shadow-[inset_0_0_40px_rgba(37,99,235,0.07)]"
+                      }
+                    `}
+                  />
+
+                  {/* =================================================
+                      BLUE TOP ACCENT
+                  ================================================= */}
+
+                  <div
+                    className="
+                      absolute
+                      left-0
+                      top-0
+                      h-[2px]
+                      w-16
+                      bg-blue-500
+                      transition-all
+                      duration-300
+                      group-hover:w-24
+                    "
+                  />
+
+                  {/* =================================================
+                      TITLE + LOCATION
+                  ================================================= */}
+
+                  <div
+                    className="
+                      relative
+                      z-10
+                      flex
+                      flex-col
+                      gap-4
+                      sm:flex-row
+                      sm:items-start
+                      sm:justify-between
+                    "
+                  >
+                    <div className="min-w-0">
+
+                      {/* Logo / Category */}
+                      <div className="mb-3 flex flex-wrap items-center gap-3">
+
+                        {training.logo && (
+                          <div className="relative h-6 w-20 shrink-0">
+                            <Image
+                              src={training.logo}
+                              alt={`${training.title} logo`}
+                              fill
+                              sizes="80px"
+                              className="object-contain object-left"
+                            />
+                          </div>
+                        )}
+
+                        <span
+                          className={`text-[8px] font-semibold uppercase tracking-[0.3em] ${
+                            isLight
+                              ? "text-slate-400"
+                              : "text-slate-500"
+                          }`}
+                        >
+                          {training.category}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3
+                        className="
+                          text-[21px]
+                          font-semibold
+                          leading-tight
+                          tracking-[-0.025em]
+                          transition-colors
+                          duration-300
+                          sm:text-[23px]
+                          md:text-[24px]
+                          group-hover:text-blue-500
+                        "
+                      >
+                        {training.title}
+                      </h3>
+                    </div>
+
+                    {/* Location */}
+                    <div
+                      className={`
+                        inline-flex
+                        w-fit
+                        shrink-0
+                        items-center
+                        gap-2
+                        rounded-full
+                        border
+                        px-3
+                        py-2
+                        text-[10px]
+                        transition-all
+                        duration-300
+
+                        ${
+                          isLight
+                            ? "border-slate-200 bg-slate-50 text-slate-500 group-hover:border-blue-200 group-hover:text-blue-600"
+                            : "border-white/[0.07] bg-white/[0.025] text-slate-400 group-hover:border-blue-500/[0.20] group-hover:text-blue-400"
+                        }
+                      `}
+                    >
+                      <span className="h-1 w-1 rounded-full bg-blue-500" />
+
+                      {training.location}
+                    </div>
+                  </div>
+
+                  {/* =================================================
+                      DESCRIPTION
+                  ================================================= */}
+
+                  <p
+                    className={`
+                      relative
+                      z-10
+                      mt-5
+                      max-w-[900px]
+                      text-[13px]
+                      leading-6
+                      sm:text-[14px]
+                      sm:leading-7
+
+                      ${
+                        isLight
+                          ? "text-slate-600"
+                          : "text-slate-400"
+                      }
+                    `}
+                  >
+                    {training.description}
+                  </p>
+
+                  {/* =================================================
+                      LEARNINGS + FOCUS
+
+                      MOBILE:
+                      ONE COLUMN
+
+                      LAPTOP:
+                      TWO COLUMNS
+                  ================================================= */}
+
+                  <div
+                    className="
+                      relative
+                      z-10
+                      mt-7
+                      grid
+                      grid-cols-1
+                      gap-8
+                      lg:grid-cols-[minmax(0,1fr)_minmax(280px,1.1fr)]
+                      lg:gap-12
+                    "
+                  >
+                    {/* =================================================
+                        KEY LEARNINGS
+                    ================================================= */}
+
+                    <div className="min-w-0">
+
+                      <div
+                        className={`
+                          mb-4
+                          text-[8px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.28em]
+
+                          ${
+                            isLight
+                              ? "text-slate-400"
+                              : "text-slate-500"
+                          }
+                        `}
+                      >
+                        Key Learnings
+                      </div>
+
+                      <ul className="space-y-4">
+
+                        {training.learned.map(
+                          (item) => (
+                            <li
+                              key={item}
+                              className={`
+                                relative
+                                pl-4
+                                text-[13px]
+                                leading-6
+                                sm:text-[14px]
+                                sm:leading-7
+
+                                ${
+                                  isLight
+                                    ? "text-slate-600"
+                                    : "text-slate-300"
+                                }
+                              `}
+                            >
+                              <span
+                                className="
+                                  absolute
+                                  left-0
+                                  top-[10px]
+                                  h-1
+                                  w-1
+                                  rounded-full
+                                  bg-blue-500
+                                "
+                              />
+
+                              {renderBoldText(item)}
+                            </li>
+                          ),
+                        )}
+
+                      </ul>
+                    </div>
+
+                    {/* =================================================
+                        TRAINING FOCUS
+                    ================================================= */}
+
+                    <div className="min-w-0">
+
+                      <div
+                        className={`
+                          mb-4
+                          text-[8px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.28em]
+
+                          ${
+                            isLight
+                              ? "text-slate-400"
+                              : "text-slate-500"
+                          }
+                        `}
+                      >
+                        Training Focus
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+
+                        {training.focus.map(
+                          (item) => (
+                            <span
+                              key={item}
+                              className={`
+                                rounded-[3px]
+                                border
+                                px-3
+                                py-2
+                                text-[9px]
+                                font-medium
+                                leading-none
+                                transition-all
+                                duration-300
+
+                                ${
+                                  isLight
+                                    ? "border-blue-100 bg-blue-50 text-blue-600 group-hover:border-blue-200"
+                                    : "border-blue-500/[0.16] bg-blue-500/[0.06] text-blue-400 group-hover:border-blue-500/[0.25]"
+                                }
+                              `}
+                            >
+                              {item}
+                            </span>
+                          ),
+                        )}
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}
+
+/* =========================================================
+   BOLD TEXT SUPPORT
+========================================================= */
+
+function renderBoldText(text: string) {
+  const parts = text.split("**");
+
+  return parts.map((part, index) =>
+    index % 2 === 1 ? (
+      <strong
+        key={index}
+        className="font-semibold text-current"
+      >
+        {part}
+      </strong>
+    ) : (
+      <span key={index}>
+        {part}
+      </span>
+    ),
+  );
+}
