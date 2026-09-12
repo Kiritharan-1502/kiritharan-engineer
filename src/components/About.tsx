@@ -8,147 +8,60 @@ export const About = () => {
 
   const isDark = theme === "dark";
 
-  const paragraphClass = `
-    text-[17px]
-    leading-[1.85]
+  const paragraphClass = `text-[16px] leading-[1.8] sm:text-[17px] lg:text-[19px] ${
+    isDark
+      ? "text-slate-300"
+      : "text-[#506481]"
+  }`;
 
-    sm:text-[18px]
-
-    lg:text-[19px]
-
-    ${
-      isDark
-        ? "text-slate-300"
-        : "text-[#506481]"
-    }
-  `;
-
-  const strongClass = `
-    font-semibold
-    ${
-      isDark
-        ? "text-white"
-        : "text-[#101d35]"
-    }
-  `;
+  const strongClass = `font-semibold ${
+    isDark
+      ? "text-white"
+      : "text-[#101d35]"
+  }`;
 
   return (
     <section
       id="about"
-      className={`
-        relative
-        w-full
-        overflow-hidden
-        transition-colors
-        duration-500
-
-        ${
-          isDark
-            ? "bg-[#080814] text-white"
-            : "bg-white text-[#101d35]"
-        }
-      `}
+      className={`relative w-full overflow-hidden transition-colors duration-500 ${
+        isDark
+          ? "bg-[#080814] text-white"
+          : "bg-white text-[#101d35]"
+      }`}
     >
-
-      {/* =====================================================
-          SUBTLE BACKGROUND GLOW
-      ===================================================== */}
+      {/* Background Glow */}
 
       <div
-        className={`
-          pointer-events-none
-          absolute
-          left-1/2
-          top-20
-          h-[500px]
-          w-[500px]
-          -translate-x-1/2
-          rounded-full
-          blur-[140px]
-
-          ${
-            isDark
-              ? "bg-blue-600/[0.035]"
-              : "bg-blue-500/[0.025]"
-          }
-        `}
+        className={`pointer-events-none absolute left-1/2 top-20 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[140px] ${
+          isDark
+            ? "bg-blue-600/[0.035]"
+            : "bg-blue-500/[0.025]"
+        }`}
       />
 
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
+      <div className="relative mx-auto w-full max-w-[1550px] px-6 py-16 sm:px-10 sm:py-20 lg:px-16 lg:py-28 xl:px-[7.8vw]">
 
-      <div
-        className="
-          relative
-          mx-auto
-          w-full
-          max-w-[1550px]
-          px-7
-          pt-32
-          pb-24
-
-          sm:px-10
-          sm:pt-36
-
-          lg:px-16
-          lg:pt-36
-          lg:pb-28
-
-          xl:px-[7.8vw]
-        "
-      >
-
-        {/* =====================================================
-            ABOUT HEADING
-        ===================================================== */}
+        {/* HEADING */}
 
         <motion.div
           initial="rest"
           whileHover="hover"
-          whileInView="visible"
-          viewport={{
-            once: true,
-            amount: 0.3,
-          }}
-          className="
-            inline-flex
-            cursor-default
-            flex-col
-            items-start
-          "
+          className="inline-flex cursor-default flex-col items-start"
         >
-
           <motion.h2
             variants={{
               rest: {
                 y: 0,
               },
-
               hover: {
                 y: -1,
               },
-
-              visible: {
-                y: 0,
-              },
             }}
-            transition={{
-              duration: 0.3,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className={`
-              text-[clamp(2.8rem,4.2vw,4rem)]
-              font-bold
-              leading-[0.95]
-              tracking-[-0.05em]
-
-              ${
-                isDark
-                  ? "text-white"
-                  : "text-[#101d35]"
-              }
-            `}
+            className={`text-[clamp(2.8rem,4.2vw,4rem)] font-bold leading-[0.95] tracking-[-0.05em] ${
+              isDark
+                ? "text-white"
+                : "text-[#101d35]"
+            }`}
           >
             About{" "}
             <span className="text-[#3b82f6]">
@@ -156,79 +69,37 @@ export const About = () => {
             </span>
           </motion.h2>
 
-          {/* Animated Blue Underline */}
           <motion.div
             variants={{
               rest: {
                 width: "58px",
               },
-
               hover: {
                 width: "100%",
-              },
-
-              visible: {
-                width: "58px",
               },
             }}
             transition={{
               duration: 0.5,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="
-              mt-6
-              h-[4px]
-              rounded-full
-              bg-[#3b82f6]
-            "
+            className="mt-5 h-[4px] rounded-full bg-[#3b82f6]"
           />
-
         </motion.div>
 
-        {/* =====================================================
-            ABOUT CONTENT
-        ===================================================== */}
+        {/* ABOUT CONTENT */}
 
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
+          initial={false}
+          animate={{
             opacity: 1,
             y: 0,
           }}
-          viewport={{
-            once: true,
-            amount: 0.2,
-          }}
-          transition={{
-            duration: 0.7,
-            delay: 0.15,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className={`
-            mt-12
-            max-w-[1240px]
-            border-l-2
-            pl-8
-
-            sm:pl-10
-
-            lg:pl-12
-
-            ${
-              isDark
-                ? "border-blue-500/20"
-                : "border-[#075baa]/15"
-            }
-          `}
+          className={`mt-10 max-w-[1240px] border-l-2 pl-5 sm:mt-12 sm:pl-8 lg:pl-12 ${
+            isDark
+              ? "border-blue-500/20"
+              : "border-[#075baa]/15"
+          }`}
         >
-
-          {/* =====================================================
-              PARAGRAPH 1
-          ===================================================== */}
-
           <p className={paragraphClass}>
             I am a{" "}
             <strong className={strongClass}>
@@ -240,27 +111,20 @@ export const About = () => {
             </strong>{" "}
             in industrial robot programming, robotic
             paint application systems, automotive
-            manufacturing, commissioning, troubleshooting,
-            and process optimization. I have hands-on
-            expertise with{" "}
+            manufacturing, commissioning,
+            troubleshooting, and process optimization.
+            I have hands-on expertise with{" "}
             <strong className={strongClass}>
               ABB, Yaskawa, and Dürr
             </strong>{" "}
             robotic systems, supporting robot programming,
             offline programming, application prove-out,
-            production start-up, customer technical support,
-            and continuous improvement.
+            production start-up, customer technical
+            support, and continuous improvement.
           </p>
 
-          {/* =====================================================
-              PARAGRAPH 2
-          ===================================================== */}
-
           <p
-            className={`
-              ${paragraphClass}
-              mt-7
-            `}
+            className={`${paragraphClass} mt-6`}
           >
             My technical expertise covers automotive paint
             applications including{" "}
@@ -281,15 +145,8 @@ export const About = () => {
             .
           </p>
 
-          {/* =====================================================
-              PARAGRAPH 3
-          ===================================================== */}
-
           <p
-            className={`
-              ${paragraphClass}
-              mt-7
-            `}
+            className={`${paragraphClass} mt-6`}
           >
             I am proficient in{" "}
             <strong className={strongClass}>
@@ -297,9 +154,9 @@ export const About = () => {
               and MotoSim
             </strong>
             , with practical experience in offline
-            programming, simulation, robot-path development,
-            debugging, and production optimization. I also
-            have knowledge of{" "}
+            programming, simulation, robot-path
+            development, debugging, and production
+            optimization. I also have knowledge of{" "}
             <strong className={strongClass}>
               atomizers, bell applicators, dosing systems,
               colour-change systems, conveyor synchronization,
@@ -309,15 +166,8 @@ export const About = () => {
             .
           </p>
 
-          {/* =====================================================
-              PARAGRAPH 4
-          ===================================================== */}
-
           <p
-            className={`
-              ${paragraphClass}
-              mt-7
-            `}
+            className={`${paragraphClass} mt-6`}
           >
             I have successfully supported{" "}
             <strong className={strongClass}>
@@ -330,15 +180,8 @@ export const About = () => {
             automation teams, suppliers, and vendors.
           </p>
 
-          {/* =====================================================
-              PARAGRAPH 5
-          ===================================================== */}
-
           <p
-            className={`
-              ${paragraphClass}
-              mt-7
-            `}
+            className={`${paragraphClass} mt-6`}
           >
             I have also completed{" "}
             <strong className={strongClass}>
@@ -348,9 +191,7 @@ export const About = () => {
             , providing valuable international technical
             exposure.
           </p>
-
         </motion.div>
-
       </div>
     </section>
   );

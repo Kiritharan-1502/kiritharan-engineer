@@ -7,17 +7,12 @@ import { useTheme } from "@/components/ThemeProvider";
 const renderBoldText = (
   text: string,
   isLight: boolean,
-) => {
-  const parts = text.split(/(\*\*.*?\*\*)/g);
-
-  return parts.map((part, index) => {
-    if (
+) =>
+  text
+    .split(/(\*\*.*?\*\*)/g)
+    .map((part, index) =>
       part.startsWith("**") &&
-      part.endsWith("**")
-    ) {
-      const boldText = part.slice(2, -2);
-
-      return (
+      part.endsWith("**") ? (
         <strong
           key={index}
           className={`font-semibold ${
@@ -26,14 +21,12 @@ const renderBoldText = (
               : "text-slate-100"
           }`}
         >
-          {boldText}
+          {part.slice(2, -2)}
         </strong>
-      );
-    }
-
-    return <span key={index}>{part}</span>;
-  });
-};
+      ) : (
+        <span key={index}>{part}</span>
+      ),
+    );
 
 export const Experience = () => {
   const { theme } = useTheme();
@@ -43,13 +36,14 @@ export const Experience = () => {
   return (
     <section
       id="experience"
-      className={`relative overflow-hidden py-28 transition-colors duration-500 ${
+      className={`relative overflow-hidden py-16 transition-colors duration-500 sm:py-20 lg:py-28 ${
         isLight
           ? "bg-[#f7f9fc]"
           : "bg-[#080814]"
       }`}
     >
       {/* Background Glow */}
+
       <div
         className={`pointer-events-none absolute left-1/2 top-32 h-[500px] w-[700px] -translate-x-1/2 rounded-full blur-[150px] ${
           isLight
@@ -58,18 +52,18 @@ export const Experience = () => {
         }`}
       />
 
-      <div className="relative mx-auto w-[89%] max-w-[1400px]">
+      <div className="relative mx-auto w-[92%] max-w-[1400px] sm:w-[89%]">
 
-        {/* Heading */}
-        <div className="mb-20">
+        {/* HEADING */}
+
+        <div className="mb-12 sm:mb-16 lg:mb-20">
           <motion.div
             initial="rest"
             whileHover="hover"
-            animate="rest"
             className="inline-block"
           >
             <h2
-              className={`relative inline-block cursor-default text-[64px] font-semibold leading-[1.05] tracking-[-0.045em] ${
+              className={`relative inline-block cursor-default text-[clamp(2.8rem,4.2vw,4rem)] font-bold leading-[0.95] tracking-[-0.05em] ${
                 isLight
                   ? "text-[#101d35]"
                   : "text-white"
@@ -90,13 +84,13 @@ export const Experience = () => {
                   duration: 0.55,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="absolute -bottom-4 left-0 h-[3px] bg-[#3b82f6]"
+                className="absolute -bottom-5 left-0 h-[3px] bg-[#3b82f6]"
               />
             </h2>
           </motion.div>
 
           <p
-            className={`mt-7 max-w-[720px] text-[17px] leading-[1.8] ${
+            className={`mt-8 max-w-[720px] text-[15px] leading-[1.8] sm:text-[17px] ${
               isLight
                 ? "text-[#506481]"
                 : "text-slate-400"
@@ -109,10 +103,10 @@ export const Experience = () => {
           </p>
         </div>
 
-        {/* Timeline */}
+        {/* TIMELINE */}
+
         <div className="relative">
 
-          {/* Timeline Line */}
           <div
             className={`absolute left-[30px] top-0 hidden w-px md:block ${
               isLight
@@ -124,28 +118,20 @@ export const Experience = () => {
             }}
           />
 
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-10 lg:space-y-12">
 
             {experiences.map(
               (experience, index) => (
                 <motion.article
                   key={experience.number}
-                  initial={{
-                    opacity: 0,
-                    y: 30,
-                  }}
-                  whileInView={{
+                  initial={false}
+                  animate={{
                     opacity: 1,
                     y: 0,
                   }}
-                  viewport={{
-                    once: true,
-                    amount: 0.08,
-                  }}
                   transition={{
-                    duration: 0.6,
-                    delay: index * 0.06,
-                    ease: [0.22, 1, 0.36, 1],
+                    duration: 0.35,
+                    delay: index * 0.03,
                   }}
                   whileHover={{
                     y: -4,
@@ -153,7 +139,8 @@ export const Experience = () => {
                   className="relative pl-0 md:pl-[96px]"
                 >
 
-                  {/* Timeline Number */}
+                  {/* TIMELINE NUMBER */}
+
                   <div className="absolute left-0 top-[38px] hidden md:block">
                     <div
                       className={`flex h-[62px] w-[62px] items-center justify-center rounded-full ${
@@ -165,8 +152,8 @@ export const Experience = () => {
                       <div
                         className={`flex h-[44px] w-[44px] items-center justify-center rounded-full border text-[12px] font-semibold tracking-[0.08em] text-white ${
                           isLight
-                            ? "border-[#1768d5]/40 bg-[#1768d5] shadow-[0_0_25px_rgba(23,104,213,0.25)]"
-                            : "border-blue-400/40 bg-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,0.35)]"
+                            ? "border-[#1768d5]/40 bg-[#1768d5] shadow-[0_0_25px_rgba(23,104,213,.25)]"
+                            : "border-blue-400/40 bg-[#2563eb] shadow-[0_0_30px_rgba(37,99,235,.35)]"
                         }`}
                       >
                         {experience.number}
@@ -174,16 +161,18 @@ export const Experience = () => {
                     </div>
                   </div>
 
-                  {/* Card */}
+                  {/* CARD */}
+
                   <div
-                    className={`relative overflow-hidden rounded-[22px] border transition-all duration-500 ${
+                    className={`relative overflow-hidden rounded-[18px] border transition-all duration-500 sm:rounded-[22px] ${
                       isLight
-                        ? "border-[#1768d5]/15 bg-white shadow-[0_18px_60px_rgba(16,29,53,0.07)] hover:border-[#1768d5]/30 hover:shadow-[0_25px_75px_rgba(16,29,53,0.10)]"
-                        : "border-blue-500/[0.23] bg-[#0d0d19] shadow-[0_18px_70px_rgba(0,0,0,0.28)] hover:border-blue-400/[0.38] hover:shadow-[0_25px_80px_rgba(37,99,235,0.10)]"
+                        ? "border-[#1768d5]/15 bg-white shadow-[0_18px_60px_rgba(16,29,53,.07)] hover:border-[#1768d5]/30"
+                        : "border-blue-500/[.23] bg-[#0d0d19] shadow-[0_18px_70px_rgba(0,0,0,.28)] hover:border-blue-400/[.38]"
                     }`}
                   >
 
                     {/* Top Highlight */}
+
                     <div
                       className={`absolute left-0 right-0 top-0 h-px ${
                         isLight
@@ -193,30 +182,31 @@ export const Experience = () => {
                     />
 
                     {/* Header */}
-                    <div className="px-7 pb-7 pt-8 md:px-9 md:pt-9">
 
-                      <div className="flex flex-col gap-7 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="px-5 pb-6 pt-6 sm:px-7 sm:pb-7 sm:pt-8 md:px-9 md:pt-9">
+
+                      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
 
                         {/* Role + Company */}
-                        <div className="flex items-start gap-5">
 
-                          {/* Company Initial */}
+                        <div className="flex items-start gap-4 sm:gap-5">
+
                           <div
-                            className={`flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-[13px] text-[23px] font-semibold text-white ${
+                            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px] text-xl font-semibold text-white sm:h-14 sm:w-14 sm:text-[23px] ${
                               isLight
-                                ? "bg-[#1768d5] shadow-[0_8px_25px_rgba(23,104,213,0.18)]"
-                                : "bg-[#2563eb] shadow-[0_8px_30px_rgba(37,99,235,0.25)]"
+                                ? "bg-[#1768d5]"
+                                : "bg-[#2563eb]"
                             }`}
                           >
                             {experience.company.charAt(0)}
                           </div>
 
-                          <div>
+                          <div className="min-w-0">
 
                             <div className="flex flex-wrap items-center gap-3">
 
                               <h3
-                                className={`text-[25px] font-semibold leading-[1.3] tracking-[-0.025em] ${
+                                className={`text-[21px] font-semibold leading-[1.3] tracking-[-0.025em] sm:text-[25px] ${
                                   isLight
                                     ? "text-[#101d35]"
                                     : "text-white"
@@ -226,9 +216,10 @@ export const Experience = () => {
                               </h3>
 
                               {/* CURRENT */}
+
                               {experience.current && (
                                 <span
-                                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                                  className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] ${
                                     isLight
                                       ? "border-emerald-500/30 bg-emerald-500/[0.08] text-emerald-600"
                                       : "border-emerald-400/30 bg-emerald-400/[0.08] text-emerald-400"
@@ -249,7 +240,7 @@ export const Experience = () => {
                             </div>
 
                             <p
-                              className={`mt-2 text-[16px] font-medium ${
+                              className={`mt-2 text-[15px] font-medium sm:text-[16px] ${
                                 isLight
                                   ? "text-[#1768d5]"
                                   : "text-blue-400"
@@ -257,37 +248,32 @@ export const Experience = () => {
                             >
                               {experience.company}
                             </p>
-
                           </div>
                         </div>
 
-                        {/* Date / Location */}
+                        {/* DATE / LOCATION */}
+
                         <div
-                          className={`shrink-0 rounded-[10px] border px-4 py-3 lg:min-w-[235px] ${
+                          className={`w-full rounded-[10px] border px-4 py-3 lg:w-auto lg:min-w-[235px] ${
                             isLight
                               ? "border-[#101d35]/10 bg-[#f7f9fc]"
-                              : "border-white/[0.07] bg-[#0a0a14]"
+                              : "border-white/[.07] bg-[#0a0a14]"
                           }`}
                         >
-
-                          {experience.current ? (
-                            <p className="text-right font-mono text-[13px] font-semibold uppercase tracking-[0.08em] text">
-                              2025
-                            </p>
-                          ) : (
-                            <p
-                              className={`text-right font-mono text-[13px] ${
-                                isLight
-                                  ? "text-[#506481]"
-                                  : "text-slate-300"
-                              }`}
-                            >
-                              {experience.period}
-                            </p>
-                          )}
+                          <p
+                            className={`text-left font-mono text-[12px] font-semibold uppercase tracking-[0.08em] lg:text-right ${
+                              isLight
+                                ? "text-[#506481]"
+                                : "text-slate-300"
+                            }`}
+                          >
+                            {experience.current
+                              ? "2025"
+                              : experience.period}
+                          </p>
 
                           <p
-                            className={`mt-1 text-right font-mono text-[13px] ${
+                            className={`mt-1 text-left font-mono text-[12px] lg:text-right ${
                               isLight
                                 ? "text-[#6f86a8]"
                                 : "text-slate-500"
@@ -295,57 +281,36 @@ export const Experience = () => {
                           >
                             {experience.location}
                           </p>
-
                         </div>
-
                       </div>
                     </div>
 
                     {/* Divider */}
+
                     <div
-                      className={`mx-7 h-px md:mx-9 ${
+                      className={`mx-5 h-px sm:mx-7 md:mx-9 ${
                         isLight
-                          ? "bg-[#101d35]/[0.08]"
-                          : "bg-white/[0.07]"
+                          ? "bg-[#101d35]/[.08]"
+                          : "bg-white/[.07]"
                       }`}
                     />
 
-                    {/* Responsibilities */}
-                    <div className="px-7 py-8 md:px-9">
+                    {/* RESPONSIBILITIES */}
 
-                      <ul className="space-y-5">
+                    <div className="px-5 py-6 sm:px-7 sm:py-8 md:px-9">
+                      <ul className="space-y-4 sm:space-y-5">
 
                         {experience.responsibilities.map(
                           (
                             responsibility,
                             responsibilityIndex,
                           ) => (
-                            <motion.li
+                            <li
                               key={`${experience.number}-${responsibilityIndex}`}
-                              initial={{
-                                opacity: 0,
-                                x: -8,
-                              }}
-                              whileInView={{
-                                opacity: 1,
-                                x: 0,
-                              }}
-                              viewport={{
-                                once: true,
-                                amount: 0.1,
-                              }}
-                              transition={{
-                                duration: 0.35,
-                                delay:
-                                  responsibilityIndex *
-                                  0.025,
-                              }}
-                              className="flex items-start gap-4"
+                              className="flex items-start gap-3 sm:gap-4"
                             >
-
-                              {/* Bullet */}
                               <span
-                                className={`mt-[5px] shrink-0 text-[20px] leading-none ${
+                                className={`mt-[4px] shrink-0 text-[20px] leading-none ${
                                   isLight
                                     ? "text-[#1768d5]"
                                     : "text-cyan-400"
@@ -354,9 +319,8 @@ export const Experience = () => {
                                 ›
                               </span>
 
-                              {/* Responsibility */}
                               <p
-                                className={`text-[16px] leading-[1.75] ${
+                                className={`text-[14px] leading-[1.75] sm:text-[16px] ${
                                   isLight
                                     ? "text-[#506481]"
                                     : "text-slate-300"
@@ -367,48 +331,76 @@ export const Experience = () => {
                                   isLight,
                                 )}
                               </p>
-
-                            </motion.li>
+                            </li>
                           ),
                         )}
-
                       </ul>
                     </div>
 
                     {/* Divider */}
+
                     <div
-                      className={`mx-7 h-px md:mx-9 ${
+                      className={`mx-5 h-px sm:mx-7 md:mx-9 ${
                         isLight
-                          ? "bg-[#101d35]/[0.08]"
-                          : "bg-white/[0.07]"
+                          ? "bg-[#101d35]/[.08]"
+                          : "bg-white/[.07]"
                       }`}
                     />
 
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 px-7 py-6 md:px-9">
+                    {/* TECHNOLOGIES */}
 
+                    <div className="flex flex-wrap gap-2 px-5 py-5 sm:px-7 sm:py-6 md:px-9">
                       {experience.technologies.map(
                         (technology) => (
                           <span
                             key={technology}
-                            className={`rounded-[6px] border px-3 py-1.5 font-mono text-[11px] transition-all duration-300 ${
+                            className={`rounded-[6px] border px-2.5 py-1.5 font-mono text-[10px] sm:px-3 sm:text-[11px] ${
                               isLight
-                                ? "border-[#1768d5]/20 bg-[#1768d5]/[0.05] text-[#1768d5] hover:border-[#1768d5]/40 hover:bg-[#1768d5]/[0.08]"
-                                : "border-blue-500/[0.25] bg-blue-500/[0.08] text-blue-300 hover:border-blue-400/[0.40] hover:bg-blue-500/[0.13]"
+                                ? "border-[#1768d5]/20 bg-[#1768d5]/[.05] text-[#1768d5]"
+                                : "border-blue-500/[.25] bg-blue-500/[.08] text-blue-300"
                             }`}
                           >
                             {technology}
                           </span>
                         ),
                       )}
-
                     </div>
-
                   </div>
                 </motion.article>
               ),
             )}
+          </div>
+        </div>
 
+        {/* FOOTER LINE */}
+
+        <div
+          className={`mt-14 flex flex-col gap-5 border-t pt-7 sm:mt-20 sm:flex-row sm:items-center sm:justify-between ${
+            isLight
+              ? "border-[#101d35]/[.08]"
+              : "border-white/[.07]"
+          }`}
+        >
+          <p
+            className={`text-[10px] uppercase tracking-[0.18em] sm:text-sm ${
+              isLight
+                ? "text-slate-400"
+                : "text-slate-600"
+            }`}
+          >
+            Robotics • Automation • Automotive
+            Manufacturing
+          </p>
+
+          <div
+            className={`flex items-center gap-3 text-sm ${
+              isLight
+                ? "text-[#64748b]"
+                : "text-slate-400"
+            }`}
+          >
+            <span className="h-2 w-2 rounded-full bg-blue-500" />
+            3 Robotic Platforms
           </div>
         </div>
       </div>
