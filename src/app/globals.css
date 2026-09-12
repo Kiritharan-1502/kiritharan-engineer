@@ -17,7 +17,7 @@
 
 /* =========================================================
    DARK THEME
-   ========================================================= */
+========================================================= */
 
 :root,
 [data-theme="dark"] {
@@ -43,7 +43,7 @@
 
 /* =========================================================
    LIGHT THEME
-   ========================================================= */
+========================================================= */
 
 [data-theme="light"] {
   --background: #f7f9fc;
@@ -68,7 +68,7 @@
 
 /* =========================================================
    GLOBAL RESET
-   ========================================================= */
+========================================================= */
 
 html {
   scroll-behavior: smooth;
@@ -124,7 +124,7 @@ textarea {
 
 /* =========================================================
    MOBILE SAFE AREA
-   ========================================================= */
+========================================================= */
 
 @supports (padding: env(safe-area-inset-top)) {
   body {
@@ -135,7 +135,7 @@ textarea {
 
 /* =========================================================
    THEME UTILITIES
-   ========================================================= */
+========================================================= */
 
 @utility portfolio-bg {
   background-color: var(--background);
@@ -167,7 +167,7 @@ textarea {
 
 /* =========================================================
    GLASS
-   ========================================================= */
+========================================================= */
 
 @utility glass {
   background-color: var(--surface-soft);
@@ -178,7 +178,7 @@ textarea {
 
 /* =========================================================
    LENIS
-   ========================================================= */
+========================================================= */
 
 html.lenis,
 html.lenis body {
@@ -203,8 +203,8 @@ html.lenis body {
 
 /* =========================================================
    SAFE TRANSITIONS
-   Do NOT globally override Framer Motion transitions.
-   ========================================================= */
+   Do not create animations here.
+========================================================= */
 
 a,
 button,
@@ -226,15 +226,149 @@ section,
 
 /* =========================================================
    SECTION SCROLL POSITION
-   ========================================================= */
+========================================================= */
 
 section {
   scroll-margin-top: 86px;
 }
 
 /* =========================================================
+   ENGINEERING AMBIENT LIGHT
+   BOTH DARK + LIGHT MODE
+========================================================= */
+
+#experience,
+#training,
+#skills,
+#education,
+#contact {
+  position: relative;
+  isolation: isolate;
+}
+
+/* =========================================================
+   PRIMARY BLUE ATMOSPHERE
+========================================================= */
+
+#experience::before,
+#training::before,
+#skills::before,
+#education::before,
+#contact::before {
+  content: "";
+
+  position: absolute;
+
+  top: -70px;
+  left: 50%;
+
+  width: min(900px, 90vw);
+  height: 480px;
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(59, 130, 246, 0.065) 0%,
+      rgba(59, 130, 246, 0.035) 32%,
+      rgba(59, 130, 246, 0.012) 55%,
+      transparent 75%
+    );
+
+  filter: blur(55px);
+
+  /*
+   * Static atmosphere only.
+   * No animation.
+   * No shake.
+   * No movement.
+   */
+}
+
+/* =========================================================
+   SECONDARY BLUE ATMOSPHERE
+========================================================= */
+
+#experience::after,
+#training::after,
+#skills::after,
+#education::after,
+#contact::after {
+  content: "";
+
+  position: absolute;
+
+  right: -160px;
+  bottom: 12%;
+
+  width: 420px;
+  height: 420px;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(37, 99, 235, 0.035) 0%,
+      rgba(37, 99, 235, 0.018) 35%,
+      transparent 72%
+    );
+
+  filter: blur(70px);
+}
+
+/* =========================================================
+   LIGHT MODE BLUE ATMOSPHERE
+   Slightly brighter so it is visible on white.
+========================================================= */
+
+[data-theme="light"] #experience::before,
+[data-theme="light"] #training::before,
+[data-theme="light"] #skills::before,
+[data-theme="light"] #education::before,
+[data-theme="light"] #contact::before {
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(37, 99, 235, 0.105) 0%,
+      rgba(37, 99, 235, 0.060) 28%,
+      rgba(59, 130, 246, 0.025) 52%,
+      transparent 75%
+    );
+
+  filter: blur(55px);
+}
+
+[data-theme="light"] #experience::after,
+[data-theme="light"] #training::after,
+[data-theme="light"] #skills::after,
+[data-theme="light"] #education::after,
+[data-theme="light"] #contact::after {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(37, 99, 235, 0.055) 0%,
+      rgba(59, 130, 246, 0.025) 35%,
+      transparent 72%
+    );
+
+  filter: blur(70px);
+}
+
+/* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 767px) {
   html {
@@ -266,10 +400,6 @@ section {
     overflow-wrap: break-word;
   }
 
-  /*
-   * Prevent accidental horizontal layout expansion.
-   */
-
   section > div,
   section > main,
   section > article {
@@ -277,120 +407,93 @@ section {
     min-width: 0;
   }
 
-  /*
-   * Keep images safely inside the viewport.
-   */
-
   img {
     max-width: 100%;
   }
 }
 
 /* =========================================================
-   MOBILE — SUBTLE ENGINEERING AMBIENT LIGHT
-   ========================================================= */
+   MOBILE — AMBIENT LIGHT
+========================================================= */
 
 @media (max-width: 767px) {
-  #experience,
-  #training,
-  #skills,
-  #education,
-  #contact {
-    isolation: isolate;
-  }
-
-  /*
-   * Soft blue light near the top of each section.
-   * This gives the feeling that the next section is
-   * becoming visible as you scroll toward it.
-   */
-
   #experience::before,
   #training::before,
   #skills::before,
   #education::before,
   #contact::before {
-    content: "";
-
-    position: absolute;
-
-    top: -80px;
+    top: -55px;
     left: 50%;
 
-    width: 460px;
-    height: 260px;
+    width: 120vw;
+    height: 360px;
 
     transform: translateX(-50%);
 
-    pointer-events: none;
-
-    z-index: -1;
-
-    border-radius: 999px;
-
-    background:
-      radial-gradient(
-        ellipse at center,
-        rgba(59, 130, 246, 0.075) 0%,
-        rgba(59, 130, 246, 0.035) 32%,
-        rgba(59, 130, 246, 0) 72%
-      );
-
-    filter: blur(12px);
+    filter: blur(48px);
   }
-
-  /*
-   * Slight secondary blue atmosphere lower in the section.
-   */
 
   #experience::after,
   #training::after,
   #skills::after,
   #education::after,
   #contact::after {
-    content: "";
-
-    position: absolute;
-
     right: -180px;
-    bottom: 10%;
+    bottom: 12%;
 
-    width: 360px;
-    height: 360px;
+    width: 340px;
+    height: 340px;
 
-    pointer-events: none;
+    filter: blur(60px);
+  }
 
-    z-index: -1;
+  /* Light mode gets a little more visible blue atmosphere */
 
-    border-radius: 999px;
+  [data-theme="light"] #experience::before,
+  [data-theme="light"] #training::before,
+  [data-theme="light"] #skills::before,
+  [data-theme="light"] #education::before,
+  [data-theme="light"] #contact::before {
+    background:
+      radial-gradient(
+        ellipse at center,
+        rgba(37, 99, 235, 0.12) 0%,
+        rgba(37, 99, 235, 0.065) 30%,
+        rgba(59, 130, 246, 0.025) 55%,
+        transparent 76%
+      );
 
+    filter: blur(48px);
+  }
+
+  [data-theme="light"] #experience::after,
+  [data-theme="light"] #training::after,
+  [data-theme="light"] #skills::after,
+  [data-theme="light"] #education::after,
+  [data-theme="light"] #contact::after {
     background:
       radial-gradient(
         circle,
-        rgba(37, 99, 235, 0.035) 0%,
-        rgba(37, 99, 235, 0) 70%
+        rgba(37, 99, 235, 0.065) 0%,
+        rgba(59, 130, 246, 0.025) 38%,
+        transparent 72%
       );
 
-    filter: blur(18px);
+    filter: blur(60px);
   }
 }
 
 /* =========================================================
-   MOBILE — DARK MODE CARD DEFINITION
-   ========================================================= */
+   DARK MODE — MOBILE CARD ATMOSPHERE
+========================================================= */
 
 @media (max-width: 767px) {
   [data-theme="dark"] #experience article,
   [data-theme="dark"] #training article {
     box-shadow:
-      0 0 0 1px rgba(59, 130, 246, 0.025),
+      0 0 0 1px rgba(59, 130, 246, 0.035),
       0 18px 45px rgba(0, 0, 0, 0.16);
   }
-
-  /*
-   * Make existing subtle borders slightly easier
-   * to see on small screens.
-   */
 
   [data-theme="dark"] #experience [class*="border-white"],
   [data-theme="dark"] #training [class*="border-white"] {
@@ -399,15 +502,25 @@ section {
 }
 
 /* =========================================================
-   MOBILE — TOUCH INTERACTION
-   ========================================================= */
+   LIGHT MODE — MOBILE CARD EDGE
+========================================================= */
+
+@media (max-width: 767px) {
+  [data-theme="light"] #experience article,
+  [data-theme="light"] #training article {
+    box-shadow:
+      0 0 0 1px rgba(37, 99, 235, 0.045),
+      0 18px 45px rgba(37, 99, 235, 0.055);
+  }
+}
+
+/* =========================================================
+   TOUCH DEVICES
+   NO SHAKE
+   NO ROTATION
+========================================================= */
 
 @media (hover: none) and (pointer: coarse) {
-  /*
-   * Phones don't have a real hover state.
-   * Active state gives cards a tiny tactile response.
-   */
-
   #experience article,
   #training article {
     transition:
@@ -422,15 +535,23 @@ section {
     transform: scale(0.997);
 
     box-shadow:
-      0 0 0 1px rgba(59, 130, 246, 0.12),
-      0 0 28px rgba(59, 130, 246, 0.07),
-      0 20px 50px rgba(0, 0, 0, 0.2);
+      0 0 0 1px rgba(59, 130, 246, 0.10),
+      0 0 28px rgba(59, 130, 246, 0.06),
+      0 20px 50px rgba(0, 0, 0, 0.16);
+  }
+
+  [data-theme="light"] #experience article:active,
+  [data-theme="light"] #training article:active {
+    box-shadow:
+      0 0 0 1px rgba(37, 99, 235, 0.10),
+      0 0 28px rgba(37, 99, 235, 0.07),
+      0 20px 50px rgba(37, 99, 235, 0.08);
   }
 }
 
 /* =========================================================
    TABLET
-   ========================================================= */
+========================================================= */
 
 @media (min-width: 768px) and (max-width: 1023px) {
   html {
@@ -441,56 +562,55 @@ section {
     scroll-margin-top: 78px;
   }
 
-  /*
-   * Tablet ambient lighting.
-   */
-
-  #experience,
-  #training,
-  #skills,
-  #education,
-  #contact {
-    isolation: isolate;
-  }
-
   #experience::before,
   #training::before,
   #skills::before,
   #education::before,
   #contact::before {
-    content: "";
-
-    position: absolute;
-
-    top: -100px;
+    top: -90px;
     left: 50%;
 
-    width: 600px;
-    height: 300px;
+    width: 620px;
+    height: 320px;
 
     transform: translateX(-50%);
 
-    pointer-events: none;
+    filter: blur(55px);
+  }
 
-    z-index: -1;
+  #experience::after,
+  #training::after,
+  #skills::after,
+  #education::after,
+  #contact::after {
+    right: -180px;
+    bottom: 12%;
 
-    border-radius: 999px;
+    width: 380px;
+    height: 380px;
 
+    filter: blur(65px);
+  }
+
+  [data-theme="light"] #experience::before,
+  [data-theme="light"] #training::before,
+  [data-theme="light"] #skills::before,
+  [data-theme="light"] #education::before,
+  [data-theme="light"] #contact::before {
     background:
       radial-gradient(
         ellipse at center,
-        rgba(59, 130, 246, 0.055),
-        transparent 70%
+        rgba(37, 99, 235, 0.095),
+        rgba(59, 130, 246, 0.025) 50%,
+        transparent 75%
       );
-
-    filter: blur(16px);
   }
 }
 
 /* =========================================================
    DESKTOP
-   Keep desktop appearance clean and unchanged.
-   ========================================================= */
+   Keep clean.
+========================================================= */
 
 @media (min-width: 1024px) {
   section {
@@ -500,7 +620,7 @@ section {
 
 /* =========================================================
    REDUCE MOTION
-   ========================================================= */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
