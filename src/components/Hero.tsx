@@ -15,9 +15,7 @@ export function Hero() {
         relative
         min-h-[100svh]
         w-full
-        max-w-full
         overflow-hidden
-
         ${
           isLight
             ? "bg-white text-slate-950"
@@ -42,17 +40,14 @@ export function Hero() {
           right-4
           top-24
           z-50
-
           flex
           h-11
           w-11
           items-center
           justify-center
-
           rounded-full
           border
           backdrop-blur-md
-
           transition-all
           duration-300
 
@@ -65,16 +60,12 @@ export function Hero() {
 
           ${
             isLight
-              ? "border-slate-300 bg-white/80 text-slate-600 hover:border-blue-400 hover:text-blue-600"
+              ? "border-slate-300 bg-white/70 text-slate-600 hover:border-blue-400 hover:text-blue-600"
               : "border-white/[0.16] bg-white/[0.04] text-slate-300 hover:border-blue-400 hover:bg-blue-500/[0.07] hover:text-blue-400"
           }
         `}
       >
         {isLight ? (
-          /* =====================================================
-             SUN
-          ===================================================== */
-
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -146,10 +137,6 @@ export function Hero() {
             />
           </svg>
         ) : (
-          /* =====================================================
-             MOON
-          ===================================================== */
-
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -168,37 +155,44 @@ export function Hero() {
       </button>
 
       {/* =========================================================
-          DESKTOP ROBOT
+          HERO IMAGE
           
-          Desktop keeps the original large cinematic composition.
+          ONE IMAGE FOR ALL SCREEN SIZES.
+          
+          The photograph fills the hero.
+          We control its position instead of creating a
+          separate mobile image box.
       ========================================================= */}
 
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-y-0
-          right-0
-          hidden
-          w-[56%]
-          overflow-hidden
-
-          lg:block
-        "
-      >
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
           src="/logos/robotics-hero.jpg"
           alt="Industrial robotic painting system"
           fill
           priority
-          sizes="56vw"
+          sizes="100vw"
           className="
             object-cover
-            object-center
+
+            /* MOBILE
+               Keep robot large and on the right.
+            */
+            object-[72%_center]
+
+            /* LARGE PHONES */
+            sm:object-[70%_center]
+
+            /* TABLET */
+            md:object-[69%_center]
+
+            /* DESKTOP */
+            lg:object-[center_center]
           "
         />
 
-        {/* DESKTOP LEFT BLEND */}
+        {/* =======================================================
+            IMAGE CONTRAST
+        ======================================================= */}
 
         <div
           className={`
@@ -207,70 +201,18 @@ export function Hero() {
 
             ${
               isLight
-                ? "bg-gradient-to-r from-white via-white/30 to-transparent"
-                : "bg-gradient-to-r from-[#080814] via-[#080814]/30 to-transparent"
+                ? "bg-white/[0.08]"
+                : "bg-black/[0.12]"
             }
           `}
         />
-      </div>
 
-      {/* =========================================================
-          MOBILE ROBOT
+        {/* =======================================================
+            LEFT TEXT GRADIENT
           
-          IMPORTANT:
-          We deliberately make the SOURCE IMAGE large and move it
-          left. This makes the ROBOT large while keeping the robot
-          itself inside the phone viewport.
-      ========================================================= */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          z-0
-          overflow-hidden
-
-          lg:hidden
-        "
-      >
-        <div
-          className="
-            absolute
-
-            /* large image */
-            h-auto
-            w-[820px]
-            max-w-none
-
-            /* position */
-            left-[-390px]
-            top-[155px]
-
-            /* tablet phones */
-            sm:left-[-330px]
-            sm:top-[145px]
-            sm:w-[900px]
-          "
-        >
-          <Image
-            src="/logos/robotics-hero.jpg"
-            alt="Industrial robotic painting system"
-            width={1536}
-            height={1024}
-            priority
-            className="
-              block
-              h-auto
-              w-full
-              max-w-none
-            "
-          />
-        </div>
-
-        {/* =====================================================
-            MOBILE DARK BLEND
-        ===================================================== */}
+            This is what creates the clean split:
+            dark/clean left → visible robot right.
+        ======================================================= */}
 
         <div
           className={`
@@ -281,77 +223,97 @@ export function Hero() {
               isLight
                 ? `
                   bg-gradient-to-r
-                  from-white
-                  via-white/[0.82]
-                  via-[45%]
+                  from-white/[0.98]
+                  via-white/[0.88]
+                  via-[42%]
                   to-transparent
                 `
                 : `
                   bg-gradient-to-r
-                  from-[#080814]
-                  via-[#080814]/[0.72]
-                  via-[43%]
+                  from-[#080814]/[0.99]
+                  via-[#080814]/[0.84]
+                  via-[42%]
                   to-transparent
                 `
             }
           `}
         />
 
-        {/* =====================================================
-            EXTRA MOBILE LEFT READABILITY
-        ===================================================== */}
+        {/* =======================================================
+            MOBILE LEFT READABILITY
+        ======================================================= */}
 
         <div
           className={`
             absolute
             inset-y-0
             left-0
-            w-[58%]
+            w-[55%]
+
+            sm:w-[50%]
 
             ${
               isLight
-                ? "bg-gradient-to-r from-white via-white/90 to-transparent"
-                : "bg-gradient-to-r from-[#080814] via-[#080814]/85 to-transparent"
+                ? "bg-gradient-to-r from-white/[0.55] to-transparent"
+                : "bg-gradient-to-r from-[#080814]/[0.45] to-transparent"
             }
           `}
         />
 
-        {/* =====================================================
-            MOBILE TOP FADE
-        ===================================================== */}
+        {/* =======================================================
+            TOP FADE
+        ======================================================= */}
 
         <div
           className={`
             absolute
             inset-x-0
             top-0
-            h-40
+            h-28
 
             ${
               isLight
-                ? "bg-gradient-to-b from-white/35 to-transparent"
-                : "bg-gradient-to-b from-[#080814]/60 to-transparent"
+                ? "bg-gradient-to-b from-white/[0.38] to-transparent"
+                : "bg-gradient-to-b from-[#080814]/[0.48] to-transparent"
             }
           `}
         />
 
-        {/* =====================================================
-            MOBILE BOTTOM FADE
-        ===================================================== */}
+        {/* =======================================================
+            BOTTOM FADE
+        ======================================================= */}
 
         <div
           className={`
             absolute
             inset-x-0
             bottom-0
-            h-32
+            h-36
 
             ${
               isLight
-                ? "bg-gradient-to-t from-white/35 to-transparent"
-                : "bg-gradient-to-t from-[#080814]/65 to-transparent"
+                ? "bg-gradient-to-t from-white/[0.35] to-transparent"
+                : "bg-gradient-to-t from-[#080814]/[0.60] to-transparent"
             }
           `}
+        />
+
+        {/* =======================================================
+            SUBTLE BLUE ATMOSPHERE
+        ======================================================= */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            right-[-15%]
+            top-[20%]
+            h-[55%]
+            w-[55%]
+            rounded-full
+            bg-blue-500/[0.025]
+            blur-[100px]
+          "
         />
       </div>
 
@@ -391,10 +353,6 @@ export function Hero() {
             xl:px-20
           "
         >
-          {/* =====================================================
-              CONTENT
-          ===================================================== */}
-
           <div
             className="
               w-full
@@ -549,7 +507,7 @@ export function Hero() {
                 sm:mt-9
               "
             >
-              {/* EXPLORE MY WORK */}
+              {/* EXPLORE */}
 
               <a
                 href="#experience"
@@ -576,7 +534,7 @@ export function Hero() {
 
                   ${
                     isLight
-                      ? "border-slate-200 text-slate-900 hover:border-blue-500 hover:text-blue-600"
+                      ? "border-slate-300 text-slate-900 hover:border-blue-500 hover:text-blue-600"
                       : "border-white/[0.12] text-white hover:border-blue-500 hover:bg-blue-500/[0.05]"
                   }
                 `}
@@ -590,7 +548,7 @@ export function Hero() {
                 </span>
               </a>
 
-              {/* DOWNLOAD RESUME */}
+              {/* RESUME */}
 
               <a
                 href="/logos/Kiritharan.K%20CV.pdf"
@@ -638,7 +596,7 @@ export function Hero() {
 
                     ${
                       isLight
-                        ? "border-slate-200 group-hover:border-blue-500 group-hover:text-blue-600"
+                        ? "border-slate-300 group-hover:border-blue-500 group-hover:text-blue-600"
                         : "border-white/[0.12] group-hover:border-blue-500 group-hover:text-blue-400"
                     }
                   `}
@@ -667,7 +625,7 @@ export function Hero() {
 
                 ${
                   isLight
-                    ? "border-slate-200"
+                    ? "border-slate-300"
                     : "border-white/[0.08]"
                 }
               `}
@@ -690,7 +648,7 @@ export function Hero() {
                       ${
                         index !== 3
                           ? isLight
-                            ? "border-r border-slate-200"
+                            ? "border-r border-slate-300"
                             : "border-r border-white/[0.07]"
                           : ""
                       }
